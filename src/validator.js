@@ -1,78 +1,53 @@
-import { isIpv4, isPercent, isPort, isLoss } from '@/utils'
-
-// ip校验
-export const ip = (msg = '请输入正确的IP') => {
-  return function(rule, val, cb) {
-    if (isIpv4(val) || val === '') cb()
-    else cb(msg)
-  }
+export function isIpv4(val) {
+  const ary = val.split(".");
+  return (
+    ary.length === 4 &&
+    ary.every((i) => i !== "" && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
+  );
 }
 
-// 端口校验
-export const port = (msg = '请输入0-65535的正整数') => {
-  return function(rule, val, cb) {
-    if (isPort(val) || val === '') cb()
-    else cb(msg)
-  }
+export function isMacAddress(val) {
+  const ary = val.split(":");
+  return ary.length === 6 && ary.every((i) => /^[\dabcdefABCDEF]{2}$/.test(i));
 }
 
-// mac校验
-export const mac = (msg = '请输入正确的MAC地址') => {
-  return function(rule, val, cb) {
-    if (isPort(val) || val === '') cb()
-    else cb(msg)
-  }
+//金额 等
+export function isPositiveFloat(text) {
+  return (
+    /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) ||
+    /^[0]{1}(.[0]{1,2})?$/.test(text)
+  );
 }
 
-// 时间校验
-export const timeCheck = () => {
-  return function(rule, val, cb) {
-    const timeLag = rule.timeLag || 7
-    if (Date.parse(val[1]) - Date.parse(val[0]) > 3600 * 1000 * 24 * timeLag) cb(`查询间隔不能大于${timeLag}天`)
-    else cb()
-  }
+// 百分率 0-100
+export function isPercent(text) {
+  return (
+    (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) && parseFloat(text) <= 100) ||
+    /^[0]{1}(.[0-9]{1,2})?$/.test(text)
+  );
 }
 
-// 百分率校验
-export const rateRange = (msg = '请输入正确的区间') => {
-  return (rule, val, cb) => {
-    if (!val || !Array.isArray(val)) cb()
-    else if (val.some(num => num !== '' && !isPercent(num))) cb('请输入0-100的数字')
-    else if (parseFloat(val[0] || 0) <= parseFloat(val[1] || 100)) cb()
-    else cb(msg)
-  }
+// 端口 0-65535
+export function isPort(text) {
+  return (
+    (/^[1-9][0-9]*$/.test(text) && Math.floor(text) <= 65535) ||
+    /^0$/.test(text)
+  );
 }
 
-// 端口区间校验
-export const portRange = (msg = '请输入正确的区间') => {
-  return (rule, val, cb) => {
-    if (!val || !Array.isArray(val)) cb()
-    else if (val.some(num => num !== '' && !isPort(num))) cb('请输入0-65535的正整数')
-    else if (parseFloat(val[0] || 0) <= parseFloat(val[1] || 65535)) cb()
-    else cb(msg)
-  }
+export function isJSType(val, target) {
+  return (
+    Object.prototype.toString
+      .call(val)
+      .replace(/^\[object ([a-zA-Z]*)\]$/, "$1")
+      .toLowerCase() === target.toLowerCase()
+  );
 }
 
-// 离群因子区间校验
-export const lossRange = (msg = '请输入正确的区间') => {
-  return (rule, val, cb) => {
-    if (!val || !Array.isArray(val)) cb()
-    else if (val.some(num => num !== '' && !isLoss(num))) cb('请输入数字')
-    else if (parseFloat(val[0] || 0) <= parseFloat(val[1] || 0)) cb()
-    else cb(msg)
-  }
+export function isEmpty(val) {
+  return val === null || val === "";
 }
 
-export function validatorErrorHandler(fieldList, errObj) {
-  const errList = Object.keys(errObj)
-  if (errList.length > 0) {
-    const errInfo = errObj[errList[0]]
-    if (Array.isArray(errInfo) && errInfo.length > 0) {
-      const { message, field } = errInfo[0]
-      if (message && field) {
-        const idx = fieldList.findIndex(item => item.key === field)
-        idx != -1 && this.$messageTip.error(fieldList[idx].name + message)
-      }
-    }
-  }
+export function isNotEmptyText(val) {
+  return val !== null && val !== "" && val !== undefined;
 }
