@@ -38,18 +38,3 @@ export function getFileSlient(url) {
   iframe.setAttribute('src', url)
 }
 
-/**
- * 从Public文件夹里下载文件
- * fileName:文件名
- * url:在public文件夹中的url 首字符不带/ eg:theme/index.css
- */
-export function downloadStaticFile(fileName, url) {
-  if (!fileName || !url) return
-  let a = document.createElement('a')
-  a.setAttribute('href', `${process.env.BASE_URL}${url}`)
-  a.setAttribute('download', fileName)
-  a.style.display = 'none'
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
-}

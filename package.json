@@ -4,12 +4,13 @@
   "description": "A Utils by Lo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config ./webpack.config.js"
+    "build": "webpack --config ./build/webpack.config.js",
+    "test": "mocha"
   },
   "author": "luojunbang",
   "license": "ISC",
   "devDependencies": {
+    "mocha": "^9.0.0",
     "path-browserify": "^1.0.1",
     "webpack-cli": "^4.7.2"
   },

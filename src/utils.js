@@ -66,15 +66,9 @@ export function fmtUndefind(val) {
   return val;
 }
 
-export function fmtEmptyVal(val,target='-'){
-	if(isEmpty(val)) return target
-	return val
-}
-
-//特殊输入转义
-export function SaferHTML(data) {
-  const result = data.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  return result;
+export function fmtEmptyVal(val, target = "-") {
+  if (isEmpty(val)) return target;
+  return val;
 }
 
 export function copyText(val) {
