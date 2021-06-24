@@ -1,15 +1,18 @@
+/* eslint-disable no-undef */
 /**
  * 从URL里下载文件
  * fileName:文件名
  * data:后台取得的数据
  * dataType: 数据格式
  */
-export function downloadFile(fileName, data, dataType) {
-  if (!data || !fileName) return
+function downloadFile(fileName, data, dataType) {
+  if (!data || !fileName || !window) return
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data, fileName) //IE
   } else {
-    const url = window.URL.createObjectURL(new Blob([data], { type: dataType }))
+    const url = window.URL.createObjectURL(
+      new Blob([data], { type: dataType })
+    )
     let a = document.createElement('a')
     a.setAttribute('href', url)
     a.setAttribute('download', fileName)
@@ -30,7 +33,8 @@ export function downloadFile(fileName, data, dataType) {
  * @param parameters 参数
  * @param url 请求地址
  */
-export function getFileSlient(url) {
+function getFileSlient(url) {
+  if (!window) throw new Error('This function need window env')
   //向后台发送请求
   let iframe = document.createElement('iframe')
   iframe.style.display = 'none'
@@ -38,3 +42,7 @@ export function getFileSlient(url) {
   iframe.setAttribute('src', url)
 }
 
+module.exports = {
+  downloadFile,
+  getFileSlient,
+}

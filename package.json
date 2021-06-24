@@ -1,6 +1,6 @@
 {
   "name": "lo-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Utils by Lo",
   "main": "dist/loUtils.min.js",
   "scripts": {
@@ -10,11 +10,12 @@
   "author": "luojunbang",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.29.0",
     "mocha": "^9.0.0",
     "path-browserify": "^1.0.1",
+    "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2"
   },
-  "dependencies": {
-    "webpack": "^5.38.1"
-  }
+  "dependencies": {}
 }

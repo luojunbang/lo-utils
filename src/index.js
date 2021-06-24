@@ -1,4 +1,15 @@
-const { isEmpty, isType } = require('./validator')
+const dateHandler = require('./extend/dateHandler')
+const { downloadFile, getFileSlient } = require('./fileHandler')
+const {
+  isIpv4,
+  isMacAddress,
+  isPositiveFloat,
+  isPercent,
+  isPort,
+  isJSType,
+  isEmpty,
+  isNotEmptyText,
+} = require('./extend/validator')
 
 /**
  * @param {Function} func
@@ -72,7 +83,7 @@ function fmtEmptyVal(val, target = '-') {
 }
 
 function copyText(val) {
-  if (!isType(val, 'string') || document) return false
+  if (!isJSType(val, 'string') || document) return false
   var oInput = document.createElement('input')
   oInput.value = val
   document.body.appendChild(oInput)
@@ -90,4 +101,18 @@ module.exports = {
   fmtUndefind,
   fmtEmptyVal,
   copyText,
+  //
+  ...dateHandler,
+  //
+  downloadFile,
+  getFileSlient,
+  //
+  isIpv4,
+  isMacAddress,
+  isPositiveFloat,
+  isPercent,
+  isPort,
+  isJSType,
+  isEmpty,
+  isNotEmptyText,
 }
