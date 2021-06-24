@@ -1,6 +1,6 @@
-import dateHandler from "./src/dateHandler";
-import { downloadFile, getFileSlient } from "./src/fileHandler";
-import {
+const dateHandler = require("./src/dateHandler");
+const { downloadFile, getFileSlient } = require("./src/fileHandler");
+const {
   isIpv4,
   isMacAddress,
   isPositiveFloat,
@@ -9,17 +9,17 @@ import {
   isJSType,
   isEmpty,
   isNotEmptyText,
-} from "./src/validator";
-import {
+} = require("./src/validator");
+const {
   debounce,
   fmtNum,
   getLabelWidth,
   fmtUndefind,
   fmtEmptyVal,
   copyText,
-} from "./src/utils";
+} = require("./src/utils");
 
-export default {
+module.exports = {
   debounce,
   fmtNum,
   getLabelWidth,

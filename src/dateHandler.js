@@ -25,15 +25,15 @@ const generatorDate = function (date, formatter = "y-m-d h:i:s") {
     h: d.getHours(),
     i: d.getMinutes(),
     s: d.getSeconds(),
-    a: d.getDay(),
+    a: ["日", "一", "二", "三", "四", "五", "六"][d.getDay()],
   };
-  res = formatter.replace(/([ymdhisa])+/g, (_, key) => {
-    const value = formatObj[key];
-    // Note: getDay() returns 0 on Sunday
-    if (key === "a") {
-      return ["日", "一", "二", "三", "四", "五", "六"][value];
-    }
-    return value.toString().padStart(2, "0");
+  res = formatter;
+  Object.keys(formatObj).forEach((key) => {
+    const reg = new RegExp(`${key}{1}`, "g");
+    res = res.replace(
+      reg,
+      key === "a" ? formatObj[key] : formatObj[key].toString().padStart(2, "0") // 星期不填充0
+    );
   });
   return res;
 };
@@ -58,8 +58,8 @@ const fmtTime = function (date, splitor = ":") {
  * @param Date | String | Number
  * @returns 2020-01-01 18:00:00
  */
-const fmtDateTime = function (date) {
-  return generatorDate(date);
+const fmtDateTime = function (date, formatter) {
+  return generatorDate(date, formatter);
 };
 
 /**
@@ -71,4 +71,10 @@ const isSecondTimeBigger = function (start, end) {
   return generatorDate(end) > generatorDate(start);
 };
 
-export default { fmtDate, fmtTime, fmtDateTime, isSecondTimeBigger };
+module.exports = {
+  generatorDate,
+  fmtDate,
+  fmtTime,
+  fmtDateTime,
+  isSecondTimeBigger,
+};
