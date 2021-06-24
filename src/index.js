@@ -1,5 +1,5 @@
 const dateHandler = require('./extend/dateHandler')
-const { downloadFile, getFileSlient } = require('./fileHandler')
+const { downloadFile, getFileSlient } = require('./extend/fileHandler')
 const {
   isIpv4,
   isMacAddress,
