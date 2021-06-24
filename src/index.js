@@ -10,7 +10,29 @@ const {
   isEmpty,
   isNotEmptyText,
 } = require('./extend/validator')
-
+module.exports = {
+  parseJSONstringify,
+  debounce,
+  fmtNum,
+  getLabelWidth,
+  fmtUndefind,
+  fmtEmptyVal,
+  copyText,
+  //
+  ...dateHandler,
+  //
+  downloadFile,
+  getFileSlient,
+  //
+  isIpv4,
+  isMacAddress,
+  isPositiveFloat,
+  isPercent,
+  isPort,
+  isJSType,
+  isEmpty,
+  isNotEmptyText,
+}
 /**
  * @param {Function} func
  * @param {number} wait
@@ -94,25 +116,45 @@ function copyText(val) {
   return true
 }
 
-module.exports = {
-  debounce,
-  fmtNum,
-  getLabelWidth,
-  fmtUndefind,
-  fmtEmptyVal,
-  copyText,
-  //
-  ...dateHandler,
-  //
-  downloadFile,
-  getFileSlient,
-  //
-  isIpv4,
-  isMacAddress,
-  isPositiveFloat,
-  isPercent,
-  isPort,
-  isJSType,
-  isEmpty,
-  isNotEmptyText,
+
+function parseJSONstringify(string) {
+  // json
+  let lastIndex = 0,
+    start = string.indexOf('"{', lastIndex),
+    end = string.indexOf('}"', start)
+  while (start != -1) {
+    string =
+      string.slice(0, start) +
+      '"' +
+      string.slice(start + 1, end + 1).replace(/"/g, '\\"') +
+      string.slice(end + 1)
+    lastIndex = end
+    start = string.indexOf('"{', lastIndex)
+    end = string.indexOf('}"', start)
+  }
+  // xml
+  lastIndex = 0
+  start = string.indexOf('"<', lastIndex)
+  end = string.indexOf('>"', start)
+  while (start != -1) {
+    string =
+      string.slice(0, start) +
+      '"' +
+      string.slice(start + 1, end + 1).replace(/"/g, '\\"') +
+      string.slice(end + 1)
+    lastIndex = end
+    start = string.indexOf('"<', lastIndex)
+    end = string.indexOf('>"', start)
+  }
+
+  let res = null
+  try {
+    res = JSON.parse(string)
+  } catch (err) {
+    console.log('err.', err)
+  }
+  return res
 }
+
+console.log()
+

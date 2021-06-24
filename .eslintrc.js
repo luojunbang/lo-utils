@@ -8,7 +8,8 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     quotes: ['error', 'single'],//'' ``
-    'no-empty':['off']
+    'no-empty':['off'],
+    'no-unused-vars':['off']
   },
   parserOptions: {
     parser: 'babel-eslint',
