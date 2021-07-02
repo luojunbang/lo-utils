@@ -8,7 +8,7 @@ const generatorDate = function (date, formatter = 'y-m-d h:i:s') {
   if (!date) return res
   if (Object.prototype.toString.call(date) === '[object Date]') {
   } else if (/^[0-9]{0,13}$/.test(date)) {
-    if (date.length === 10) {
+    if (/^[0-9]{10}$/.test(date)) {
       // 对于秒数做一个处理
       date += '000'
     }

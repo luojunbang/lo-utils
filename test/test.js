@@ -14,6 +14,7 @@ describe('DateHandler', function () {
     assert.equal(generatorDate('2021-06-21', 'y:m:d'), '2021:06:21')
     assert.equal(generatorDate('2021-06-21', 'ymd'), '20210621')
     assert.equal(generatorDate('2021-06-21', 'd:m:y'), '21:06:2021')
+    assert.equal(generatorDate(1625155746, 'd:m:y'), '02:07:2021')
     assert.equal(
       generatorDate('2021-06-21', 'd:m:y h:i:s'),
       '21:06:2021 00:00:00'
