@@ -1,10 +1,10 @@
 const fs = require('fs')
 const { join } = require('path')
 module.exports = {
-  checkDirFilePath
+  checkDirExist
 }
 
-function checkDirFilePath(path = './') {
+function checkDirExist(path = './') {
   if (/^\//.test(path)) throw new Error('Please no RootPath')
   // toDo.. check path 有非法字符
   const path_ary = path.split('/')
