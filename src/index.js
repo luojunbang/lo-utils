@@ -156,5 +156,4 @@ function parseJSONstringify(string) {
   return res
 }
 
-console.log()
 
