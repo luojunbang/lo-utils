@@ -9,7 +9,8 @@ module.exports = {
   fmtUndefind,
   fmtEmptyVal,
   copyText,
-  fmtSize,
+  fmtStorageSize,
+  fmtContentLength,
   //
   ...dateHandler,
   //
@@ -148,7 +149,7 @@ function parseJSONstringify(string) {
  * @param {String} unit accept targetUnit ex.'k','K','Kb' 
  * @returns {String} The val after transform
  */
-function fmtSize(val, unit) {
+function fmtStorageSize(val, unit) {
   const UNIT = 'bkmgtp'.split('')
   val = val.toString().toLowerCase()
   let size = parseFloat(val, 10),
@@ -174,3 +175,15 @@ function fmtSize(val, unit) {
   return res + (unit ? unit : UNIT[unitIdx])
 }
 
+
+
+function fmtContentLength(val){
+  const UNIT = 'BKMGTP'
+  let res = +val
+  let unitIdx = 0
+  while(res.toFixed(0).length>3){
+    res = res/1000
+    unitIdx++
+  }
+  return (isInt(res) ? res : res.toFixed(1) )+ UNIT[unitIdx]
+}

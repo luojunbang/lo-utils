@@ -7,7 +7,8 @@ const {
   generatorDate,
   parseJSONstringify,
   isInt,
-  fmtSize,
+  fmtStorageSize,
+  fmtContentLength,
 } = require('../src/index.js')
 
 describe('validator', function () {
@@ -60,19 +61,23 @@ describe('DateHandler', function () {
 })
 
 describe('Utils', function () {
-  it('fmtSize', function(){
-    assert.equal(fmtSize('2048', 'k'), '2k')
-    assert.equal(fmtSize(2048, 'kb'), '2kb')
-    assert.equal(fmtSize(2048), '2k')
-    assert.equal(fmtSize(2048, 'Kb'), '2Kb')
-    assert.equal(fmtSize('2048K', 'm'), '2m')
-    assert.equal(fmtSize('2.5m', 'k'), '2560k')
-    assert.equal(fmtSize('10.5m', 'b'), '11010048b')
-    assert.equal(fmtSize('10.5m'), '10.5m')
-    assert.equal(fmtSize('2048K', 'mb'), '2mb')
-    assert.equal(fmtSize('2048K', 'MB'), '2MB')
-    assert.equal(fmtSize('2048K', 'k'), '2048k')
-    assert.equal(fmtSize('2048K', 'g'), '0.0g')
-    assert.equal(fmtSize('200K', 'm'), '0.2m')
+  it('fmtStorageSize', function(){
+    assert.equal(fmtStorageSize('2048', 'k'), '2k')
+    assert.equal(fmtStorageSize(2048, 'kb'), '2kb')
+    assert.equal(fmtStorageSize(2048), '2k')
+    assert.equal(fmtStorageSize(2048, 'Kb'), '2Kb')
+    assert.equal(fmtStorageSize('2048K', 'm'), '2m')
+    assert.equal(fmtStorageSize('2.5m', 'k'), '2560k')
+    assert.equal(fmtStorageSize('10.5m', 'b'), '11010048b')
+    assert.equal(fmtStorageSize('10.5m'), '10.5m')
+    assert.equal(fmtStorageSize('2048K', 'mb'), '2mb')
+    assert.equal(fmtStorageSize('2048K', 'MB'), '2MB')
+    assert.equal(fmtStorageSize('2048K', 'k'), '2048k')
+    assert.equal(fmtStorageSize('2048K', 'g'), '0.0g')
+    assert.equal(fmtStorageSize('200K', 'm'), '0.2m')
+  })
+  it('fmtContentLength',function(){
+    assert.equal(fmtContentLength(1000),'1K')
+    assert.equal(fmtContentLength(2100),'2.1K')
   })
 })
