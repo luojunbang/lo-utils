@@ -1,15 +1,6 @@
 const dateHandler = require('./extend/dateHandler')
-const { downloadFile, getFileSlient } = require('./extend/fileHandler')
-const {
-  isIpv4,
-  isMacAddress,
-  isPositiveFloat,
-  isPercent,
-  isPort,
-  isJSType,
-  isEmpty,
-  isNotEmptyText,
-} = require('./extend/validator')
+const fileHandler = require('./extend/fileHandler')
+const validator = require('./extend/validator')
 module.exports = {
   parseJSONstringify,
   debounce,
@@ -18,21 +9,16 @@ module.exports = {
   fmtUndefind,
   fmtEmptyVal,
   copyText,
+  fmtSize,
   //
   ...dateHandler,
   //
-  downloadFile,
-  getFileSlient,
+  ...fileHandler,
   //
-  isIpv4,
-  isMacAddress,
-  isPositiveFloat,
-  isPercent,
-  isPort,
-  isJSType,
-  isEmpty,
-  isNotEmptyText,
+  ...validator,
 }
+const { isEmpty, isJSType, isInt } = validator
+
 /**
  * @param {Function} func
  * @param {number} wait
@@ -116,7 +102,6 @@ function copyText(val) {
   return true
 }
 
-
 function parseJSONstringify(string) {
   // json
   let lastIndex = 0,
@@ -156,4 +141,36 @@ function parseJSONstringify(string) {
   return res
 }
 
+/**
+ * @description formater size display
+ * @example ('2048K','m') -> '2m'
+ * @param {String｜Number } val The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
+ * @param {String} unit accept targetUnit ex.'k','K','Kb' 
+ * @returns {String} The val after transform
+ */
+function fmtSize(val, unit) {
+  const UNIT = 'bkmgtp'.split('')
+  val = val.toString().toLowerCase()
+  let size = parseFloat(val, 10),
+    originUnit = 'b'
+
+  if (isNaN(size)) throw new Error('Require a right input')
+  if (/[bkmgtp]/.test(val))
+    originUnit = val.replace(/^[0-9.]+([bkmgtp]{1})$/g, '$1')
+  let res = size * Math.pow(1024, UNIT.indexOf(originUnit)), //tranform size with unit b
+    unitIdx = 0
+  if (unit) {
+    if (isJSType(unit, 'string') && UNIT.indexOf(unit[0].toLowerCase()) != -1) {
+      let targetUnitIdx = UNIT.indexOf(unit[0].toLowerCase())
+      res = res * Math.pow(1024, 0 - targetUnitIdx)
+    } else throw new Error('Require the correct transform unit')
+  } else {
+    while (res.toFixed(0).length > 3) {
+      res = res / 1024
+      unitIdx++
+    }
+  }
+  res = isInt(res) ? res : res.toFixed(1)
+  return res + (unit ? unit : UNIT[unitIdx])
+}
 

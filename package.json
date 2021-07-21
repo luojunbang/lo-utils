@@ -5,7 +5,7 @@
   "main": "dist/loUtils.min.js",
   "scripts": {
     "build": "webpack --config ./build/webpack.config.js",
-    "test": "mocha"
+    "test": "mocha --watch"
   },
   "author": "luojunbang",
   "license": "ISC",

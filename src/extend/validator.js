@@ -19,6 +19,11 @@ function isPositiveFloat(text) {
   )
 }
 
+function isInt(text){
+  return /^(0|[1-9][0-9]*)$/.test(text)
+}
+
+
 // 百分率 0-100
 function isPercent(text) {
   return (
@@ -61,4 +66,5 @@ module.exports = {
   isJSType,
   isEmpty,
   isNotEmptyText,
+  isInt
 }
