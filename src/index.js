@@ -11,6 +11,7 @@ module.exports = {
   copyText,
   fmtStorageSize,
   fmtContentLength,
+  fmtContentType,
   //
   ...dateHandler,
   //
@@ -146,7 +147,7 @@ function parseJSONstringify(string) {
  * @description formater size display
  * @example ('2048K','m') -> '2m'
  * @param {String｜Number } val The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
- * @param {String} unit accept targetUnit ex.'k','K','Kb' 
+ * @param {String} unit accept targetUnit ex.'k','K','Kb'
  * @returns {String} The val after transform
  */
 function fmtStorageSize(val, unit) {
@@ -175,15 +176,25 @@ function fmtStorageSize(val, unit) {
   return res + (unit ? unit : UNIT[unitIdx])
 }
 
-
-
-function fmtContentLength(val){
+function fmtContentLength(val) {
   const UNIT = 'BKMGTP'
   let res = +val
   let unitIdx = 0
-  while(res.toFixed(0).length>3){
-    res = res/1000
+  while (res.toFixed(0).length > 3) {
+    res = res / 1000
     unitIdx++
   }
-  return (isInt(res) ? res : res.toFixed(1) )+ UNIT[unitIdx]
+  return (isInt(res) ? res : res.toFixed(1)) + UNIT[unitIdx]
+}
+
+function fmtContentType(val) {
+  val = val.toLowerCase()
+  const  type = val.split('/')[1]
+  const config = {
+    plain:'txt',
+    'svg+xml':'svg',
+    javascript:'js',
+    jpeg:'jpg'
+  }
+  return config[type] || type
 }
