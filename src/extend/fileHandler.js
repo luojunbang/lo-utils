@@ -10,9 +10,7 @@ function downloadFile(fileName, data, dataType) {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data, fileName) //IE
   } else {
-    const url = window.URL.createObjectURL(
-      new Blob([data], { type: dataType })
-    )
+    const url = window.URL.createObjectURL(new Blob([data], { type: dataType }))
     let a = document.createElement('a')
     a.setAttribute('href', url)
     a.setAttribute('download', fileName)

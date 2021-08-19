@@ -1,9 +1,11 @@
 const dateHandler = require('./extend/dateHandler')
+const urlHandler = require('./extend/urlHandler')
 const fileHandler = require('./extend/fileHandler')
 const validator = require('./extend/validator')
 module.exports = {
   parseJSONstringify,
   debounce,
+  throttle,
   fmtNum,
   getLabelWidth,
   fmtUndefind,
@@ -18,8 +20,33 @@ module.exports = {
   ...fileHandler,
   //
   ...validator,
+  //
+  ...urlHandler,
 }
 const { isEmpty, isJSType, isInt } = validator
+
+/**
+ *
+ * @param {Function} func
+ * @param {Number} wait
+ * @returns {*}
+ */
+
+function throttle(func, wait = 500) {
+  let ctx, args, res, lastTime
+  const handle = _ => {
+    lastTime = Date.now()
+    res = func.call(ctx, ...args)
+    ctx = args = null
+  }
+  return function () {
+    !lastTime && (lastTime = Date.now())
+    args = arguments
+    ctx = this
+    if (Date.now() - lastTime > wait) handle()
+    return res
+  }
+}
 
 /**
  * @param {Function} func
@@ -72,12 +99,8 @@ function getLabelWidth(label, fontSize = 14) {
     res = minWidth
   if (!label) return minWidth
   if (label.length) {
-    const az09AryLength = label
-      .split('')
-      .filter((i) => /[0-9A-Za-z()%]/.test(i)).length
-    res =
-      Math.ceil((az09AryLength * fontSize * 2) / 3) +
-      (label.length - az09AryLength) * fontSize
+    const az09AryLength = label.split('').filter((i) => /[0-9A-Za-z()%]/.test(i)).length
+    res = Math.ceil((az09AryLength * fontSize * 2) / 3) + (label.length - az09AryLength) * fontSize
   }
   return Math.max(minWidth, res)
 }
@@ -110,11 +133,7 @@ function parseJSONstringify(string) {
     start = string.indexOf('"{', lastIndex),
     end = string.indexOf('}"', start)
   while (start != -1) {
-    string =
-      string.slice(0, start) +
-      '"' +
-      string.slice(start + 1, end + 1).replace(/"/g, '\\"') +
-      string.slice(end + 1)
+    string = string.slice(0, start) + '"' + string.slice(start + 1, end + 1).replace(/"/g, '\\"') + string.slice(end + 1)
     lastIndex = end
     start = string.indexOf('"{', lastIndex)
     end = string.indexOf('}"', start)
@@ -124,11 +143,7 @@ function parseJSONstringify(string) {
   start = string.indexOf('"<', lastIndex)
   end = string.indexOf('>"', start)
   while (start != -1) {
-    string =
-      string.slice(0, start) +
-      '"' +
-      string.slice(start + 1, end + 1).replace(/"/g, '\\"') +
-      string.slice(end + 1)
+    string = string.slice(0, start) + '"' + string.slice(start + 1, end + 1).replace(/"/g, '\\"') + string.slice(end + 1)
     lastIndex = end
     start = string.indexOf('"<', lastIndex)
     end = string.indexOf('>"', start)
@@ -157,8 +172,7 @@ function fmtStorageSize(val, unit) {
     originUnit = 'b'
 
   if (isNaN(size)) throw new Error('Require a right input')
-  if (/[bkmgtp]/.test(val))
-    originUnit = val.replace(/^[0-9.]+([bkmgtp]{1})$/g, '$1')
+  if (/[bkmgtp]/.test(val)) originUnit = val.replace(/^[0-9.]+([bkmgtp]{1})$/g, '$1')
   let res = size * Math.pow(1024, UNIT.indexOf(originUnit)), //tranform size with unit b
     unitIdx = 0
   if (unit) {
@@ -189,12 +203,12 @@ function fmtContentLength(val) {
 
 function fmtContentType(val) {
   val = val.toLowerCase()
-  const  type = val.split('/')[1]
+  const type = val.split('/')[1]
   const config = {
-    plain:'txt',
-    'svg+xml':'svg',
-    javascript:'js',
-    jpeg:'jpg'
+    plain: 'txt',
+    'svg+xml': 'svg',
+    javascript: 'js',
+    jpeg: 'jpg',
   }
   return config[type] || type
 }

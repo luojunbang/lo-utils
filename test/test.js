@@ -1,16 +1,6 @@
 /* eslint-disable no-undef */
 const assert = require('assert')
-const {
-  fmtDate,
-  fmtDateTime,
-  fmtTime,
-  generatorDate,
-  parseJSONstringify,
-  isInt,
-  fmtStorageSize,
-  fmtContentLength,
-  fmtContentType,
-} = require('../src/index.js')
+const { parseParams, getParams, fmtDate, fmtDateTime, fmtTime, generatorDate, parseJSONstringify, isInt, fmtStorageSize, fmtContentLength, fmtContentType } = require('../src/index.js')
 
 describe('validator', function () {
   it('isInt', function () {
@@ -29,18 +19,9 @@ describe('DateHandler', function () {
     assert.equal(generatorDate('2021-06-21', 'ymd'), '20210621')
     assert.equal(generatorDate('2021-06-21', 'd:m:y'), '21:06:2021')
     assert.equal(generatorDate(1625155746, 'd:m:y'), '02:07:2021')
-    assert.equal(
-      generatorDate('2021-06-21', 'd:m:y h:i:s'),
-      '21:06:2021 00:00:00'
-    )
-    assert.equal(
-      generatorDate('2021-06-21', 'd/m/y h:i:s'),
-      '21/06/2021 00:00:00'
-    )
-    assert.equal(
-      generatorDate('2021-06-21', 'd/m/y h:i:s 星期a'),
-      '21/06/2021 00:00:00 星期一'
-    )
+    assert.equal(generatorDate('2021-06-21', 'd:m:y h:i:s'), '21:06:2021 00:00:00')
+    assert.equal(generatorDate('2021-06-21', 'd/m/y h:i:s'), '21/06/2021 00:00:00')
+    assert.equal(generatorDate('2021-06-21', 'd/m/y h:i:s 星期a'), '21/06/2021 00:00:00 星期一')
   })
   it('fmtDate', function () {
     assert.equal(fmtDate('2021-06-21'), '2021-06-21')
@@ -50,10 +31,7 @@ describe('DateHandler', function () {
   })
   it('fmtDateTime', function () {
     assert.equal(fmtDateTime('2021-06-21'), '2021-06-21 00:00:00')
-    assert.equal(
-      fmtDateTime('2021-06-21', 'y-m-d h:i:s'),
-      '2021-06-21 00:00:00'
-    )
+    assert.equal(fmtDateTime('2021-06-21', 'y-m-d h:i:s'), '2021-06-21 00:00:00')
   })
   it('fmtTime', function () {
     assert.equal(fmtTime('2021-06-21'), '00:00:00')
@@ -62,7 +40,7 @@ describe('DateHandler', function () {
 })
 
 describe('Utils', function () {
-  it('fmtStorageSize', function(){
+  it('fmtStorageSize', function () {
     assert.equal(fmtStorageSize('2048', 'k'), '2k')
     assert.equal(fmtStorageSize(2048, 'kb'), '2kb')
     assert.equal(fmtStorageSize(2048), '2k')
@@ -77,18 +55,43 @@ describe('Utils', function () {
     assert.equal(fmtStorageSize('2048K', 'g'), '0.0g')
     assert.equal(fmtStorageSize('200K', 'm'), '0.2m')
   })
-  it('fmtContentLength',function(){
-    assert.equal(fmtContentLength(1000),'1K')
-    assert.equal(fmtContentLength(2100),'2.1K')
+  it('fmtContentLength', function () {
+    assert.equal(fmtContentLength(1000), '1K')
+    assert.equal(fmtContentLength(2100), '2.1K')
   })
-  it('fmtContentType',function(){
-    assert.equal(fmtContentType('text/html'),'html')
-    assert.equal(fmtContentType('text/css'),'css')
-    assert.equal(fmtContentType('text/javascript'),'js')
-    assert.equal(fmtContentType('image/jpeg'),'jpg')
-    assert.equal(fmtContentType('image/png'),'png')
-    assert.equal(fmtContentType('image/svg+xml'),'svg')
-    assert.equal(fmtContentType('image/webp'),'webp')
-    assert.equal(fmtContentType('video/mp4'),'mp4')
+  it('fmtContentType', function () {
+    assert.equal(fmtContentType('text/html'), 'html')
+    assert.equal(fmtContentType('text/css'), 'css')
+    assert.equal(fmtContentType('text/javascript'), 'js')
+    assert.equal(fmtContentType('image/jpeg'), 'jpg')
+    assert.equal(fmtContentType('image/png'), 'png')
+    assert.equal(fmtContentType('image/svg+xml'), 'svg')
+    assert.equal(fmtContentType('image/webp'), 'webp')
+    assert.equal(fmtContentType('video/mp4'), 'mp4')
+  })
+})
+
+describe('urlHandler', function () {
+  it('urlHandler', function () {
+    const url_str_1 = parseParams({
+      a: 1,
+      key: '真的',
+    })
+    assert.equal(url_str_1, parseParams(getParams(url_str_1)))
+    const url_str_2 = parseParams({
+      a: 1,
+      key: 'o',
+    })
+    assert.equal(url_str_2, parseParams(getParams(url_str_2)))
+    const url_str_3 = parseParams({
+      a: 1,
+      key: '//',
+    })
+    assert.equal(url_str_3, parseParams(getParams(url_str_3)))
+    const url_str_4 = parseParams({
+      a: 1,
+      key: undefined,
+    })
+    assert.equal(url_str_4, parseParams(getParams(url_str_4)))
   })
 })
