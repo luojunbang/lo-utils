@@ -1,11 +1,11 @@
 function isIpv4(val) {
   const ary = val.split('.')
-  return ary.length === 4 && ary.every((i) => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
+  return ary.length === 4 && ary.every(i => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
 }
 
 function isMacAddress(val) {
   const ary = val.split(':')
-  return ary.length === 6 && ary.every((i) => /^[\dabcdefABCDEF]{2}$/.test(i))
+  return ary.length === 6 && ary.every(i => /^[\dabcdefABCDEF]{2}$/.test(i))
 }
 
 //金额 等
