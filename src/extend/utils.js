@@ -4,7 +4,7 @@ module.exports = {
   throttle,
   debounce,
   getLabelWidth,
-  copyText,
+  copyText
 }
 
 const { isEmpty, isJSType, isInt } = require('./validator')

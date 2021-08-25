@@ -1,7 +1,7 @@
 // 工具
 
 module.exports = {
-  checkIsFirstEntry,
+  checkIsFirstEntry
 }
 
 /**

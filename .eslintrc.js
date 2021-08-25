@@ -2,9 +2,10 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true,
+    node: true
   },
-  extends: ['eslint:recommended', 'eslint-plugin-prettier'],
+  extends: ['eslint:recommended', 'eslint-config-prettier'],
+  plugins: ['prettier'],
   rules: {
     semi: ['error', 'never'],
     quotes: ['error', 'single'], //'' ``
@@ -18,7 +19,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        TrailingCommas: 'none',
+        trailingComma: 'none',
         arrowParens: 'avoid',
         eslintIntegration: true,
         singleQuote: true,
@@ -28,13 +29,13 @@ module.exports = {
         sortAttributes: false,
         bracketSpacing: true,
         tabWidth: 2,
-        endOfLine: 'auto',
-      },
-    ],
+        endOfLine: 'auto'
+      }
+    ]
   },
   parserOptions: {
     parser: 'babel-eslint',
     //note： {...a,b} ES2018 才将这个运算符引入了对象。
-    ecmaVersion: 2018,
-  },
+    ecmaVersion: 2018
+  }
 }

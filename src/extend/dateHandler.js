@@ -5,7 +5,7 @@ module.exports = {
   fmtDate,
   fmtTime,
   fmtDateTime,
-  isSecondTimeBigger,
+  isSecondTimeBigger
 }
 
 /**
@@ -41,7 +41,7 @@ function generatorDate(date, formatter = 'y-m-d h:i:s') {
     h: d.getHours(),
     i: d.getMinutes(),
     s: d.getSeconds(),
-    a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()],
+    a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()]
   }
   res = formatter
   Object.keys(formatObj).forEach(key => {

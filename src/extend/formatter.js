@@ -6,7 +6,7 @@ module.exports = {
   fmtEmptyVal,
   fmtStorageSize,
   fmtContentLength,
-  fmtContentType
+  fmtContentType,
 }
 
 /**
@@ -57,7 +57,7 @@ function fmtStorageSize(val, unit) {
 
   if (isNaN(size)) throw new Error('Require a right input')
   if (/[bkmgtp]/.test(val)) originUnit = val.replace(/^[0-9.]+([bkmgtp]{1})$/g, '$1')
-  let res = size * Math.pow(1024, UNIT.indexOf(originUnit)), //tranform size with unit b
+  let res = size * Math.pow(1024, UNIT.indexOf(originUnit)), //transform size with unit b
     unitIdx = 0
   if (unit) {
     if (isJSType(unit, 'string') && UNIT.indexOf(unit[0].toLowerCase()) != -1) {

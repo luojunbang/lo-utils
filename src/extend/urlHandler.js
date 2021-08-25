@@ -2,7 +2,7 @@
 
 module.exports = {
   parseParams,
-  getParams,
+  getParams
 }
 
 /**

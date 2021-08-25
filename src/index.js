@@ -13,5 +13,5 @@ module.exports = {
   ...urlHandler,
   ...formatter,
   ...helper,
-  ...utils,
+  ...utils
 }

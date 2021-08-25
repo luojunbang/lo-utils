@@ -2,7 +2,7 @@
 
 module.exports = {
   downloadFile,
-  getFileSilent,
+  getFileSilent
 }
 
 /**
