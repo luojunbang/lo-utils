@@ -72,3 +72,24 @@
   left: 0;
   bottom: 0;
 }
+
+.fl,
+.float-l {
+  float: left;
+}
+
+.fr,
+.float-r {
+  float: right;
+}
+
+/*  */
+.vertical-m {
+  vertical-align: middle;
+}
+.vertical-t {
+  vertical-align: top;
+}
+.vertical-b {
+  vertical-align: bottom;
+}

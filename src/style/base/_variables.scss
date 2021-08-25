@@ -10,18 +10,17 @@ $text-color-base: #516379 !default;
 $text-color-secondary: #909399 !default;
 $text-color-placeholder: #c0c4cc !default;
 
-
 $background-color-base: #fff !default;
 
-$mask-background-color: #333333 !default;
+$background-color-mask: rgba(0,0,0,.1) !default;
 
 /* Border */
 $border-width: 1px !default;
-$border-color: rgba(229, 228, 235, 1) !default;
+$border-color: #efefef !default;
 
+$border-radius-sm: 2px !default;
 $border-radius: 4px !default;
 $border-radius-lg: 8px !default;
-$border-radius-sm: 2px !default;
 
 $round: 50rem !default;
 
@@ -35,10 +34,9 @@ $font-size-base: 14px !default; //html font-size
 $font-size-lg: 16px !default;
 $font-size-sm: 12px !default;
 
+$font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 500 !default;
-$font-weight-base: $font-weight-normal !default;
-$font-weight-light: 300 !default;
 
 $line-height-base: 1.5 !default;
 $line-height-lg: 2 !default;
