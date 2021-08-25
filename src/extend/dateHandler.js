@@ -1,9 +1,17 @@
+// 日期格式化工具
+
 /**
- * @desc 生成日期对象
- * @param Date | String | Number
- * @returns //2020-01-01
+ * @description
+ * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)
+ * @param {String} date
+ * @param {String} formatter y-m-d h:i:s a
+ * @example
+ * ```js
+ *    generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
+ *    generatorDate('2020-01-01','ymdhis 星期a') == '20200101000000 星期五'
+ * ```
  */
-const generatorDate = function (date, formatter = 'y-m-d h:i:s') {
+exports.generatorDate = function (date, formatter = 'y-m-d h:i:s') {
   let res = 'Invalid Date'
   if (!date) return res
   if (Object.prototype.toString.call(date) === '[object Date]') {
@@ -28,7 +36,7 @@ const generatorDate = function (date, formatter = 'y-m-d h:i:s') {
     a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()],
   }
   res = formatter
-  Object.keys(formatObj).forEach((key) => {
+  Object.keys(formatObj).forEach(key => {
     const reg = new RegExp(`${key}{1}`, 'g')
     res = res.replace(
       reg,
@@ -39,42 +47,52 @@ const generatorDate = function (date, formatter = 'y-m-d h:i:s') {
 }
 
 /**
- * @param Date | String | Number
- * @returns //2020-01-01
+ * @description 格式化日期
+ * @param {String} Date
+ * @param {String} splitter  '-'
+ * @example
+ * ```js
+ *    fmtDate('2020-01-01') == '2020-01-01'
+ *    fmtDate('2020-01-01','') == '20200101'
+ *    fmtDate('2020-01-01','/') == '2020/01/01'
+ * ```
  */
-const fmtDate = function (date, splitor = '-') {
-  return generatorDate(date, `y${splitor}m${splitor}d`)
+exports.fmtDate = function (date, splitter = '-') {
+  return generatorDate(date, `y${splitter}m${splitter}d`)
 }
 
 /**
- * @param Date | String | Number
- * @returns //18:00:00
+ * @description 格式化时间
+ * @param {String} Date
+ * @param {String} splitter  ':'
+ * @example
+ * ```js
+ *    fmtDate('2020-01-01') == '00:00:00'
+ *    fmtDate('2020-01-01','') == '000000'
+ *    fmtDate('2020-01-01',' ') == '00 00 00'
+ * ```
  */
-const fmtTime = function (date, splitor = ':') {
-  return generatorDate(date, `h${splitor}i${splitor}s`)
+exports.fmtTime = function (date, splitter = ':') {
+  return generatorDate(date, `h${splitter}i${splitter}s`)
 }
 
 /**
- * @param Date | String | Number
- * @returns 2020-01-01 18:00:00
+ * @description 跟generatorData一样
  */
-const fmtDateTime = function (date, formatter) {
+exports.fmtDateTime = function (date, formatter) {
   return generatorDate(date, formatter)
 }
 
 /**
- * @param Date | String | Number
- * @param Date | String | Number
- * @returns Boolean
+ * @description 比较事件,第二参数时间戳比第一参数时间戳大
+ * @param {String} first
+ * @param {String} last
+ * @returns {Boolean}
+ * @example
+ * ```js
+ *    isSecondTimeBigger('2020-01-01','2020-01-02') == true
+ * ```
  */
-const isSecondTimeBigger = function (start, end) {
-  return generatorDate(end) > generatorDate(start)
-}
-
-module.exports = {
-  generatorDate,
-  fmtDate,
-  fmtTime,
-  fmtDateTime,
-  isSecondTimeBigger,
+exports.isSecondTimeBigger = function (first, last) {
+  return generatorDate(last) > generatorDate(first)
 }

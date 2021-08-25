@@ -1,15 +1,17 @@
-module.exports = {
-  checkIsFirstEntry,
-}
+// 工具
 
 /**
- * @param callback
+ * @description
+ * 检查是否首次访问
+ * @example
+ * checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
  */
-function checkIsFirstEntry(flagKey = 'IS_FIRST_ENTRY') {
+exports.checkIsFirstEntry = function (flagKey = 'IS_FIRST_ENTRY') {
   if (!window || !window.localStorage) throw new Error('This method need to run in browser')
   return new Promise((rs, rj) => {
-    if (window.localStorage.getItem(flagKey)) {
-      rj(window.localStorage.getItem(flagKey))
+    const ret = window.localStorage.getItem(flagKey)
+    if (ret) {
+      rj(ret)
     } else {
       window.localStorage.setItem(flagKey, 1)
       rs(1)

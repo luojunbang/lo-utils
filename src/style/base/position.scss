@@ -1,0 +1,71 @@
+.absolute{
+  position: absolute;
+}
+
+.relative{
+  position: relative;
+}
+
+.fixed{
+  position: fixed;
+}
+
+.ab-center{
+  @extend .absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.row-center{
+  @extend .absolute;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+.full{
+  @extend .absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.col-center{
+  @extend .absolute;
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+.center-bottom{
+  @extend .row-center;
+  bottom: 0;
+}
+
+.right-t{
+  @extend .absolute;
+  right: 0;
+  top: 0;
+}
+.right-m{
+  @extend .col-center;
+  right: 0;
+}
+.right-b{
+  @extend .absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.left-t{
+  @extend .absolute;
+  top: 0;
+  left: 0;
+}
+.left-m{
+  @extend .col-center;
+  left: 0;
+}
+.left-b{
+  @extend .absolute;
+  left: 0;
+  bottom: 0;
+}

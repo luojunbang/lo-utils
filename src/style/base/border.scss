@@ -1,0 +1,28 @@
+.border-base{
+    border:$border-width solid $border-color;
+}
+.border-l{
+    border:$border-width solid $border-color;
+}
+.border-r{
+    border:$border-width solid $border-color;
+}
+.border-t{
+    border:$border-width solid $border-color;
+}
+.border-b{
+    border:$border-width solid $border-color;
+}
+
+.border-b0{
+    border-bottom: none!important;
+}
+.border-t0{
+    border-top: none!important;
+}
+.border-l0{
+    border-left: none!important;
+}
+.border-r0{
+    border-right: none!important;
+}
