@@ -2,8 +2,8 @@
 
 /**
  * @description
- * @param {*} val
- * @returns
+ * @param {String} val
+ * @returns {Boolean}
  */
 exports.isIpv4 = function (val) {
   const ary = val.split('.')
@@ -12,8 +12,8 @@ exports.isIpv4 = function (val) {
 
 /**
  * @description
- * @param {*} val
- * @returns
+ * @param {String} val
+ * @returns {Boolean}
  */
 exports.isMacAddress = function (val) {
   const ary = val.split(':')
@@ -22,8 +22,8 @@ exports.isMacAddress = function (val) {
 
 /**
  * @description 金额 等
- * @param {*} val
- * @returns
+ * @param {String|Number} val
+ * @returns {Boolean}
  */
 exports.isPositiveFloat = function (text) {
   return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) || /^[0]{1}(.[0]{1,2})?$/.test(text)
@@ -31,8 +31,8 @@ exports.isPositiveFloat = function (text) {
 
 /**
  * @description
- * @param {*} val
- * @returns
+ * @param {String|Number} val
+ * @returns {Boolean}
  */
 exports.isInt = function (text) {
   return /^(0|[1-9][0-9]*)$/.test(text)
@@ -41,8 +41,8 @@ exports.isInt = function (text) {
 //
 /**
  * @description 百分率 0-100
- * @param {*} val
- * @returns
+ * @param {String|Number} val
+ * @returns {Boolean}
  */
 exports.isPercent = function (text) {
   return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) && parseFloat(text) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text)
@@ -50,8 +50,8 @@ exports.isPercent = function (text) {
 
 /**
  * @description 端口 0-65535
- * @param {*} val
- * @returns
+ * @param {String|Number} val
+ * @returns {Boolean}
  */
 exports.isPort = function (text) {
   return (/^[1-9][0-9]*$/.test(text) && Math.floor(text) <= 65535) || /^0$/.test(text)
@@ -60,7 +60,8 @@ exports.isPort = function (text) {
 /**
  * @description
  * @param {*} val
- * @returns
+ * @param {String} target
+ * @returns {Boolean}
  */
 exports.isJSType = function (val, target) {
   return (
@@ -74,7 +75,7 @@ exports.isJSType = function (val, target) {
 /**
  * @description
  * @param {*} val
- * @returns
+ * @returns {Boolean}
  */
 exports.isEmpty = function (val) {
   return val === null || val === ''
@@ -83,7 +84,7 @@ exports.isEmpty = function (val) {
 /**
  * @description
  * @param {*} val
- * @returns
+ * @returns {Boolean}
  */
 exports.isNotEmptyText = function (val) {
   return val !== null && val !== '' && val !== undefined

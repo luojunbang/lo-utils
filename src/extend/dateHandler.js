@@ -84,7 +84,7 @@ exports.fmtDateTime = function (date, formatter) {
 }
 
 /**
- * @description 比较事件,第二参数时间戳比第一参数时间戳大
+ * @description 比较时间,第二参数时间戳比第一参数时间戳大
  * @param {String} first
  * @param {String} last
  * @returns {Boolean}

@@ -26,5 +26,9 @@
     "axios": "^0.21.1",
     "mysql": "^2.18.1",
     "pify": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luojunbang/lo-utils.git"
   }
 }

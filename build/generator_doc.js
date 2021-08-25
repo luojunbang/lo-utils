@@ -11,7 +11,7 @@ npm i lo-utils --save
 
 ## 使用
 \`\`\`js
-import { fmtDate } 'lo-utils'
+import { fmtDate } from 'lo-utils'
 \`\`\`
 
 ## 公共样式说明
