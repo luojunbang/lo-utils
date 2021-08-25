@@ -32,7 +32,7 @@ import { fmtDate } from 'lo-utils'
  工具  {  throttle,  debounce,  getLabelWidth,  copyText}
 * validator.js
 
- 工具  {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
+ 工具  {  [isIpv4](#isIpv4),  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
 
 
 ## 公共样式说明
