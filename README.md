@@ -7,11 +7,21 @@
 npm i lo-utils --save
 ```
 
+## 使用
+```js
+import { fmtDate } 'lo-utils'
+```
+
 ## 公共样式说明
 
+### 导入
+```js
+import 'lo-utils/style/index.scss';
+```
+
 ### 边距 (mg|pd)-(大小)-(方向)
-* 大小：base(可无)｜lg｜sm｜xs
-* 方向：t｜r｜b｜l｜lr(左右)｜tb(上下)
+* 大小：base(可无)|lg|sm|xs
+* 方向：t|r|b|l|lr(左右)|tb(上下)
 * 其他：mg0auto(margin:0 auto)
 
 例如：左方基础外边距,:class="mg-l"左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
