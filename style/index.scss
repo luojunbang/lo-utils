@@ -1,78 +1,20 @@
 @import './base/base.scss';
-// /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/ 
 
+// /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/ 
 ::-webkit-scrollbar { 
-  width: 12px; /*对垂直流动条有效*/ 
-  height: 12px; /*对水平流动条有效*/ 
 } 
 /*定义滚动条的轨道颜色、内阴影及圆角*/ 
 ::-webkit-scrollbar-track-piece{ 
-  background: #021B30;
-  // -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2); 
-  // background-color: rgb(16,32,68); 
-  // border-radius: 3px; 
 } 
 /*定义滑块颜色、内阴影及圆角*/ 
 ::-webkit-scrollbar-thumb {
-    background: #004986;
-    // border-radius: 5px;
-  /* -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2);  */
-  // background-color: rgb(28,51,97); 
 } 
 /*定义两端按钮的样式*/ 
 ::-webkit-scrollbar-button { 
-  background-color: rgb(16,23,45);
 } 
 /*定义右下角汇合处的样式*/ 
 ::-webkit-scrollbar-corner { 
-  background: none; 
-}
-// .table-text-cut.el-table th>.cell,
-.table-text-cut.el-table td>.cell{
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.table-text-center.el-table td, 
-.table-text-center.el-table th{
-  text-align: center;
 }
 
-
-.chart-resize-container{
-  transition: width,height .3s;
-}
-.h-25vh {
-  height: 25vh;
-}
-.h-40vh {
-  height: 40vh;
-}
-.h-50vh {
-  height: 50vh;
-}
-.h-65vh {
-  height: 65vh;
-}
-.h-75vh{
-  height: 75vh;
-}
-.h-85vh{
-  height: 85vh;
-}
-.h-160px{
-  height: 160px;
-}
-.custom-loading{
-  .el-loading-text{
-    font-size: 14px;
-    color: #3c73e1;
-  }
-  
-  i{
-    font-size: 30px;
-    color: #3c73e1;
-  }
-}
 
 

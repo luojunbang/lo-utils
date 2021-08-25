@@ -9,7 +9,7 @@ npm i lo-utils --save
 
 ## 使用
 ```js
-import { fmtDate } 'lo-utils'
+import { fmtDate } from 'lo-utils'
 ```
 
 ## 公共样式说明
@@ -89,7 +89,7 @@ fmtDate('2020-01-01',' ') == '00 00 00'
 * description 跟generatorData一样 
 
 ### isSecondTimeBigger 
-* description 比较事件,第二参数时间戳比第一参数时间戳大  
+* description 比较时间,第二参数时间戳比第一参数时间戳大  
 * param {String} first  
 * param {String} last  
 * returns {Boolean}  
@@ -127,7 +127,10 @@ xlsx:TODO
 *  工具
 ### checkIsFirstEntry 
 * description  检查是否首次访问  
-* example  checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{}) 
+* example
+```js
+checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
+``` 
 
 
 
@@ -156,48 +159,49 @@ xlsx:TODO
 *  工具
 ### isIpv4 
 * description  
-* param {} val  
-* returns 
+* param {String} val  
+* returns {Boolean} 
 
 ### isMacAddress 
 * description  
-* param {} val  
-* returns 
+* param {String} val  
+* returns {Boolean} 
 
 ### isPositiveFloat 
 * description 金额 等  
-* param {} val  
-* returns 
+* param {String|Number} val  
+* returns {Boolean} 
 
 ### isInt 
 * description  
-* param {} val  
-* returns 
+* param {String|Number} val  
+* returns {Boolean} 
 
 ### isPercent 
 * description 百分率 0-100  
-* param {} val  
-* returns 
+* param {String|Number} val  
+* returns {Boolean} 
 
 ### isPort 
 * description 端口 0-65535  
-* param {} val  
-* returns 
+* param {String|Number} val  
+* returns {Boolean} 
 
 ### isJSType 
 * description  
 * param {} val  
-* returns 
+* param {String} target  
+* returns {Boolean} 
 
 ### isEmpty 
 * description  
 * param {} val  
-* returns 
+* returns {Boolean} 
 
 ### isNotEmptyText 
 * description  
 * param {} val  
-* returns 
+* returns {Boolean} 
 
 
 
