@@ -14,25 +14,25 @@ import { fmtDate } from 'lo-utils'
 ## 工具函数
 * dateHandler.js
 
- 日期格式化工具  {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
+ 日期格式化工具  {  [generatorDate](#generatorDate),  [fmtDate](#fmtDate),  [fmtTime](#fmtTime),  [fmtDateTime](#fmtDateTime),  [isSecondTimeBigger](#isSecondTimeBigger)}
 * fileHandler.js
 
- 文件工具  {  downloadFile,  getFileSilent}
+ 文件工具  {  [downloadFile](#downloadFile),  [getFileSilent](#getFileSilent)}
 * formatter.js
 
- 格式化  {  fmtNum,  fmtUndefined,  fmtEmptyVal,  fmtStorageSize,  fmtContentLength,  fmtContentType}
+ 格式化  {  [fmtNum](#fmtNum),  [fmtUndefined](#fmtUndefined),  [fmtEmptyVal](#fmtEmptyVal),  [fmtStorageSize](#fmtStorageSize),  [fmtContentLength](#fmtContentLength),  [fmtContentType](#fmtContentType)}
 * helper.js
 
- 工具  {  checkIsFirstEntry}
+ 工具  {  [checkIsFirstEntry](#checkIsFirstEntry)}
 * urlHandler.js
 
- 工具  {  parseParams,  getParams}
+ 工具  {  [parseParams](#parseParams),  [getParams](#getParams)}
 * utils.js
 
- 工具  {  throttle,  debounce,  getLabelWidth,  copyText}
+ 工具  {  [throttle](#throttle),  [debounce](#debounce),  [getLabelWidth](#getLabelWidth),  [copyText](#copyText)}
 * validator.js
 
- 工具  {  [isIpv4](#isIpv4),  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
+ 工具  {  [isIpv4](#isIpv4),  [isMacAddress](#isMacAddress),  [isPositiveFloat](#isPositiveFloat),  [isInt](#isInt),  [isPercent](#isPercent),  [isPort](#isPort),  [isJSType](#isJSType),  [isEmpty](#isEmpty),  [isNotEmptyText](#isNotEmptyText)}
 
 
 ## 公共样式说明

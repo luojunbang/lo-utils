@@ -73,7 +73,12 @@ function generatorREADME(path) {
   const list = content.replace(/\r|\n/g, '').split('/**')
   const fileDescription = '' // '* ' + list[0].replace(/\//g, '') + '\n'
   js_config += '* ' + path.slice(path.lastIndexOf('/') + 1) + '\n\n'
-  js_config += list[0].replace(/\//g, '').replace('module.exports', '').replace('=', '') + '\n'
+  js_config +=
+    list[0]
+      .replace(/\//g, '')
+      .replace('module.exports', '')
+      .replace('=', '')
+      .replace(/[\w+]+/g, (rs, $1) => `[${rs}](#${rs})`) + '\n'
   return list.slice(1).reduce((rs, func) => {
     const idx = func.indexOf('function')
     const name = func.replace(/^[\s\S]*function[\s]*([\w+]+)[\s\S]*$/g, '### $1 \n') //标题
