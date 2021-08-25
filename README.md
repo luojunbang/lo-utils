@@ -20,37 +20,37 @@ import 'YOUR_VARIABLES.scss' //具体变量名称见 'lo-utils/style/base/_varia
 import 'lo-utils/style/index.scss';
 ```
 
-### 边距 (mg|pd)-(大小)-(方向)
-* 大小：base(可无)|lg|sm|xs
-* 方向：t|r|b|l|lr(左右)|tb(上下)
+### 边距 (mg | pd)-(大小)-(方向)
+* 大小：base(可无) | lg | sm | xs
+* 方向：t | r | b | l | lr(左右) | tb(上下)
 * 其他：mg0auto(margin:0 auto)
 
 例如：左方基础外边距,:class="mg-l"左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
 
 ### 定位
-* 定位：relative|absolute|fixed
-* 类名：row-center|col-center|{(left|middle|right)-(t|m|b)}|full
+* 定位：relative | absolute | fixed
+* 类名：row-center | col-center | {(left | middle | right)-(t | m | b)} | full
 
 例如：一行垂直居中对齐 class="middle-m"
 
 ### flex布局
-* 布局：flex-(row|column)-(reverse?)|flex-row-nowrap(flex-row align-center justify-center)
-* 横向：justify-(start|end|center|between|around)
-* 垂直：align-(start|end|center|stretch)
-* 自身：self-(start|end|center|stretch)
+* 布局：flex-(row | column)-(reverse?) | flex-row-nowrap(flex-row align-center justify-center)
+* 横向：justify-(start | end | center | between | around)
+* 垂直：align-(start | end | center | stretch)
+* 自身：self-(start | end | center | stretch)
 
 例如：一行垂直居中对齐 class="flex-row align-center justify-center"
 
 ### 文字 text
 * 大小：base(可无)｜lg｜sm
-* 行高：[lh] text-lh-(lg[2]|sm[1.2]|[1.5])
-* 粗细：text-(bold|light)
-* 对齐：text-(left|right|center)
-* 其他：text-(ABC|Abc|abc|cut[超过省略号]|2cut[两行超过省略号])
+* 行高：[lh] text-lh-(lg[2] | sm[1.2] | [1.5])
+* 粗细：text-(bold | light)
+* 对齐：text-(left | right | center)
+* 其他：text-(ABC | Abc | abc | cut[超过省略号] | 2cut[两行超过省略号])
 * 下划线 underline
 
 ### 瞄边 border
-* border-(base|t|r|b|l)-(none?)
+* border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
 *  日期格式化工具
 ### generatorDate 
