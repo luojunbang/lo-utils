@@ -18,6 +18,7 @@ import { fmtDate } 'lo-utils'
 
 ### 导入
 \`\`\`js
+import 'YOUR_VARIABLES.scss' //具体变量名称见 'lo-utils/style/base/_variables.scss'
 import 'lo-utils/style/index.scss';
 \`\`\`
 
