@@ -52,7 +52,7 @@ import 'lo-utils/style/index.scss';
 ### 瞄边 border
 * border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
-*  日期格式化工具module.exports = {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger,}
+*  日期格式化工具module.exports = {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
 ### generatorDate 
 * description  格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)  
 * param {String} date  
@@ -102,7 +102,7 @@ isSecondTimeBigger('2020-01-01','2020-01-02') == true
 
 
 ## fileHandler.js
-*  文件工具module.exports = {  downloadFile,  getFileSilent,}
+*  文件工具module.exports = {  downloadFile,  getFileSilent}
 ### downloadFile 
 * description  从URL里下载文件  
 * param {String} fileName 文件名  
@@ -159,7 +159,7 @@ xlsx:TODO
 
 
 ## helper.js
-*  工具module.exports = {  checkIsFirstEntry,}
+*  工具module.exports = {  checkIsFirstEntry}
 ### checkIsFirstEntry 
 * description  检查是否首次访问  
 * example
@@ -171,7 +171,7 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## urlHandler.js
-*  工具module.exports = {  parseParams,  getParams,}
+*  工具module.exports = {  parseParams,  getParams}
 ### parseParams 
 * param {} params  
 * param {} url  
@@ -186,7 +186,7 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## utils.js
-*  工具module.exports = {  throttle,  debounce,  getLabelWidth,  copyText,}const { isEmpty, isJSType, isInt } = require('.validator')
+*  工具module.exports = {  throttle,  debounce,  getLabelWidth,  copyText}const { isEmpty, isJSType, isInt } = require('.validator')
 ### throttle 
 * param {Function} func  
 * param {Number} wait  
@@ -212,7 +212,7 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## validator.js
-*  工具module.exports = {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText,}
+*  工具module.exports = {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
 ### isIpv4 
 * description  
 * param {String} val  
