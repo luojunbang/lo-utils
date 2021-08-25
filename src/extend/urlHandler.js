@@ -1,12 +1,17 @@
 // 工具
 
+module.exports = {
+  parseParams,
+  getParams,
+}
+
 /**
  *
  * @param {*} params
  * @param {*} url
  * @returns
  */
-exports.parseParams = function (params, url) {
+function parseParams(params, url) {
   let res = url ? url + '?' : ''
   return (
     res +
@@ -22,7 +27,7 @@ exports.parseParams = function (params, url) {
  * @param {*} url
  * @returns
  */
-exports.getParams = function (url) {
+function getParams(url) {
   url = url.slice(url.indexOf('?') + 1).split('&')
   return url.reduce((rs, item) => {
     const [key, value] = item.split('=')

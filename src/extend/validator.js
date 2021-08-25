@@ -1,11 +1,23 @@
 // 工具
 
+module.exports = {
+  isIpv4,
+  isMacAddress,
+  isPositiveFloat,
+  isInt,
+  isPercent,
+  isPort,
+  isJSType,
+  isEmpty,
+  isNotEmptyText,
+}
+
 /**
  * @description
  * @param {String} val
  * @returns {Boolean}
  */
-exports.isIpv4 = function (val) {
+function isIpv4(val) {
   const ary = val.split('.')
   return ary.length === 4 && ary.every(i => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
 }
@@ -15,7 +27,7 @@ exports.isIpv4 = function (val) {
  * @param {String} val
  * @returns {Boolean}
  */
-exports.isMacAddress = function (val) {
+function isMacAddress(val) {
   const ary = val.split(':')
   return ary.length === 6 && ary.every(i => /^[\dabcdefABCDEF]{2}$/.test(i))
 }
@@ -25,7 +37,7 @@ exports.isMacAddress = function (val) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-exports.isPositiveFloat = function (text) {
+function isPositiveFloat(text) {
   return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) || /^[0]{1}(.[0]{1,2})?$/.test(text)
 }
 
@@ -34,7 +46,7 @@ exports.isPositiveFloat = function (text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-exports.isInt = function (text) {
+function isInt(text) {
   return /^(0|[1-9][0-9]*)$/.test(text)
 }
 
@@ -44,7 +56,7 @@ exports.isInt = function (text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-exports.isPercent = function (text) {
+function isPercent(text) {
   return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) && parseFloat(text) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text)
 }
 
@@ -53,7 +65,7 @@ exports.isPercent = function (text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-exports.isPort = function (text) {
+function isPort(text) {
   return (/^[1-9][0-9]*$/.test(text) && Math.floor(text) <= 65535) || /^0$/.test(text)
 }
 
@@ -63,7 +75,7 @@ exports.isPort = function (text) {
  * @param {String} target
  * @returns {Boolean}
  */
-exports.isJSType = function (val, target) {
+function isJSType(val, target) {
   return (
     Object.prototype.toString
       .call(val)
@@ -77,7 +89,7 @@ exports.isJSType = function (val, target) {
  * @param {*} val
  * @returns {Boolean}
  */
-exports.isEmpty = function (val) {
+function isEmpty(val) {
   return val === null || val === ''
 }
 
@@ -86,6 +98,6 @@ exports.isEmpty = function (val) {
  * @param {*} val
  * @returns {Boolean}
  */
-exports.isNotEmptyText = function (val) {
+function isNotEmptyText(val) {
   return val !== null && val !== '' && val !== undefined
 }

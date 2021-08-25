@@ -1,5 +1,10 @@
 // 文件工具
 
+module.exports = {
+  downloadFile,
+  getFileSilent,
+}
+
 /**
  * @description
  * 从URL里下载文件
@@ -14,7 +19,7 @@
  *    xlsx:TODO
  * ```
  */
-exports.downloadFile = function (fileName, data, dataType) {
+function downloadFile(fileName, data, dataType) {
   if (!data || !fileName || !window) return
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data, fileName) //IE
@@ -35,7 +40,7 @@ exports.downloadFile = function (fileName, data, dataType) {
  * @description 静默iframe导出文件
  * @param url 请求地址
  */
-exports.getFileSilent = function (url) {
+function getFileSilent(url) {
   if (!window) throw new Error('This function need window env')
   //向后台发送请求
   let iframe = document.createElement('iframe')

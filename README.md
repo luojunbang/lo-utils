@@ -52,7 +52,7 @@ import 'lo-utils/style/index.scss';
 ### 瞄边 border
 * border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
-*  日期格式化工具
+*  日期格式化工具module.exports = {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger,}
 ### generatorDate 
 * description  格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)  
 * param {String} date  
@@ -102,7 +102,7 @@ isSecondTimeBigger('2020-01-01','2020-01-02') == true
 
 
 ## fileHandler.js
-*  文件工具
+*  文件工具module.exports = {  downloadFile,  getFileSilent,}
 ### downloadFile 
 * description  从URL里下载文件  
 * param {String} fileName 文件名  
@@ -116,15 +116,50 @@ xls:'applicationvnd.ms-excel;charset=UTF-8'
 xlsx:TODO
 ``` 
 
-### getFileSilent 
+### need 
 * description 静默iframe导出文件  
 * param url 请求地址 
 
 
 
 
+## formatter.js
+*  格式化module.exports = {  fmtNum,  fmtUndefined,  fmtEmptyVal,  fmtStorageSize,  fmtContentLength,  fmtContentType,}
+### fmtNum 
+* param {} val  
+* returns 
+
+### fmtUndefined 
+* param {} val  
+* returns 
+
+### fmtEmptyVal 
+* param {} val  
+* returns 
+
+### fmtStorageSize 
+* description formatter size display  
+* param {String｜Number } val The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p  
+* param {String} unit accept targetUnit ex.'k','K','Kb'  
+* returns {String} The val after transform  
+* example
+```js
+('2048K','m') -> '2m'
+``` 
+
+### fmtContentLength 
+* param {} val  
+* returns 
+
+### fmtContentType 
+* param {} val  
+* returns 
+
+
+
+
 ## helper.js
-*  工具
+*  工具module.exports = {  checkIsFirstEntry,}
 ### checkIsFirstEntry 
 * description  检查是否首次访问  
 * example
@@ -136,7 +171,7 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## urlHandler.js
-*  工具
+*  工具module.exports = {  parseParams,  getParams,}
 ### parseParams 
 * param {} params  
 * param {} url  
@@ -151,12 +186,33 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## utils.js
-*  工具
- * * @param {*} params * @param {*} url * @returns */
+*  工具module.exports = {  throttle,  debounce,  getLabelWidth,  copyText,}const { isEmpty, isJSType, isInt } = require('.validator')
+### throttle 
+* param {Function} func  
+* param {Number} wait  
+* returns {} 
+
+### debounce 
+* param {Function} func  
+* param {number} wait  
+* param {boolean} immediate  
+* return {} 
+
+### getLabelWidth 
+* description 计算label的长度 三个数组字母==两个文字  
+* param {} label  
+* param {} fontSize  
+* returns 
+
+### copyText 
+* param {} val  
+* returns 
+
+
 
 
 ## validator.js
-*  工具
+*  工具module.exports = {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText,}
 ### isIpv4 
 * description  
 * param {String} val  

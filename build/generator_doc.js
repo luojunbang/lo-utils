@@ -67,10 +67,10 @@ function generatorREADME(path) {
   const list = content.replace(/\r|\n/g, '').split('/**')
   const fileDescription = '* ' + list[0].replace(/\//g, '') + '\n'
   return list.slice(1).reduce((rs, func) => {
-    const idx = func.indexOf('exports')
-    const name = func.replace(/^[\s\S]*exports.([\w+]+)[\s\S]*=[\s\S]*function[\s\S]*$/g, '### $1 \n') //标题3
+    const idx = func.indexOf('function')
+    const name = func.replace(/^[\s\S]*function[\s]*([\w+]+)[\s\S]*$/g, '### $1 \n') //标题
     if (idx === -1) return rs + name
-    const md = func.slice(0, func.indexOf('exports')).replace(/\*|\//g, '').split('@') //提取函数注释
+    const md = func.slice(0, func.indexOf('function')).replace(/\*|\//g, '').split('@') //提取函数注释
     const ret = md.reduce((rs, txt) => {
       //拼接注释为markdown
       if (txt.replace(/\s/g, '') === '') return rs

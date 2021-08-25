@@ -1,5 +1,13 @@
 // 日期格式化工具
 
+module.exports = {
+  generatorDate,
+  fmtDate,
+  fmtTime,
+  fmtDateTime,
+  isSecondTimeBigger,
+}
+
 /**
  * @description
  * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)
@@ -11,7 +19,7 @@
  *    generatorDate('2020-01-01','ymdhis 星期a') == '20200101000000 星期五'
  * ```
  */
-exports.generatorDate = function (date, formatter = 'y-m-d h:i:s') {
+function generatorDate(date, formatter = 'y-m-d h:i:s') {
   let res = 'Invalid Date'
   if (!date) return res
   if (Object.prototype.toString.call(date) === '[object Date]') {
@@ -57,7 +65,7 @@ exports.generatorDate = function (date, formatter = 'y-m-d h:i:s') {
  *    fmtDate('2020-01-01','/') == '2020/01/01'
  * ```
  */
-exports.fmtDate = function (date, splitter = '-') {
+function fmtDate(date, splitter = '-') {
   return generatorDate(date, `y${splitter}m${splitter}d`)
 }
 
@@ -72,14 +80,14 @@ exports.fmtDate = function (date, splitter = '-') {
  *    fmtDate('2020-01-01',' ') == '00 00 00'
  * ```
  */
-exports.fmtTime = function (date, splitter = ':') {
+function fmtTime(date, splitter = ':') {
   return generatorDate(date, `h${splitter}i${splitter}s`)
 }
 
 /**
  * @description 跟generatorData一样
  */
-exports.fmtDateTime = function (date, formatter) {
+function fmtDateTime(date, formatter) {
   return generatorDate(date, formatter)
 }
 
@@ -93,6 +101,6 @@ exports.fmtDateTime = function (date, formatter) {
  *    isSecondTimeBigger('2020-01-01','2020-01-02') == true
  * ```
  */
-exports.isSecondTimeBigger = function (first, last) {
+function isSecondTimeBigger(first, last) {
   return generatorDate(last) > generatorDate(first)
 }

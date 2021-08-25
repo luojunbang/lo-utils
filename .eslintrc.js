@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['eslint:recommended', '@vue/prettier'],
+  extends: ['eslint:recommended', 'eslint-plugin-prettier'],
   rules: {
     semi: ['error', 'never'],
     quotes: ['error', 'single'], //'' ``
@@ -18,6 +18,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
+        TrailingCommas: 'none',
         arrowParens: 'avoid',
         eslintIntegration: true,
         singleQuote: true,
