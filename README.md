@@ -14,7 +14,7 @@ import { fmtDate } from 'lo-utils'
 ## 工具函数
 * dateHandler.js
 
- 日期格式化工具  {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
+ 日期格式化工具  {  [generatorDate](#generatorDate),  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
 * fileHandler.js
 
  文件工具  {  downloadFile,  getFileSilent}
