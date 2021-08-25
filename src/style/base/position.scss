@@ -10,7 +10,8 @@
   position: fixed;
 }
 
-.ab-center{
+.ab-center,
+.middle-m{
   @extend .absolute;
   left: 50%;
   top: 50%;
@@ -35,10 +36,12 @@
   transform: translate(0,-50%);
 }
 
-.center-bottom{
+.center-bottom,
+.middle-b{
   @extend .row-center;
   bottom: 0;
 }
+
 
 .right-t{
   @extend .absolute;

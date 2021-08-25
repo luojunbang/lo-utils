@@ -8,7 +8,7 @@ module.exports = {
   throttle,
   fmtNum,
   getLabelWidth,
-  fmtUndefind,
+  fmtUndefined,
   fmtEmptyVal,
   copyText,
   fmtStorageSize,
@@ -99,13 +99,13 @@ function getLabelWidth(label, fontSize = 14) {
     res = minWidth
   if (!label) return minWidth
   if (label.length) {
-    const az09AryLength = label.split('').filter((i) => /[0-9A-Za-z()%]/.test(i)).length
+    const az09AryLength = label.split('').filter(i => /[0-9A-Za-z()%]/.test(i)).length
     res = Math.ceil((az09AryLength * fontSize * 2) / 3) + (label.length - az09AryLength) * fontSize
   }
   return Math.max(minWidth, res)
 }
 
-function fmtUndefind(val) {
+function fmtUndefined(val) {
   if (val === undefined || val === null) return '-'
   return val
 }

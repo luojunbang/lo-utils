@@ -1,31 +1,13 @@
 /************************ text ************************/
-.color-base {
-  color: $primary-color;
-}
-.text-c-b,
-.text-color-base {
-  color: $text-color-base;
-}
-
-.text-c-s,
-.text-color-secondary {
-  color: $text-color-secondary;
-}
-
-.text-c-p,
-.text-color-placeholder {
-  color: $text-color-placeholder;
-}
-
-.font-sm {
+.text-sm {
   font-size: $font-size-sm;
 }
 
-.font-base {
+.text-base,.text {
   font-size: $font-size-base;
 }
 
-.font-lg {
+.text-lg {
   font-size: $font-size-lg;
 }
 
@@ -47,7 +29,8 @@
   overflow: hidden;
 }
 
-.text-more-line-cut {
+.text-more-line-cut，
+.text-2cut {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -56,28 +39,23 @@
 }
 
 
-.font-lh-lg {
+.text-lh-lg {
   line-height: 2;
 }
 
-.font-lh {
+.text-lh {
   line-height: 1.5;
 }
 
-.font-lh-sm {
+.text-lh-sm {
   line-height: 1.2;
 }
 
-.text-bold,
-.font-w-bold {
+.text-bold {
   font-weight: $font-weight-bold;
 }
 
-.font-w-normal {
-  font-weight: $font-weight-normal;
-}
-
-.font-w-light {
+.text-light {
   font-weight: $font-weight-light;
 }
 
@@ -97,19 +75,4 @@
   text-decoration: underline;
 }
 
-// .primary-text{
-//   @extend .font-lg;
-//   @extend .text-bold;
-// }
-// .regular-text{
-//   @extend .font-base;
-//   @extend .font-w-normal;
-// }
-// .secondary-text{
-//   @extend .font-base;
-//   @extend .font-w-normal;
-// }
-// .placeholder{
-//   @extend .font-base;
-//   @extend .font-w-light;
-// }
+
