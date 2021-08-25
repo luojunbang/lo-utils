@@ -11,6 +11,29 @@ npm i lo-utils --save
 ```js
 import { fmtDate } from 'lo-utils'
 ```
+## 工具函数
+* dateHandler.js
+
+ 日期格式化工具  {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
+* fileHandler.js
+
+ 文件工具  {  downloadFile,  getFileSilent}
+* formatter.js
+
+ 格式化  {  fmtNum,  fmtUndefined,  fmtEmptyVal,  fmtStorageSize,  fmtContentLength,  fmtContentType}
+* helper.js
+
+ 工具  {  checkIsFirstEntry}
+* urlHandler.js
+
+ 工具  {  parseParams,  getParams}
+* utils.js
+
+ 工具  {  throttle,  debounce,  getLabelWidth,  copyText}
+* validator.js
+
+ 工具  {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
+
 
 ## 公共样式说明
 
@@ -25,7 +48,7 @@ import 'lo-utils/style/index.scss';
 * 方向：t | r | b | l | lr(左右) | tb(上下)
 * 其他：mg0auto(margin:0 auto)
 
-例如：左方基础外边距,:class="mg-l"左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
+例如：左方基础外边距:class="mg-l",左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
 
 ### 定位
 * 定位：relative | absolute | fixed
@@ -52,7 +75,6 @@ import 'lo-utils/style/index.scss';
 ### 瞄边 border
 * border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
-*  日期格式化工具module.exports = {  generatorDate,  fmtDate,  fmtTime,  fmtDateTime,  isSecondTimeBigger}
 ### generatorDate 
 * description  格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)  
 * param {String} date  
@@ -102,7 +124,6 @@ isSecondTimeBigger('2020-01-01','2020-01-02') == true
 
 
 ## fileHandler.js
-*  文件工具module.exports = {  downloadFile,  getFileSilent}
 ### downloadFile 
 * description  从URL里下载文件  
 * param {String} fileName 文件名  
@@ -124,7 +145,6 @@ xlsx:TODO
 
 
 ## formatter.js
-*  格式化module.exports = {  fmtNum,  fmtUndefined,  fmtEmptyVal,  fmtStorageSize,  fmtContentLength,  fmtContentType,}
 ### fmtNum 
 * param {} val  
 * returns 
@@ -159,7 +179,6 @@ xlsx:TODO
 
 
 ## helper.js
-*  工具module.exports = {  checkIsFirstEntry}
 ### checkIsFirstEntry 
 * description  检查是否首次访问  
 * example
@@ -171,7 +190,6 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## urlHandler.js
-*  工具module.exports = {  parseParams,  getParams}
 ### parseParams 
 * param {} params  
 * param {} url  
@@ -186,7 +204,6 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## utils.js
-*  工具module.exports = {  throttle,  debounce,  getLabelWidth,  copyText}const { isEmpty, isJSType, isInt } = require('.validator')
 ### throttle 
 * param {Function} func  
 * param {Number} wait  
@@ -212,7 +229,6 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 
 ## validator.js
-*  工具module.exports = {  isIpv4,  isMacAddress,  isPositiveFloat,  isInt,  isPercent,  isPort,  isJSType,  isEmpty,  isNotEmptyText}
 ### isIpv4 
 * description  
 * param {String} val  

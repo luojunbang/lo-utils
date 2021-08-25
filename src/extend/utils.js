@@ -7,8 +7,6 @@ module.exports = {
   copyText
 }
 
-const { isEmpty, isJSType, isInt } = require('./validator')
-
 /**
  *
  * @param {Function} func
@@ -87,6 +85,7 @@ function getLabelWidth(label, fontSize = 14) {
   }
   return Math.max(minWidth, res)
 }
+const { isJSType } = require('./validator')
 
 /**
  *

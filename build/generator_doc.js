@@ -13,6 +13,9 @@ npm i lo-utils --save
 \`\`\`js
 import { fmtDate } from 'lo-utils'
 \`\`\`
+`
+
+let style_config = `
 
 ## 公共样式说明
 
@@ -26,7 +29,7 @@ import 'lo-utils/style/index.scss';
 * 大小：base(可无) | lg | sm | xs
 * 方向：t | r | b | l | lr(左右) | tb(上下)
 * 其他：mg0auto(margin:0 auto)
-\n例如：左方基础外边距,:class="mg-l"左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
+\n例如：左方基础外边距:class="mg-l",左方大外边距:class="mg-l-lg",左右小内边距 class="pd-lr-sm"
 
 ### 定位
 * 定位：relative | absolute | fixed
@@ -52,20 +55,25 @@ import 'lo-utils/style/index.scss';
 * border-(base | t | r | b | l)-(none?)
 `
 
+let js_config = '## 工具函数\n'
+
 exports.doc = function (path) {
+  let js_desc = ''
   fs.recurseSync(path, function (path, name) {
     if (name) {
-      utils_markdown += generatorREADME(path) + '\n\n\n'
+      js_desc += generatorREADME(path) + '\n\n\n'
     }
   })
-  fs.writeFileSync('README.md', utils_markdown)
+  fs.writeFileSync('README.md', utils_markdown + js_config + style_config + js_desc)
 }
 
 function generatorREADME(path) {
   const fileName = '## ' + path.slice(path.lastIndexOf('/') + 1) + '\n'
   const content = fs.readFileSync(path, 'utf-8')
   const list = content.replace(/\r|\n/g, '').split('/**')
-  const fileDescription = '* ' + list[0].replace(/\//g, '') + '\n'
+  const fileDescription = '' // '* ' + list[0].replace(/\//g, '') + '\n'
+  js_config += '* ' + path.slice(path.lastIndexOf('/') + 1) + '\n\n'
+  js_config += list[0].replace(/\//g, '').replace('module.exports', '').replace('=', '') + '\n'
   return list.slice(1).reduce((rs, func) => {
     const idx = func.indexOf('function')
     const name = func.replace(/^[\s\S]*function[\s]*([\w+]+)[\s\S]*$/g, '### $1 \n') //标题
