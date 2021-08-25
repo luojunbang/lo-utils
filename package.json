@@ -6,7 +6,8 @@
   "scripts": {
     "doc": "node ./build/generator_doc.js",
     "build": "webpack --config ./build/webpack.config.js",
-    "test": "mocha --watch"
+    "test": "mocha --watch",
+    "publish:bug": "npm version patch && npm publish"
   },
   "author": "luojunbang",
   "license": "ISC",
