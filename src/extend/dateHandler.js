@@ -62,7 +62,7 @@ function generatorDate(date, formatter = 'y-m-d h:i:s') {
  * ```js
  *    fmtDate('2020-01-01') == '2020-01-01'
  *    fmtDate('2020-01-01','') == '20200101'
- *    fmtDate('2020-01-01','/') == '2020/01/01'
+ *    fmtDate('2020-01-01',' ') == '2020 01 01'
  * ```
  */
 function fmtDate(date, splitter = '-') {
@@ -75,9 +75,9 @@ function fmtDate(date, splitter = '-') {
  * @param {String} splitter  ':'
  * @example
  * ```js
- *    fmtDate('2020-01-01') == '00:00:00'
- *    fmtDate('2020-01-01','') == '000000'
- *    fmtDate('2020-01-01',' ') == '00 00 00'
+ *    fmtTime('2020-01-01') == '00:00:00'
+ *    fmtTime('2020-01-01','') == '000000'
+ *    fmtTime('2020-01-01',' ') == '00 00 00'
  * ```
  */
 function fmtTime(date, splitter = ':') {
