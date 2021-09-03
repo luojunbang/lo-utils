@@ -5,18 +5,18 @@ $success-color:#37D5EE!default;
 $warn-color:#ff8b3d!default;
 $danger-color:#FF3D62!default;
 
-$text-color-primary: #303133 !default;
-$text-color-base: #516379 !default;
-$text-color-secondary: #909399 !default;
-$text-color-placeholder: #c0c4cc !default;
+$text-color-primary: rgba(0,0,0,.85) !default;
+$text-color-base: rgba(0,0,0,.65) !default;
+$text-color-secondary: rgba(0,0,0,.45) !default;
+$text-color-placeholder: rgba(0,0,0,.25) !default;
 
-$background-color-base: #fff !default;
+$background-color-base: rgba(0,0,0,.04) !default;
 
-$background-color-mask: rgba(0,0,0,.1) !default;
+$background-color-mask: rgba(0,0,0,.04) !default;
 
 /* Border */
 $border-width: 1px !default;
-$border-color: #efefef !default;
+$border-color: rgba(0,0,0,.15) !default;
 
 $border-radius-sm: 2px !default;
 $border-radius: 4px !default;
