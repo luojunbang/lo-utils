@@ -59,3 +59,8 @@ $margin-xs: 5px !default;
 
 // Scroll-bar
 $scroll-bar-width:12px!default;
+
+
+//Note:最小屏幕位1024 - 180
+$dialog-max-height:560px!default;
+$dialog-min-height:200px!default;
