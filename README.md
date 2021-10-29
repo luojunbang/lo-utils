@@ -14,19 +14,19 @@ import { fmtDate } from 'lo-utils'
 ## 工具函数
 * dateHandler.js
 
- 日期格式化工具  {  [generatorDate](#generatorDate),  [fmtDate](#fmtDate),  [fmtTime](#fmtTime),  [fmtDateTime](#fmtDateTime),  [isSecondTimeBigger](#isSecondTimeBigger)}
+ 日期格式化工具  {  [generatorDate](#generatorDate),  [fmtDate](#fmtDate),  [fmtTime](#fmtTime),  [fmtDateTime](#fmtDateTime),  [isSecondTimeBigger](#isSecondTimeBigger),}
 * fileHandler.js
 
- 文件工具  {  [downloadFile](#downloadFile),  [getFileSilent](#getFileSilent)}
+ 文件工具  {  [downloadFile](#downloadFile),  [getFileSilent](#getFileSilent),}
 * formatter.js
 
- 格式化  {  [fmtNum](#fmtNum),  [fmtUndefined](#fmtUndefined),  [fmtEmptyVal](#fmtEmptyVal),  [fmtStorageSize](#fmtStorageSize),  [fmtContentLength](#fmtContentLength),  [fmtContentType](#fmtContentType)}
+ 格式化  {  [fmtNum](#fmtNum),  [fmtUndefined](#fmtUndefined),  [fmtEmptyVal](#fmtEmptyVal),  [fmtStorageSize](#fmtStorageSize),  [fmtContentLength](#fmtContentLength),  [fmtContentType](#fmtContentType),}
 * helper.js
 
- 工具  {  [checkIsFirstEntry](#checkIsFirstEntry)}
+ 工具  {  [checkIsFirstEntry](#checkIsFirstEntry),}
 * urlHandler.js
 
- 工具  {  [parseParams](#parseParams),  [getParams](#getParams)}
+ 工具  {  [parseParams](#parseParams),  [getParams](#getParams),}
 * utils.js
 
  工具  {  [throttle](#throttle),  [debounce](#debounce),  [getLabelWidth](#getLabelWidth),  [copyText](#copyText)}
@@ -191,14 +191,18 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 
 ## urlHandler.js
 ### parseParams 
-* param {} params  
-* param {} url  
-* returns 
+* description  拼接url与参数  
+* example
+```js
+parseParams({a:1},'github.com') == github.com?a=1
+``` 
 
 ### getParams 
-* param {} params  
-* param {} url  
-* returns 
+* description  从url获取参数  
+* example
+```js
+getParams('github.com?a=1') == {a:1}
+``` 
 
 
 
