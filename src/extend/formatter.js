@@ -6,7 +6,7 @@ module.exports = {
   fmtEmptyVal,
   fmtStorageSize,
   fmtContentLength,
-  fmtContentType
+  fmtContentType,
 }
 
 /**
@@ -103,7 +103,7 @@ function fmtContentType(val) {
     plain: 'txt',
     'svg+xml': 'svg',
     javascript: 'js',
-    jpeg: 'jpg'
+    jpeg: 'jpg',
   }
   return config[type] || type
 }

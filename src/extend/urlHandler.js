@@ -2,14 +2,16 @@
 
 module.exports = {
   parseParams,
-  getParams
+  getParams,
 }
 
 /**
- *
- * @param {*} params
- * @param {*} url
- * @returns
+ * @description
+ * 拼接url与参数
+ * @example
+ * ```js
+ * parseParams({a:1},'github.com') == github.com?a=1
+ * ```
  */
 function parseParams(params, url) {
   let res = url ? url + '?' : ''
@@ -22,10 +24,12 @@ function parseParams(params, url) {
 }
 
 /**
- *
- * @param {*} params
- * @param {*} url
- * @returns
+ * @description
+ * 从url获取参数
+ * @example
+ * ```js
+ * getParams('github.com?a=1') == {a:1}
+ * ```
  */
 function getParams(url) {
   url = url.slice(url.indexOf('?') + 1).split('&')
