@@ -43,6 +43,10 @@ import 'YOUR_VARIABLES.scss' //具体变量名称见 'lo-utils/style/base/_varia
 import 'lo-utils/style/index.scss';
 ```
 
+### 颜色 color-(颜色)
+* 基础颜色：primary｜success｜warn｜danger｜highlight
+* 文字颜色：title｜text｜subtext｜placeholder
+
 ### 边距 (mg | pd)-(大小)-(方向)
 * 大小：base(可无) | lg | sm | xs
 * 方向：t | r | b | l | lr(左右) | tb(上下)
@@ -137,8 +141,8 @@ xls:'applicationvnd.ms-excel;charset=UTF-8'
 xlsx:TODO
 ``` 
 
-### need 
-* description 静默iframe导出文件  
+### getFileSilent 
+* description  静默iframe导出文件  
 * param url 请求地址 
 
 

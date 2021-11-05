@@ -37,7 +37,8 @@ function downloadFile(fileName, data, dataType) {
 }
 
 /**
- * @description 静默iframe导出文件
+ * @description
+ * 静默iframe导出文件
  * @param url 请求地址
  */
 function getFileSilent(url) {

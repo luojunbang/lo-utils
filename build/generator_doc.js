@@ -25,6 +25,10 @@ import 'YOUR_VARIABLES.scss' //具体变量名称见 'lo-utils/style/base/_varia
 import 'lo-utils/style/index.scss';
 \`\`\`
 
+### 颜色 color-(颜色)
+* 基础颜色：primary｜success｜warn｜danger｜highlight
+* 文字颜色：title｜text｜subtext｜placeholder
+
 ### 边距 (mg | pd)-(大小)-(方向)
 * 大小：base(可无) | lg | sm | xs
 * 方向：t | r | b | l | lr(左右) | tb(上下)
@@ -81,7 +85,10 @@ function generatorREADME(path) {
       .replace(/[\w+]+/g, (rs, $1) => `[${rs}](#${rs})`) + '\n'
   return list.slice(1).reduce((rs, func) => {
     const idx = func.indexOf('function')
-    const name = func.replace(/^[\s\S]*function[\s]*([\w+]+)[\s\S]*$/g, '### $1 \n') //标题
+    const name = func.replace(/^[\s\S]*function[\s]*([\w+]+)\([\s\S]*$/, '### $1 \n') //标题
+    if (name === '### need \n') {
+      console.log(func)
+    }
     if (idx === -1) return rs + name
     const md = func.slice(0, func.indexOf('function')).replace(/\*|\//g, '').split('@') //提取函数注释
     const ret = md.reduce((rs, txt) => {
