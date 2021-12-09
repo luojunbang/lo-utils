@@ -79,14 +79,14 @@ import 'lo-utils/style/index.scss';
 ### 瞄边 border
 * border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
-### generatorDate 
+### getWeek 
 * description  格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)  
 * param {String} date  
 * param {String} formatter y-m-d h:i:s a  
 * example
 ```js
 generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
-generatorDate('2020-01-01','ymdhis 星期a') == '20200101000000 星期五'
+generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
 ``` 
 
 ### fmtDate 

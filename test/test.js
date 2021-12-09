@@ -22,6 +22,12 @@ describe('DateHandler', function () {
     assert.equal(generatorDate('2021-06-21', 'd:m:y h:i:s'), '21:06:2021 00:00:00')
     assert.equal(generatorDate('2021-06-21', 'd/m/y h:i:s'), '21/06/2021 00:00:00')
     assert.equal(generatorDate('2021-06-21', 'd/m/y h:i:s 星期a'), '21/06/2021 00:00:00 星期一')
+    assert.equal(generatorDate('2021-12-31', 'w'), '52')
+    assert.equal(generatorDate('2022-1-1', 'w'), '52')
+    assert.equal(generatorDate('2022-1-2', 'w'), '1') //1
+    assert.equal(generatorDate('2021-1-3', 'w'), '1')
+    assert.equal(generatorDate('2021-1-8', 'w'), '1')
+    assert.equal(generatorDate('2022-12-31', 'w'), '52')
   })
   it('fmtDate', function () {
     assert.equal(fmtDate('2021-06-21'), '2021-06-21')
