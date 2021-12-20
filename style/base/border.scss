@@ -26,3 +26,7 @@
 .border-r-none{
     border-right: none!important;
 }
+
+.border-r,.borde-r-base{border-radius: $border-radius;}
+.border-r-sm{border-radius: $border-radius-sm;}
+.border-r-lg{border-radius: $border-radius-lg;}

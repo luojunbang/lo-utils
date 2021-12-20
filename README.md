@@ -79,8 +79,8 @@ import 'lo-utils/style/index.scss';
 ### 瞄边 border
 * border-(base | t | r | b | l)-(none?)
 ## dateHandler.js
-### getWeek 
-* description  格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)  
+### generatorDate 
+* description 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)  
 * param {String} date  
 * param {String} formatter y-m-d h:i:s a  
 * example

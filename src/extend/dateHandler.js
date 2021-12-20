@@ -9,8 +9,7 @@ module.exports = {
 }
 
 /**
- * @description
- * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期)
+ * @description 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
  * @param {String} date
  * @param {String} formatter y-m-d h:i:s a
  * @example
@@ -19,7 +18,6 @@ module.exports = {
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  * ```
  */
-
 function generatorDate(date, formatter = 'y-m-d h:i:s') {
   let res = 'Invalid Date'
   if (!date) return res
@@ -35,7 +33,7 @@ function generatorDate(date, formatter = 'y-m-d h:i:s') {
   }
   let d = new Date(date)
   if (d.toString() === 'Invalid Date') return res
-  function getWeek(d) {
+  const getWeek = d => {
     const day1 = new Date(d.getFullYear(), 0, 1)
     const day1week = day1.getDay()
     const dis = d.getTime() - day1.getTime() - (day1week == 0 ? 0 : 86400000 * (7 - day1week))
