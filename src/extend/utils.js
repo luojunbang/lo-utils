@@ -4,7 +4,8 @@ module.exports = {
   throttle,
   debounce,
   getLabelWidth,
-  copyText
+  copyText,
+  getScrollbarWidth,
 }
 
 /**
@@ -102,4 +103,30 @@ function copyText(val) {
   oInput.style.display = 'none'
   document.body.removeChild(oInput)
   return true
+}
+
+/**
+ * @description 获取滚动条宽度
+ * @returns Number
+ *
+ */
+function getScrollbarWidth() {
+  if (!window || !document) throw new Error('Need window env')
+  const outerDiv = document.createElement('div')
+  outerDiv.style.width = '100px'
+  outerDiv.style.position = 'absolute'
+  outerDiv.style.visibility = 'hidden'
+  outerDiv.style.top = '-9999px'
+  document.body.appendChild(outerDiv)
+
+  const outerboxWidth = outerDiv.offsetWidth
+  outerDiv.style.overflow = 'scroll'
+
+  const innerDiv = document.createElement('div')
+  innerDiv.style.width = '100%'
+  outerDiv.appendChild(innerDiv)
+  const innerboxWidth = innerDiv.offsetWidth
+  console.log(outerboxWidth, innerboxWidth)
+  document.body.removeChild(outerDiv)
+  return outerboxWidth - innerboxWidth
 }

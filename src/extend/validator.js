@@ -9,7 +9,7 @@ module.exports = {
   isPort,
   isJSType,
   isEmpty,
-  isNotEmptyText
+  isNotEmptyText,
 }
 
 /**

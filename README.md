@@ -29,10 +29,10 @@ import { fmtDate } from 'lo-utils'
  工具  {  [parseParams](#parseParams),  [getParams](#getParams),}
 * utils.js
 
- 工具  {  [throttle](#throttle),  [debounce](#debounce),  [getLabelWidth](#getLabelWidth),  [copyText](#copyText)}
+ 工具  {  [throttle](#throttle),  [debounce](#debounce),  [getLabelWidth](#getLabelWidth),  [copyText](#copyText),  [getScrollbarWidth](#getScrollbarWidth),}
 * validator.js
 
- 工具  {  [isIpv4](#isIpv4),  [isMacAddress](#isMacAddress),  [isPositiveFloat](#isPositiveFloat),  [isInt](#isInt),  [isPercent](#isPercent),  [isPort](#isPort),  [isJSType](#isJSType),  [isEmpty](#isEmpty),  [isNotEmptyText](#isNotEmptyText)}
+ 工具  {  [isIpv4](#isIpv4),  [isMacAddress](#isMacAddress),  [isPositiveFloat](#isPositiveFloat),  [isInt](#isInt),  [isPercent](#isPercent),  [isPort](#isPort),  [isJSType](#isJSType),  [isEmpty](#isEmpty),  [isNotEmptyText](#isNotEmptyText),}
 
 
 ## 公共样式说明
@@ -232,6 +232,10 @@ getParams('github.com?a=1') == {a:1}
 ### copyText 
 * param {} val  
 * returns 
+
+### getScrollbarWidth 
+* description 获取滚动条宽度  
+* returns Number  
 
 
 
