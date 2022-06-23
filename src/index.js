@@ -6,6 +6,9 @@ const formatter = require('./extend/formatter')
 const helper = require('./extend/helper')
 const utils = require('./extend/utils')
 const tree = require('./extend/treeHandler')
+
+const webpack = require('./webpack/index')
+
 module.exports = {
   ...dateHandler,
   ...fileHandler,
@@ -15,4 +18,5 @@ module.exports = {
   ...helper,
   ...utils,
   ...tree,
+  ...webpack,
 }
