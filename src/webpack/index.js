@@ -1,3 +1,7 @@
+module.exports = {
+  routeAutoLink,
+}
+
 function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
   if (!Array.isArray(layoutComponentLists)) throw Error('Should be Array fo LayoutComponents.')
   // 判断是否是index.vue或者 DIR/DIR.vue
