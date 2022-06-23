@@ -5,7 +5,7 @@ const validator = require('./extend/validator')
 const formatter = require('./extend/formatter')
 const helper = require('./extend/helper')
 const utils = require('./extend/utils')
-
+const tree = require('./extend/treeHandler')
 module.exports = {
   ...dateHandler,
   ...fileHandler,
@@ -14,4 +14,5 @@ module.exports = {
   ...formatter,
   ...helper,
   ...utils,
+  ...tree,
 }

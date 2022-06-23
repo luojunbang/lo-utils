@@ -24,6 +24,9 @@ import { fmtDate } from 'lo-utils'
 * helper.js
 
  工具  {  [checkIsFirstEntry](#checkIsFirstEntry),}
+* treeHandler.js
+
+ 树遍历  {  [deepFisrt](#deepFisrt),  [wildFirst](#wildFirst),}
 * urlHandler.js
 
  工具  {  [parseParams](#parseParams),  [getParams](#getParams),}
@@ -189,6 +192,20 @@ xlsx:TODO
 ```js
 checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 ``` 
+
+
+
+
+## treeHandler.js
+### deepFisrt 
+* description  深度遍历  
+* param {Array} arr  
+* returns {Array} 
+
+### wildFirst 
+* description  广度遍历  
+* param {Array} arr  
+* returns {Array} 
 
 
 
