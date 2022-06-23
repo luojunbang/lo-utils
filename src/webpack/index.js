@@ -1,4 +1,4 @@
-function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
+function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
   if (!Array.isArray(layoutComponentLists)) throw Error('Should be Array fo LayoutComponents.')
   // 判断是否是index.vue或者 DIR/DIR.vue
   const isIndex = path => {
@@ -21,7 +21,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
   const generatorRoute = (path, fullPath, config) => {
     const route = {
       path: path,
-      component: () => import(`../views/${fullPath}`),
+      component: importFn(`../views/${fullPath}`),
       name: fullPath
         .split('/')
         .join('_')
@@ -33,16 +33,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
     return { ...config, ...route }
   }
   const routes = []
-  routePath = routePath
-    .map(i => i.replace(/^\.\//, ''))
-    .filter(i =>
-      isIndex(
-        i
-          .split('/')
-          .slice(-2)
-          .join('/')
-      )
-    )
+  routePath = routePath.map(i => i.replace(/^\.\//, '')).filter(i => isIndex(i.split('/').slice(-2).join('/')))
   routePath.forEach(path => {
     const path_ary = path.split('/')
     let _routes = routes
