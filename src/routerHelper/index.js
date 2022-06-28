@@ -1,4 +1,6 @@
 export function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
+  console.log(routePath)
+
   if (!Array.isArray(layoutComponentLists)) throw Error('Should be Array fo LayoutComponents.')
   // 判断是否是index.vue或者 DIR/DIR.vue
   const isIndex = path => {
@@ -76,9 +78,10 @@ export function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
     }
   })
   routes = routes.map(i => ({ ...i, path: '/' + i.path }))
-  return function toCompoennt(importFn) {
-    return routes.map(i => {
-      if (i.children) i.children = toCompoennt(i.children, importFn)
+  return function toCompoennt(importFn, routeLists) {
+    if (!routeLists) routeLists = routes
+    return routeLists.map(i => {
+      if (i.children) i.children = toCompoennt(importFn, i.children)
       return { ...i, component: typeof i.component === 'string' ? importFn(i.component) : i.component }
     })
   }
