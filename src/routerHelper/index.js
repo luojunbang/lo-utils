@@ -69,7 +69,7 @@ export function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
           _routes.push(generatorRoute(getRoutePath(rest_path), path, routeConfig[path]))
           break
         } else {
-          if (!layoutComponentLists[len - path_ary.length]) throw new Error(`Level ${len - path_ary.length + 1} LayoutComponents is not definded`)
+          if (!layoutComponentLists[len - path_ary.length]) throw new Error(`Level ${len - path_ary.length + 1} LayoutComponents is not definded`)``
           _routes.push({ path: `${_path}`, component: layoutComponentLists[len - path_ary.length], children: [] })
           _routes = _routes[_routes.length - 1].children
         }
