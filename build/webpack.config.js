@@ -1,6 +1,7 @@
 const path = require('path')
 const { doc } = require('./generator_doc')
-doc('./src/extend')
+const isDev = process.env.NODE_ENV === 'development'
+// !isDev && doc('./src/utils')
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.js'),

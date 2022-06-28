@@ -14,28 +14,31 @@ import { fmtDate } from 'lo-utils'
 ## 工具函数
 * dateHandler.js
 
- 日期格式化工具  {  [generatorDate](#generatorDate),  [fmtDate](#fmtDate),  [fmtTime](#fmtTime),  [fmtDateTime](#fmtDateTime),  [isSecondTimeBigger](#isSecondTimeBigger),}
+ 日期格式化工具
 * fileHandler.js
 
- 文件工具  {  [downloadFile](#downloadFile),  [getFileSilent](#getFileSilent),}
+ 文件工具
 * formatter.js
 
- 格式化  {  [fmtNum](#fmtNum),  [fmtUndefined](#fmtUndefined),  [fmtEmptyVal](#fmtEmptyVal),  [fmtStorageSize](#fmtStorageSize),  [fmtContentLength](#fmtContentLength),  [fmtContentType](#fmtContentType),}
+ 格式化
 * helper.js
 
- 工具  {  [checkIsFirstEntry](#checkIsFirstEntry),}
+ 工具
+* index.js
+
+[export](#export) * [from](#from) '.[dateHandler](#dateHandler)'[export](#export) * [from](#from) '.[fileHandler](#fileHandler)'[export](#export) * [from](#from) '.[formatter](#formatter)'[export](#export) * [from](#from) '.[helper](#helper)'[export](#export) * [from](#from) '.[treeHandler](#treeHandler)'[export](#export) * [from](#from) '.[urlHandler](#urlHandler)'[export](#export) * [from](#from) '.[utils](#utils)'[export](#export) * [from](#from) '.[validator](#validator)'
 * treeHandler.js
 
- 树遍历  {  [deepFisrt](#deepFisrt),  [wildFirst](#wildFirst),}
+ 树遍历
 * urlHandler.js
 
- 工具  {  [parseParams](#parseParams),  [getParams](#getParams),}
+ 工具
 * utils.js
 
- 工具  {  [throttle](#throttle),  [debounce](#debounce),  [getLabelWidth](#getLabelWidth),  [copyText](#copyText),  [getScrollbarWidth](#getScrollbarWidth),}
+ 工具[import](#import) { [isJSType](#isJSType) } [from](#from) '.[validator](#validator)'
 * validator.js
 
- 工具  {  [isIpv4](#isIpv4),  [isMacAddress](#isMacAddress),  [isPositiveFloat](#isPositiveFloat),  [isInt](#isInt),  [isPercent](#isPercent),  [isPort](#isPort),  [isJSType](#isJSType),  [isEmpty](#isEmpty),  [isNotEmptyText](#isNotEmptyText),}
+ 工具
 
 
 ## 公共样式说明
@@ -90,7 +93,7 @@ import 'lo-utils/style/index.scss';
 ```js
 generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
 generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
-``` 
+``` export 
 
 ### fmtDate 
 * description 格式化日期  
@@ -101,7 +104,7 @@ generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期�
 fmtDate('2020-01-01') == '2020-01-01'
 fmtDate('2020-01-01','') == '20200101'
 fmtDate('2020-01-01',' ') == '2020 01 01'
-``` 
+``` export 
 
 ### fmtTime 
 * description 格式化时间  
@@ -112,10 +115,10 @@ fmtDate('2020-01-01',' ') == '2020 01 01'
 fmtTime('2020-01-01') == '00:00:00'
 fmtTime('2020-01-01','') == '000000'
 fmtTime('2020-01-01',' ') == '00 00 00'
-``` 
+``` export 
 
 ### fmtDateTime 
-* description 跟generatorData一样 
+* description 跟generatorData一样 export 
 
 ### isSecondTimeBigger 
 * description 比较时间,第二参数时间戳比第一参数时间戳大  
@@ -125,7 +128,7 @@ fmtTime('2020-01-01',' ') == '00 00 00'
 * example
 ```js
 isSecondTimeBigger('2020-01-01','2020-01-02') == true
-``` 
+``` export 
 
 
 
@@ -142,11 +145,11 @@ dataType
 zip:'applicationzip;charset=utf-8
 xls:'applicationvnd.ms-excel;charset=UTF-8'
 xlsx:TODO
-``` 
+``` export 
 
 ### getFileSilent 
 * description  静默iframe导出文件  
-* param url 请求地址 
+* param url 请求地址 export 
 
 
 
@@ -154,15 +157,15 @@ xlsx:TODO
 ## formatter.js
 ### fmtNum 
 * param {} val  
-* returns 
+* returns export 
 
 ### fmtUndefined 
 * param {} val  
-* returns 
+* returns export 
 
 ### fmtEmptyVal 
 * param {} val  
-* returns 
+* returns export 
 
 ### fmtStorageSize 
 * description formatter size display  
@@ -172,15 +175,15 @@ xlsx:TODO
 * example
 ```js
 ('2048K','m') -> '2m'
-``` 
+``` export 
 
 ### fmtContentLength 
 * param {} val  
-* returns 
+* returns export 
 
 ### fmtContentType 
 * param {} val  
-* returns 
+* returns export 
 
 
 
@@ -191,8 +194,12 @@ xlsx:TODO
 * example
 ```js
 checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
-``` 
+``` export 
 
+
+
+
+## index.js
 
 
 
@@ -200,12 +207,12 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 ### deepFisrt 
 * description  深度遍历  
 * param {Array} arr  
-* returns {Array} 
+* returns {Array} export 
 
 ### wildFirst 
 * description  广度遍历  
 * param {Array} arr  
-* returns {Array} 
+* returns {Array} export 
 
 
 
@@ -216,14 +223,14 @@ checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
 * example
 ```js
 parseParams({a:1},'github.com') == github.com?a=1
-``` 
+``` export 
 
 ### getParams 
 * description  从url获取参数  
 * example
 ```js
 getParams('github.com?a=1') == {a:1}
-``` 
+``` export 
 
 
 
@@ -232,27 +239,27 @@ getParams('github.com?a=1') == {a:1}
 ### throttle 
 * param {Function} func  
 * param {Number} wait  
-* returns {} 
+* returns {} export 
 
 ### debounce 
 * param {Function} func  
 * param {number} wait  
 * param {boolean} immediate  
-* return {} 
+* return {} export 
 
 ### getLabelWidth 
 * description 计算label的长度 三个数组字母==两个文字  
 * param {} label  
 * param {} fontSize  
-* returns 
+* returns export 
 
 ### copyText 
 * param {} val  
-* returns 
+* returns export 
 
 ### getScrollbarWidth 
 * description 获取滚动条宽度  
-* returns Number  
+* returns Number  export 
 
 
 
@@ -261,48 +268,48 @@ getParams('github.com?a=1') == {a:1}
 ### isIpv4 
 * description  
 * param {String} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isMacAddress 
 * description  
 * param {String} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isPositiveFloat 
 * description 金额 等  
 * param {String|Number} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isInt 
 * description  
 * param {String|Number} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isPercent 
 * description 百分率 0-100  
 * param {String|Number} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isPort 
 * description 端口 0-65535  
 * param {String|Number} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isJSType 
 * description  
 * param {} val  
 * param {String} target  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isEmpty 
 * description  
 * param {} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 ### isNotEmptyText 
 * description  
 * param {} val  
-* returns {Boolean} 
+* returns {Boolean} export 
 
 
 

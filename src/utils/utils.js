@@ -1,4 +1,5 @@
 // 工具
+import { isJSType } from './validator'
 
 /**
  *
@@ -78,7 +79,6 @@ export function getLabelWidth(label, fontSize = 14) {
   }
   return Math.max(minWidth, res)
 }
-const { isJSType } = require('./validator')
 
 /**
  *

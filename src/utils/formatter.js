@@ -1,4 +1,5 @@
 // 格式化
+import { isEmpty, isJSType, isInt } from './validator'
 
 /**
  *
@@ -9,7 +10,6 @@ export function fmtNum(val) {
   // toDo...
   return val
 }
-const { isEmpty, isJSType, isInt } = require('./validator')
 
 /**
  *

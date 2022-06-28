@@ -35,6 +35,7 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
+    sourceType: 'module',
     //note： {...a,b} ES2018 才将这个运算符引入了对象。
     ecmaVersion: 2018,
   },

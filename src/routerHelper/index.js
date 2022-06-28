@@ -1,8 +1,4 @@
-module.exports = {
-  routeAutoLink,
-}
-
-function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
+export function routeAutoLink(routePath, layoutComponentLists, routeConfig) {
   if (!Array.isArray(layoutComponentLists)) throw Error('Should be Array fo LayoutComponents.')
   // 判断是否是index.vue或者 DIR/DIR.vue
   const isIndex = path => {
@@ -10,7 +6,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
     const _path = path.replace(/^\.\//, '').split('/')
     if (_path.length == 1) return /\.vue$/.test(path)
     else if (_path.length == 2) {
-      const [dir, name] = _path.slice(_path.length - 2)
+      const [dir, name] = _path.slice(-2)
       return dir.toLowerCase() + '.vue' === name.toLowerCase() || name.toLowerCase() === 'index.vue'
     } else return false
   }
@@ -25,7 +21,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
   const generatorRoute = (path, fullPath, config) => {
     const route = {
       path: path,
-      component: importFn(`../views/${fullPath}`),
+      component: fullPath,
       name: fullPath
         .split('/')
         .join('_')
@@ -36,7 +32,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
     if (config.params) route.path += (route.path ? '/' : '') + config.params
     return { ...config, ...route }
   }
-  const routes = []
+  let routes = []
   routePath = routePath.map(i => i.replace(/^\.\//, '')).filter(i => isIndex(i.split('/').slice(-2).join('/')))
   routePath.forEach(path => {
     const path_ary = path.split('/')
@@ -45,7 +41,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
     while (path_ary.length) {
       const _path = path_ary[0]
       const rest_path = path_ary.join('/')
-      const foundRoute = _routes.find(({ path }) => removePathParam(path) == `${_path}`) || {}
+      const foundRoute = _routes.find(({ path }) => removePathParam(path) == `${_path}`)
       if (foundRoute) {
         if (Array.isArray(foundRoute.children)) {
           if (isIndex(rest_path)) {
@@ -53,9 +49,11 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
             break
           }
         } else {
+          console.log(foundRoute)
           const index_path = foundRoute.name.split('_').join('/') + '.vue' //复原
           foundRoute.children = [generatorRoute('', index_path, routeConfig[index_path])]
           foundRoute.path = removePathParam(foundRoute.path)
+          if (!layoutComponentLists[len - path_ary.length]) throw new Error(`Level ${len - path_ary.length + 1} LayoutComponents is not definded`)
           foundRoute.component = layoutComponentLists[len - path_ary.length]
           delete foundRoute.name
           if (isIndex(rest_path)) {
@@ -69,6 +67,7 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
           _routes.push(generatorRoute(getRoutePath(rest_path), path, routeConfig[path]))
           break
         } else {
+          if (!layoutComponentLists[len - path_ary.length]) throw new Error(`Level ${len - path_ary.length + 1} LayoutComponents is not definded`)
           _routes.push({ path: `${_path}`, component: layoutComponentLists[len - path_ary.length], children: [] })
           _routes = _routes[_routes.length - 1].children
         }
@@ -76,6 +75,11 @@ function routeAutoLink(routePath, layoutComponentLists, routeConfig, importFn) {
       path_ary.shift()
     }
   })
-  console.log(routes)
-  return routes.map(i => ({ ...i, path: '/' + i.path }))
+  routes = routes.map(i => ({ ...i, path: '/' + i.path }))
+  return function toCompoennt(importFn) {
+    return routes.map(i => {
+      if (i.children) i.children = toCompoennt(i.children, importFn)
+      return { ...i, component: typeof i.component === 'string' ? importFn(i.component) : i.component }
+    })
+  }
 }
