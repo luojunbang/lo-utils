@@ -1,6 +1,6 @@
 {
   "name": "lo-utils",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "A Utils by Lo",
   "main": "dist/loUtils.min.js",
   "scripts": {
