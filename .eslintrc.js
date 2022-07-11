@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'eslint-config-prettier'],
+  extends: ['eslint:recommended', 'eslint-config-prettier', 'plugin:@typescript-eslint/recommended'],
   plugins: ['prettier'],
   rules: {
     semi: ['error', 'never'],
@@ -34,7 +34,7 @@ module.exports = {
     ],
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     sourceType: 'module',
     //note： {...a,b} ES2018 才将这个运算符引入了对象。
     ecmaVersion: 2018,

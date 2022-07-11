@@ -122,3 +122,28 @@ export function getScrollbarWidth() {
   document.body.removeChild(outerDiv)
   return outerboxWidth - innerboxWidth
 }
+
+export function debounce_v2(fn, wait) {
+  let args, result, ctx, timer, lastTime
+  const handle = () => {
+    const last = Date.now() - lastTime
+    if (lastTime) {
+      if (last > 0 && last < wait) {
+        setTimeout(handle, wait - last)
+      } else {
+        timer = null
+        result = fn.apply(ctx, args)
+        ctx = args = null
+      }
+    }
+  }
+  return function () {
+    args = arguments
+    ctx = this
+    lastTime = Date.now()
+    if (!timer) setTimeout(handle, wait)
+    return result
+  }
+}
+
+export function isInContainer() {}
