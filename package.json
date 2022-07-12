@@ -3,11 +3,11 @@
   "version": "1.2.10",
   "description": "A Utils by Lo",
   "main": "dist/lo-utils.min.js",
-  "module": "src/index",
+  "module": "dist/lo-utils.esm.js",
   "types": "dist/lo-utils.d.ts",
   "scripts": {
     "doc": "node ./build/generator_doc.js",
-    "build": "webpack --config ./build/webpack.config.js",
+    "build": "rollup --config",
     "build:dts": "api-extractor run --local --verbose",
     "dev": "webpack --watch --config ./build/webpack.config.js",
     "test": "mocha --watch",
@@ -29,6 +29,8 @@
     "mocha": "^9.0.0",
     "path-browserify": "^1.0.1",
     "prettier": "^2.3.2",
+    "rollup": "^2.76.0",
+    "rollup-plugin-typescript2": "^0.32.1",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
     "vue": "^3.2.37",
@@ -38,6 +40,7 @@
   },
   "files": [
     "./dist/*.ts",
+    "./dist/lo-utils.d.ts",
     "./dist/*.js"
   ],
   "dependencies": {

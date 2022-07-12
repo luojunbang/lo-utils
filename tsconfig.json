@@ -3,8 +3,7 @@
     "module": "es6",
     "target": "es6",
     "strict": true,
-    "declaration":true,
-    "declarationDir":"./dist/src/",
+    // "declaration":true,
     "moduleResolution": "node",
   },
   "paths": {

@@ -13,28 +13,38 @@ import { RouteRecordRaw } from 'vue-router';
 // Warning: (ae-forgotten-export) The symbol "navRouteConfig" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export function filePathToNest(
-routePath: string[],
-config: {
-    [x: string]: routerConfig
-}
-): navRouteConfig[]
+export function filePathToNest(routePath: string[], config: {
+    [x: string]: routerConfig;
+}): navRouteConfig[];
+
+// Warning: (ae-forgotten-export) The symbol "dataTramsformOrigin" needs to be exported by the entry point index.d.ts
+//
+// @public
+export function fmtDate(date: dataTramsformOrigin, splitter?: string): string;
+
+// @public
+export function fmtDateTime(date: dataTramsformOrigin, formatter: string): string;
+
+// @public
+export function fmtTime(date: dataTramsformOrigin, splitter?: string): string;
+
+// @public (undocumented)
+export function generatorDate(date: dataTramsformOrigin, formatter?: string): string;
+
+// @public
+export function isSecondTimeBigger(first: dataTramsformOrigin, last: dataTramsformOrigin): boolean;
 
 // Warning: (ae-forgotten-export) The symbol "DescribableFunction" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "singleRouteConfig" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export function routeAutoLink(
-routePath: string[],
-layoutComponentLists: Component[],
-routeConfig: {
-    [x: string]: routerConfig
-}
-): (importFn: DescribableFunction, routeLists?: singleRouteConfig[]) => RouteRecordRaw[]
+export function routeAutoLink(routePath: string[], layoutComponentLists: Component[], routeConfig: {
+    [x: string]: routerConfig;
+}): (importFn: DescribableFunction, routeLists?: singleRouteConfig[]) => RouteRecordRaw[];
 
 // Warnings were encountered during analysis:
 //
-// dist/src/routerHelper/routerImport.d.ts:36:5 - (ae-forgotten-export) The symbol "routerConfig" needs to be exported by the entry point index.d.ts
+// src/routerHelper/routerImport.ts:121:63 - (ae-forgotten-export) The symbol "routerConfig" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
