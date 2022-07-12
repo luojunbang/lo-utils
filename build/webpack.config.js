@@ -6,11 +6,11 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   // mode: 'development',
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: path.resolve(__dirname, '../src/index.ts'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'loUtils.min.js',
-    library: 'loUtils',
+    filename: 'lo-utils.min.js',
+    library: 'loUtill',
     libraryTarget: 'umd',
     globalObject: 'this', // 因为要区分node环境还是window环境 所以要改为this
   },
@@ -19,9 +19,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'ts-loader' },
-        ],
+        use: [{ loader: 'ts-loader' }],
       },
     ],
   },

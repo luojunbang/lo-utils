@@ -1,0 +1,14 @@
+{
+  "mainEntryPointFilePath": "./dist/src/index.d.ts",
+  "apiReport": {
+    "enabled": true,
+    "reportFolder": "<projectFolder>/temp/"
+  },
+  "docModel": {
+    "enabled": true
+  },
+  "dtsRollup": {
+    "enabled": true,
+    "untrimmedFilePath": "./dist/<unscopedPackageName>.d.ts"
+  }
+}

@@ -1,6 +1,6 @@
-import {  Component } from 'vue'
+import { Component } from 'vue'
 
-import {  RouteRecordRaw,  RouteRecordRedirectOption,  RouteMeta,  RouteRecordName,  RouteComponent } from 'vue-router'
+import { RouteRecordRaw, RouteMeta, RouteRecordName, RouteComponent } from 'vue-router'
 
 interface navRouteConfig {
   path: string
@@ -20,7 +20,6 @@ interface singleRouteConfig {
   redirect?: string
   children?: singleRouteConfig[] | undefined
 }
-
 
 type DescribableFunction = {
   description: string
@@ -112,9 +111,9 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
   return function toCompoennt(importFn: DescribableFunction, routeLists?: singleRouteConfig[]): RouteRecordRaw[] {
     if (!routeLists) routeLists = routes
     return routeLists.map(i => {
-      let children:RouteRecordRaw[] = []
+      let children: RouteRecordRaw[] = []
       if (i.children && i.children.length > 0) children = toCompoennt(importFn, i.children)
-      return { ...i, children,component: typeof i.component === 'string' ? importFn(i.component) : i.component }
+      return { ...i, children, component: typeof i.component === 'string' ? importFn(i.component) : i.component }
     })
   }
 }

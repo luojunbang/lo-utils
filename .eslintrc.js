@@ -4,8 +4,8 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'eslint-config-prettier', 'plugin:@typescript-eslint/recommended'],
-  plugins: ['prettier'],
+  extends: ['eslint:recommended', 'eslint-config-prettier', 'plugin:@typescript-eslint/recommended'], //
+  plugins: ['prettier', '@typescript-eslint'], //
   rules: {
     semi: ['error', 'never'],
     quotes: ['error', 'single'], //'' ``
@@ -13,6 +13,8 @@ module.exports = {
     'no-unused-vars': ['off'],
     'no-undef': ['off'],
     'no-case-declarations': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'space-before-function-paren': ['off', 'always'],
     'no-extra-semi': 'error',
     'no-irregular-whitespace': 'error',
@@ -39,4 +41,14 @@ module.exports = {
     //note： {...a,b} ES2018 才将这个运算符引入了对象。
     ecmaVersion: 2018,
   },
+  overrides: [
+    {
+      // enable the rule specifically for TypeScript files
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
+    },
+  ],
 }
