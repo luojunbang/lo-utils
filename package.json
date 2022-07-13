@@ -49,9 +49,10 @@
     "webpack-cli": "^4.7.2"
   },
   "files": [
-    "./dist/lo-utils.d.ts",
-    "./dist/*.js",
-    "./style/**"
+    "/dist/lo-utils.d.ts",
+    "/dist/lo-utils.*.js",
+    "/style/**",
+    "/style/**/**"
   ],
   "repository": {
     "type": "git",
