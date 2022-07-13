@@ -35,6 +35,7 @@ export function isPositiveFloat(text: string | number): boolean {
  * @returns {Boolean}
  */
 export function isInt(text: string | number): boolean {
+  if (isUndef(text)) return false
   return /^(0|[1-9][0-9]*)$/.test(text.toString())
 }
 
@@ -88,4 +89,8 @@ export function isEmpty(val: any): boolean {
  */
 export function isNotEmptyText(val: any): boolean {
   return val !== null && val !== '' && val !== undefined
+}
+
+export function isUndef(val: any) {
+  return val === null || val === undefined
 }

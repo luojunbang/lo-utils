@@ -65,16 +65,6 @@ describe('Utils', function () {
     assert.equal(fmtContentLength(1000), '1K')
     assert.equal(fmtContentLength(2100), '2.1K')
   })
-  it('fmtContentType', function () {
-    assert.equal(fmtContentType('text/html'), 'html')
-    assert.equal(fmtContentType('text/css'), 'css')
-    assert.equal(fmtContentType('text/javascript'), 'js')
-    assert.equal(fmtContentType('image/jpeg'), 'jpg')
-    assert.equal(fmtContentType('image/png'), 'png')
-    assert.equal(fmtContentType('image/svg+xml'), 'svg')
-    assert.equal(fmtContentType('image/webp'), 'webp')
-    assert.equal(fmtContentType('video/mp4'), 'mp4')
-  })
 })
 
 describe('urlHandler', function () {

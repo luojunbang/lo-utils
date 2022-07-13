@@ -4,13 +4,13 @@
  * @param {Number} wait
  * @returns {*}
  */
-export function throttle(func, wait = 500) {
-  let ctx, args, res, lastTime
+export function throttle(func: () => any, wait = 500) {
+  let ctx: any, args: any, res: any, lastTime: number
   const handle = () => {
     lastTime = Date.now()
     res = func.apply(ctx, args)
   }
-  return function (...argument) {
+  return function (...argument: any) {
     !lastTime && (lastTime = Date.now())
     args = argument
     // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -26,8 +26,8 @@ export function throttle(func, wait = 500) {
  * @param {boolean} immediate
  * @return {*}
  */
-export function debounce(func, wait = 300, immediate = false) {
-  let timeout, args, context, timestamp, result
+export function debounce(func: () => any, wait = 300, immediate = false) {
+  let timeout: NodeJS.Timeout | null, args: any | null, context: null, timestamp: number, result: any
 
   const later = function () {
     // 据上一次触发时间间隔
@@ -45,7 +45,7 @@ export function debounce(func, wait = 300, immediate = false) {
       }
     }
   }
-  return function (...argument) {
+  return function (...argument: any) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     context = this
     args = argument

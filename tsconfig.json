@@ -1,5 +1,5 @@
 {
-  "includes": ["src/**.ts"],
+  "includes": ["src/global.d.ts","src/**.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -8,6 +8,7 @@
     "target": "es6",
     "strict": true,
     "moduleResolution": "node",
+    "noImplicitThis": false,
   },
   "types":[
     "vite/client"

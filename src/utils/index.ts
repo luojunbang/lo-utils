@@ -6,4 +6,4 @@ export * from './treeHandler'
 export * from './urlHandler'
 export * from './utils'
 export * from './validator'
-export * from './debounce.js
+export * from './debounce'

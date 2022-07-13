@@ -45,6 +45,5 @@ export function wildFirst(arr: any[], { children = 'children', name = 'name' } =
     })
     waitParseList = cacheList
   }
-  console.log(res)
   return res
 }
