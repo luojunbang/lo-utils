@@ -10,13 +10,12 @@ const tsPlugin = ts({
     compilerOptions: {
       declaration: true,
       declarationMap: true,
-      declarationDir: path.resolve(__dirname, 'dist/src'),
     },
     exclude: ['__tests__', 'test-dts'],
   },
 })
 
-const config = {
+const emsConfig = {
   input: './src/index.ts',
   output: {
     file: 'dist/lo-utils.esm.js',
@@ -25,4 +24,24 @@ const config = {
   plugins: [tsPlugin],
 }
 
-export default config
+const { terser } = require('rollup-plugin-terser')
+
+const umdConfig = {
+  input: './src/index.ts',
+  output: {
+    file: 'dist/lo-utils.min.js',
+    name: 'lou',
+    format: 'umd',
+  },
+  plugins: [
+    tsPlugin,
+    terser({
+      compress: {
+        ecma: 2015,
+        pure_getters: true,
+      },
+    }),
+  ],
+}
+
+export default [emsConfig, umdConfig]

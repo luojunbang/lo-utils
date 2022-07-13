@@ -5,7 +5,7 @@
  * @param {String} val
  * @returns {Boolean}
  */
-export function isIpv4(val) {
+export function isIpv4(val: string): boolean {
   const ary = val.split('.')
   return ary.length === 4 && ary.every(i => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
 }
@@ -15,7 +15,7 @@ export function isIpv4(val) {
  * @param {String} val
  * @returns {Boolean}
  */
-export function isMacAddress(val) {
+export function isMacAddress(val: string): boolean {
   const ary = val.split(':')
   return ary.length === 6 && ary.every(i => /^[\dabcdefABCDEF]{2}$/.test(i))
 }
@@ -25,8 +25,8 @@ export function isMacAddress(val) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-export function isPositiveFloat(text) {
-  return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) || /^[0]{1}(.[0]{1,2})?$/.test(text)
+export function isPositiveFloat(text: string | number): boolean {
+  return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) || /^[0]{1}(.[0]{1,2})?$/.test(text.toString())
 }
 
 /**
@@ -34,8 +34,8 @@ export function isPositiveFloat(text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-export function isInt(text) {
-  return /^(0|[1-9][0-9]*)$/.test(text)
+export function isInt(text: string | number): boolean {
+  return /^(0|[1-9][0-9]*)$/.test(text.toString())
 }
 
 //
@@ -44,8 +44,8 @@ export function isInt(text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-export function isPercent(text) {
-  return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text) && parseFloat(text) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text)
+export function isPercent(text: string | number): boolean {
+  return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) && parseFloat(text.toString()) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text.toString())
 }
 
 /**
@@ -53,8 +53,8 @@ export function isPercent(text) {
  * @param {String|Number} val
  * @returns {Boolean}
  */
-export function isPort(text) {
-  return (/^[1-9][0-9]*$/.test(text) && Math.floor(text) <= 65535) || /^0$/.test(text)
+export function isPort(text: string | number): boolean {
+  return (/^[1-9][0-9]*$/.test(text.toString()) && Math.floor(+text) <= 65535) || /^0$/.test(text.toString())
 }
 
 /**
@@ -63,7 +63,7 @@ export function isPort(text) {
  * @param {String} target
  * @returns {Boolean}
  */
-export function isJSType(val, target) {
+export function isJSType(val: any, target: string): boolean {
   return (
     Object.prototype.toString
       .call(val)
@@ -77,7 +77,7 @@ export function isJSType(val, target) {
  * @param {*} val
  * @returns {Boolean}
  */
-export function isEmpty(val) {
+export function isEmpty(val: any): boolean {
   return val === null || val === ''
 }
 
@@ -86,6 +86,6 @@ export function isEmpty(val) {
  * @param {*} val
  * @returns {Boolean}
  */
-export function isNotEmptyText(val) {
+export function isNotEmptyText(val: any): boolean {
   return val !== null && val !== '' && val !== undefined
 }

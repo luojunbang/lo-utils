@@ -1,15 +1,20 @@
 {
+  "includes": ["src/**.ts"],
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist",
     "module": "es6",
     "target": "es6",
     "strict": true,
-    // "declaration":true,
     "moduleResolution": "node",
   },
+  "types":[
+    "vite/client"
+  ],
   "paths": {
     "@/*": [
       "src/*"
     ]
-  },
-  "includes": ["src/**.ts"]
+  }
 }

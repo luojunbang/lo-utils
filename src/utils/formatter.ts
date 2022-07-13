@@ -6,9 +6,9 @@ import { isEmpty, isJSType, isInt } from './validator'
  * @param {*} val
  * @returns
  */
-export function fmtNum(val) {
+export function fmtNum(val: string | number, fixed = 0): string {
   // toDo...
-  return val
+  return val.toString()
 }
 
 /**
@@ -16,7 +16,7 @@ export function fmtNum(val) {
  * @param {*} val
  * @returns
  */
-export function fmtUndefined(val) {
+export function fmtUndefined(val: any) {
   if (val === undefined || val === null) return '-'
   return val
 }
@@ -26,7 +26,7 @@ export function fmtUndefined(val) {
  * @param {*} val
  * @returns
  */
-export function fmtEmptyVal(val, target = '-') {
+export function fmtEmptyVal(val: any, target = '-') {
   if (isEmpty(val)) return target
   return val
 }
@@ -41,11 +41,11 @@ export function fmtEmptyVal(val, target = '-') {
  * ('2048K','m') -> '2m'
  * ```
  */
-export function fmtStorageSize(val, unit) {
+export function fmtStorageSize(val: string | number, unit: string): string {
   const UNIT = 'bkmgtp'.split('')
   val = val.toString().toLowerCase()
-  let size = parseFloat(val, 10),
-    originUnit = 'b'
+  const size = parseFloat(val)
+  let originUnit = 'b'
 
   if (isNaN(size)) throw new Error('Require a right input')
   if (/[bkmgtp]/.test(val)) originUnit = val.replace(/^[0-9.]+([bkmgtp]{1})$/g, '$1')
@@ -53,7 +53,7 @@ export function fmtStorageSize(val, unit) {
     unitIdx = 0
   if (unit) {
     if (isJSType(unit, 'string') && UNIT.indexOf(unit[0].toLowerCase()) != -1) {
-      let targetUnitIdx = UNIT.indexOf(unit[0].toLowerCase())
+      const targetUnitIdx = UNIT.indexOf(unit[0].toLowerCase())
       res = res * Math.pow(1024, 0 - targetUnitIdx)
     } else throw new Error('Require the correct transform unit')
   } else {
@@ -62,8 +62,7 @@ export function fmtStorageSize(val, unit) {
       unitIdx++
     }
   }
-  res = isInt(res) ? res : res.toFixed(1)
-  return res + (unit ? unit : UNIT[unitIdx])
+  return (isInt(res) ? res : res.toFixed(1)) + (unit ? unit : UNIT[unitIdx])
 }
 
 /**
@@ -71,7 +70,7 @@ export function fmtStorageSize(val, unit) {
  * @param {*} val
  * @returns
  */
-export function fmtContentLength(val) {
+export function fmtContentLength(val: string | number): string {
   const UNIT = 'BKMGTP'
   let res = +val
   let unitIdx = 0
@@ -80,21 +79,4 @@ export function fmtContentLength(val) {
     unitIdx++
   }
   return (isInt(res) ? res : res.toFixed(1)) + UNIT[unitIdx]
-}
-
-/**
- *
- * @param {*} val
- * @returns
- */
-export function fmtContentType(val) {
-  val = val.toLowerCase()
-  const type = val.split('/')[1]
-  const config = {
-    plain: 'txt',
-    'svg+xml': 'svg',
-    javascript: 'js',
-    jpeg: 'jpg',
-  }
-  return config[type] || type
 }

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const assert = require('assert')
-const { parseParams, getParams, fmtDate, fmtDateTime, fmtTime, generatorDate, isInt, fmtStorageSize, fmtContentLength, fmtContentType, deepFisrt, wildFirst } = require('../dist/loUtils.min.js')
+const { parseParams, getParams, fmtDate, fmtDateTime, fmtTime, generatorDate, isInt, fmtStorageSize, fmtContentLength, fmtContentType, deepFisrt, wildFirst } = require('../dist/lo-utils.min.js')
 
 describe('validator', function () {
   it('isInt', function () {

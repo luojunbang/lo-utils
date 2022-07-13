@@ -7,8 +7,8 @@
  * parseParams({a:1},'github.com') == github.com?a=1
  * ```
  */
-export function parseParams(params, url) {
-  let res = url ? url + '?' : ''
+export function parseParams(params: Record<string, string>, url: string): string {
+  const res = url ? url + '?' : ''
   return (
     res +
     Object.keys(params)
@@ -25,11 +25,11 @@ export function parseParams(params, url) {
  * getParams('github.com?a=1') == {a:1}
  * ```
  */
-export function getParams(url) {
-  url = url.slice(url.indexOf('?') + 1).split('&')
-  return url.reduce((rs, item) => {
+export function getParams(url: string) {
+  const url_ary = url.slice(url.indexOf('?') + 1).split('&')
+  return url_ary.reduce((rs, item) => {
     const [key, value] = item.split('=')
     rs[key] = decodeURIComponent(value)
     return rs
-  }, {})
+  }, {} as Record<string, string>)
 }

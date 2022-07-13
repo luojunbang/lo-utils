@@ -1,5 +1,5 @@
 {
-  "mainEntryPointFilePath": "./dist/index.d.ts",
+  "mainEntryPointFilePath": "./dist/src/index.d.ts",
   "apiReport": {
     "enabled": true,
     "reportFolder": "<projectFolder>/temp/"

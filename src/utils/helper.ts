@@ -15,8 +15,8 @@ export function checkIsFirstEntry(flagKey = 'IS_FIRST_ENTRY') {
     if (ret) {
       rj(ret)
     } else {
-      window.localStorage.setItem(flagKey, 1)
-      rs(1)
+      window.localStorage.setItem(flagKey, '1')
+      rs('1')
     }
   })
 }

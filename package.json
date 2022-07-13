@@ -7,9 +7,10 @@
   "types": "dist/lo-utils.d.ts",
   "scripts": {
     "doc": "node ./build/generator_doc.js",
-    "build": "rollup --config",
+    "build": "rollup -c rollup.config.js",
     "build:dts": "api-extractor run --local --verbose",
     "dev": "webpack --watch --config ./build/webpack.config.js",
+    "vite": "vite --config ./example/vite.config.ts",
     "test": "mocha --watch",
     "publish:bug": "npm version patch && npm publish"
   },
@@ -20,6 +21,7 @@
     "@microsoft/api-extractor": "^7.28.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-vue": "^2.3.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.5",
     "eslint": "^8.19.0",
@@ -30,10 +32,13 @@
     "path-browserify": "^1.0.1",
     "prettier": "^2.3.2",
     "rollup": "^2.76.0",
+    "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-typescript2": "^0.32.1",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
+    "vite": "^2.9.14",
     "vue": "^3.2.37",
+    "vue-eslint-parser": "^9.0.3",
     "vue-router": "^4.1.1",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2"
@@ -41,15 +46,21 @@
   "files": [
     "./dist/*.ts",
     "./dist/lo-utils.d.ts",
-    "./dist/*.js"
+    "./dist/*.js",
+    "./style/**"
   ],
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
+    "esbuild": "^0.14.49",
     "mysql": "^2.18.1",
-    "pify": "^5.0.0"
+    "pify": "^5.0.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luojunbang/lo-utils.git"
-  }
+  },
+  "eslintIgnore": [
+    "/dist/**"
+  ]
 }
