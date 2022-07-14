@@ -12,6 +12,7 @@
     "dev": "webpack --watch --config ./build/webpack.config.js",
     "vite": "vite --config ./example/vite.config.ts",
     "test": "mocha --watch",
+    "release": "npm run build && npm run publish:bug",
     "publish:bug": "npm version patch && npm publish"
   },
   "author": "luojunbang",

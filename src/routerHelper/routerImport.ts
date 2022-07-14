@@ -21,11 +21,6 @@ interface singleRouteConfig {
   children?: singleRouteConfig[] | undefined
 }
 
-type DescribableFunction = {
-  description: string
-  (someArg: string): RouteComponent | (() => Promise<RouteComponent>)
-}
-
 // 判断是否是index.vue或者 */DIR/DIR.vue 不区分大小写
 const isIndex = (path: string): boolean => {
   if (!path) return false
@@ -108,7 +103,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
     }
   })
   routes = routes.map(i => ({ ...i, path: '/' + i.path }))
-  return function toCompoennt(importFn: DescribableFunction, routeLists?: singleRouteConfig[]): RouteRecordRaw[] {
+  return function toCompoennt(importFn: (someArg: string) => RouteComponent | (() => Promise<RouteComponent>), routeLists?: singleRouteConfig[]): RouteRecordRaw[] {
     if (!routeLists) routeLists = routes
     return routeLists.map(i => {
       let children: RouteRecordRaw[] = []
