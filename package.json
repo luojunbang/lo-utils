@@ -7,7 +7,7 @@
   "types": "dist/lo-utils.d.ts",
   "scripts": {
     "doc": "node ./build/generator_doc.js",
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.js && npm run build:dts",
     "build:dts": "api-extractor run --local --verbose",
     "dev": "webpack --watch --config ./build/webpack.config.js",
     "vite": "vite --config ./example/vite.config.ts",
