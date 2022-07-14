@@ -11,9 +11,7 @@
  * ```
  */
 
-type dataTramsformOrigin = Date | string | number
-
-export function generatorDate(date: dataTramsformOrigin, formatter = 'y-m-d h:i:s') {
+export function generatorDate(date: Date | string | number, formatter = 'y-m-d h:i:s') {
   let res = 'Invalid Date'
   if (!date) return res
   if (Object.prototype.toString.call(date) === '[object Date]') {
@@ -69,7 +67,7 @@ export function generatorDate(date: dataTramsformOrigin, formatter = 'y-m-d h:i:
  *    fmtDate('2020-01-01',' ') == '2020 01 01'
  * ```
  */
-export function fmtDate(date: dataTramsformOrigin, splitter = '-') {
+export function fmtDate(date: Date | string | number, splitter = '-') {
   return generatorDate(date, `y${splitter}m${splitter}d`)
 }
 
@@ -84,14 +82,14 @@ export function fmtDate(date: dataTramsformOrigin, splitter = '-') {
  *    fmtTime('2020-01-01',' ') == '00 00 00'
  * ```
  */
-export function fmtTime(date: dataTramsformOrigin, splitter = ':') {
+export function fmtTime(date: Date | string | number, splitter = ':') {
   return generatorDate(date, `h${splitter}i${splitter}s`)
 }
 
 /**
  * @description 跟generatorData一样
  */
-export function fmtDateTime(date: dataTramsformOrigin, formatter: string) {
+export function fmtDateTime(date: Date | string | number, formatter: string) {
   return generatorDate(date, formatter)
 }
 
@@ -105,6 +103,6 @@ export function fmtDateTime(date: dataTramsformOrigin, formatter: string) {
  *    isSecondTimeBigger('2020-01-01','2020-01-02') == true
  * ```
  */
-export function isSecondTimeBigger(first: dataTramsformOrigin, last: dataTramsformOrigin) {
+export function isSecondTimeBigger(first: Date | string | number, last: Date | string | number) {
   return generatorDate(last) > generatorDate(first)
 }

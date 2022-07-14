@@ -51,8 +51,7 @@
   "files": [
     "dist/lo-utils.d.ts",
     "dist/lo-utils.*.js",
-    "style/**",
-    "style/**/**"
+    "style/**"
   ],
   "repository": {
     "type": "git",
