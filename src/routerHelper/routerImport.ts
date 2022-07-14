@@ -14,10 +14,9 @@ interface routerConfig {
 }
 interface singleRouteConfig {
   path: string
-  component: string | RouteComponent | null | undefined
+  component: string | Component
   name?: RouteRecordName
   meta?: RouteMeta
-  redirect?: string
   children?: singleRouteConfig[] | undefined
 }
 
@@ -59,7 +58,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
     if (config.params) route.path += (route.path ? '/' : '') + config.params
     return { ...config, ...route }
   }
-  let routes: singleRouteConfig[] = []
+  const routes: singleRouteConfig[] = []
   routePath = routePath.map(i => i.replace(/^\.\//, '')).filter(i => isIndex(i.split('/').slice(-2).join('/')))
   routePath.forEach(path => {
     const path_ary = path.split('/')
@@ -69,7 +68,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
       const _path = path_ary[0]
       const rest_path = path_ary.join('/')
       const foundRoute: singleRouteConfig | undefined = _routes.find(({ path }) => removePathParam(path) == `${_path}`)
-      if (foundRoute && foundRoute.name) {
+      if (foundRoute) {
         if (Array.isArray(foundRoute.children)) {
           if (isIndex(rest_path)) {
             foundRoute.children.push(generatorRoute('', path, routeConfig[path]))
@@ -102,7 +101,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
       path_ary.shift()
     }
   })
-  routes = routes.map(i => ({ ...i, path: '/' + i.path }))
+  // routes = routes.map(i => ({ ...i, path: '/' + i.path }))
   return function toCompoennt(importFn: (someArg: string) => RouteComponent | (() => Promise<RouteComponent>), routeLists?: singleRouteConfig[]): RouteRecordRaw[] {
     if (!routeLists) routeLists = routes
     return routeLists.map(i => {
