@@ -112,7 +112,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
   }
 }
 
-export function filePathToNest(routePath: string[], config: { [x: string]: routerConfig }): navRouteConfig[] {
+export function filePathToNest(routePath: string[], config: { [x: string]: routerConfig }, prefix = ''): navRouteConfig[] {
   const pathList: string[][] = routePath.filter(i => isIndex(i.split('/').slice(-2).join('/'))).map(i => i.replace(/^\.\//, '').split('/'))
 
   const generator = (path: string[]): string[] => {
@@ -127,13 +127,13 @@ export function filePathToNest(routePath: string[], config: { [x: string]: route
     const realpath = pathList[idx].join('/')
     const path = generator(pathList[idx])
     if (path.length > 1) {
-      if (!navConfig2.get(path[0])) navConfig2.set(path[0], { path: path[0], title: config[realpath]?.meta?.title ?? path[0], children: [] })
+      if (!navConfig2.get(path[0])) navConfig2.set(path[0], { path: prefix + path[0], title: config[realpath]?.meta?.title ?? path[0], children: [] })
       const parent_key = path.slice(0, path.length - 1).join('/')
-      if (!navConfig2.get(parent_key)) navConfig2.set(parent_key, { path: parent_key, title: config[realpath]?.meta?.title ?? parent_key.replace('/', '_'), children: [] })
+      if (!navConfig2.get(parent_key)) navConfig2.set(parent_key, { path: prefix + parent_key, title: config[realpath]?.meta?.title ?? parent_key.replace('/', '_'), children: [] })
     }
-    navConfig2.set(path.join('/'), { path: path.join('/'), title: config[realpath]?.meta?.title ?? path.join('_'), children: [] })
+    navConfig2.set(path.join('/'), { path: prefix + path.join('/'), title: config[realpath]?.meta?.title ?? path.join('_'), children: [] })
   }
-  // console.log(navConfig2)
+  console.log(navConfig2)
 
   const ans: navRouteConfig[] = []
   for (const pathString of navConfig2.keys()) {
