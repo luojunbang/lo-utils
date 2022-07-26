@@ -1,6 +1,6 @@
 {
   "name": "lo-utils",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "description": "A Utils by Lo",
   "main": "dist/lo-utils.min.js",
   "module": "dist/lo-utils.esm.js",
