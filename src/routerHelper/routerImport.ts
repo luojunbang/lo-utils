@@ -133,7 +133,7 @@ export function filePathToNest(routePath: string[], config: { [x: string]: route
     }
     navConfig2.set(path.join('/'), { path: prefix + path.join('/'), title: config[realpath]?.meta?.title ?? path.join('_'), children: [] })
   }
-  console.log(navConfig2)
+  // console.log(navConfig2)
 
   const ans: navRouteConfig[] = []
   for (const pathString of navConfig2.keys()) {

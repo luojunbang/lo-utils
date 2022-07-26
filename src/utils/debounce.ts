@@ -4,7 +4,7 @@
  * @param {Number} wait
  * @returns {*}
  */
-export function throttle(func: () => any, wait = 500) {
+export function throttle(func: (...arg: any[]) => any, wait = 500) {
   let ctx: any, args: any, res: any, lastTime: number
   const handle = () => {
     lastTime = Date.now()
@@ -13,7 +13,6 @@ export function throttle(func: () => any, wait = 500) {
   return function (...argument: any) {
     !lastTime && (lastTime = Date.now())
     args = argument
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
     ctx = this
     if (Date.now() - lastTime > wait) handle()
     return res
@@ -26,7 +25,7 @@ export function throttle(func: () => any, wait = 500) {
  * @param {boolean} immediate
  * @return {*}
  */
-export function debounce(func: () => any, wait = 300, immediate = false) {
+export function debounce(func: (...arg: any[]) => any, wait = 300, immediate = false) {
   let timeout: NodeJS.Timeout | null, args: any | null, context: null, timestamp: number, result: any
 
   const later = function () {
