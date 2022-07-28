@@ -11,8 +11,9 @@ export function throttle(func: (...arg: any[]) => any, wait = 500) {
     res = func.apply(ctx, args)
   }
   return function (...argument: any) {
-    !lastTime && (lastTime = Date.now())
+    !lastTime && handle()
     args = argument
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     ctx = this
     if (Date.now() - lastTime > wait) handle()
     return res
@@ -26,7 +27,7 @@ export function throttle(func: (...arg: any[]) => any, wait = 500) {
  * @return {*}
  */
 export function debounce(func: (...arg: any[]) => any, wait = 300, immediate = false) {
-  let timeout: NodeJS.Timeout | null, args: any | null, context: null, timestamp: number, result: any
+  let timeout: any, args: any | null, context: null, timestamp: number, result: any
 
   const later = function () {
     // 据上一次触发时间间隔

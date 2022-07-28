@@ -64,12 +64,12 @@ export function isInContainer() {
   console.log('heloo')
 }
 
-export function r(x = 10) {
+export function r(x = 10): string {
   return Math.random()
     .toString(16)
     .slice(2, 2 + x)
 }
 
-export function t(x = 2) {
-  return new Promise(rs => setTimeout(rs, x * 1000))
+export function t(wait: number, ...args: any[]) {
+  return new Promise(rs => setTimeout(rs, wait * 1000, ...args))
 }

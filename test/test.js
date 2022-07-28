@@ -1,6 +1,20 @@
 /* eslint-disable no-undef */
 const assert = require('assert')
-const { parseParams, getParams, fmtDate, fmtDateTime, fmtTime, generatorDate, isInt, fmtStorageSize, fmtContentLength, fmtContentType, deepFisrt, wildFirst } = require('../dist/lo-utils.min.js')
+const {
+  parseParams,
+  getParams,
+  fmtDate,
+  fmtDateTime,
+  fmtTime,
+  generatorDate,
+  isInt,
+  fmtStorageSize,
+  fmtContentLength,
+  fmtContentType,
+  deepFisrt,
+  wildFirst,
+  parseToPx,
+} = require('../dist/lo-utils.min.js')
 
 describe('validator', function () {
   it('isInt', function () {
@@ -128,5 +142,18 @@ describe('treeHandler', function () {
         .map(i => i.name)
         .join(',')
     )
+  })
+})
+
+describe('styleHandler', function () {
+  it('parseToPx', function () {
+    assert.equal(parseToPx(0), '0')
+    assert.equal(parseToPx('0'), '0')
+    assert.equal(parseToPx('12'), '12px')
+    assert.equal(parseToPx('12%'), '12%')
+    assert.equal(parseToPx('12vw'), '12vw')
+    assert.equal(parseToPx('12vh'), '12vh')
+    assert.equal(parseToPx('12em'), '12em')
+    assert.equal(parseToPx('12rem'), '12rem')
   })
 })
