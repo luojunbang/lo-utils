@@ -1,5 +1,5 @@
 {
-  "includes": ["src/global.d.ts","src/**.ts"],
+  "includes": ["src/global.d.ts","src/**.ts","example/**.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -11,7 +11,14 @@
     "noImplicitThis": false,
   },
   "types":[
-    "vite/client"
+    // "vite/client"
+    "webpack-env",
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "example/*.ts",
   ],
   "paths": {
     "@/*": [
