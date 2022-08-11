@@ -18,7 +18,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "example/*.ts",
+    "example/*.ts", "packages/utils/index.ts",
   ],
   "paths": {
     "@/*": [
