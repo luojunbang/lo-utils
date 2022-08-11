@@ -1,5 +1,5 @@
 <template>
-  <div>app</div>
+  <div $bg-red>app</div>
 </template>
 
 <script lang="ts" setup>

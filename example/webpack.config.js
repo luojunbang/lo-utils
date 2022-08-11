@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const { DefinePlugin } = require('webpack')
 module.exports = {
   entry: resolve('./example/index.ts'),
   //   devServer: {
@@ -23,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader'],
+        use: ['vue-loader', resolve(__dirname, '../src/loader/loClassLoader/index.js')],
       },
       {
         test: /\.ts$/,
@@ -38,7 +39,11 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new HTMLWebpackPlugin({
-      //   template: resolve(__dirname, './example/index.html'),
+      template: resolve(__dirname, './index.html'),
+    }),
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: 'true',
+      __VUE_PROD_DEVTOOLS__: 'false',
     }),
   ],
 }
