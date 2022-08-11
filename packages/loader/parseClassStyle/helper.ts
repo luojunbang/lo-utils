@@ -1,11 +1,9 @@
-const chalk = require('chalk')
-
 let config = {}
 if (Object.keys(config).length === 0) generateConfig()
 
 console.log(config)
 
-function configContact(alias, name, types = [], originals = []) {
+function configContact(alias, name, types: string[] = [], originals: string[] = []) {
   if (types.length === 0) config[alias] = name
   types.forEach((type, idx) => {
     const t = type
@@ -32,8 +30,6 @@ function generateConfig() {
   configContact('pd', 'padding', directionTypes, directionOriginals)
 }
 
-function getCssProperty(key) {
+export function getCssProperty(key) {
   return config[key] ?? key.replace(/([A-Z])/g, (rs, $1) => '-' + $1.toLowerCase())
 }
-
-exports.getCssProperty = getCssProperty

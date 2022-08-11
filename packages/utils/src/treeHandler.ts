@@ -47,3 +47,12 @@ export function wildFirst(arr: any[], { children = 'children', name = 'name' } =
   }
   return res
 }
+
+export function deepPriority<T extends Record<string, any>, U>(root: T, fn: (x: T, y: number) => any, { children = 'children' } = {}): void {
+  if (Array.isArray(root[children]) && root[children].length > 0) {
+    ;(root[children] as T[]).forEach((node, idx) => {
+      fn(node, idx)
+      deepPriority(node, fn)
+    })
+  }
+}
