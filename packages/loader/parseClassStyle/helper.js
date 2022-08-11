@@ -1,7 +1,5 @@
 const chalk = require('chalk')
 
-
-
 let config = {}
 if (Object.keys(config).length === 0) generateConfig()
 
