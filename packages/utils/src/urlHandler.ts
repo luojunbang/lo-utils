@@ -7,7 +7,7 @@
  * parseParams({a:1},'github.com') == github.com?a=1
  * ```
  */
-export function parseParams(params: Record<string, string>, url: string): string {
+export function parseParams(params: Record<string, any>, url = ''): string {
   const res = url ? url + '?' : ''
   return (
     res +

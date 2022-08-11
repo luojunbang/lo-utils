@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['eslint:recommended', 'eslint-config-prettier', 'plugin:@typescript-eslint/recommended'], //
-  plugins: ['prettier', '@typescript-eslint'], //
+  plugins: ['prettier', '@typescript-eslint', 'jest'], //
   rules: {
     semi: ['error', 'never'],
     quotes: ['error', 'single'], //'' ``
@@ -49,6 +49,16 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
+    },
+    // tests, no restrictions (runs in Node / jest with jsdom)
+    {
+      files: ['**/__tests__/**', 'test-dts/**'],
+      rules: {
+        'no-restricted-globals': 'off',
+        'no-restricted-syntax': 'off',
+        'jest/no-disabled-tests': 'error',
+        'jest/no-focused-tests': 'error',
       },
     },
   ],

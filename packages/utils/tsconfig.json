@@ -1,5 +1,5 @@
 {
-  "includes": ["src/global.d.ts","src/**.ts","example/**.ts"],
+  "includes": ["src/global.d.ts", "src/**.ts", "example/**.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -8,21 +8,15 @@
     "target": "es6",
     "strict": true,
     "moduleResolution": "node",
-    "noImplicitThis": false,
+    "esModuleInterop": true,
+    "noImplicitThis": false
   },
-  "types":[
+  "types": [
     // "vite/client"
-    "webpack-env",
+    "webpack-env"
   ],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "example/*.ts", "packages/utils/index.ts",
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "example/*.ts", "packages/utils/index.ts"],
   "paths": {
-    "@/*": [
-      "src/*"
-    ]
+    "@/*": ["src/*"]
   }
 }

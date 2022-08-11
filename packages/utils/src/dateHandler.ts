@@ -89,7 +89,7 @@ export function fmtTime(date: Date | string | number, splitter = ':') {
 /**
  * @description 跟generatorData一样
  */
-export function fmtDateTime(date: Date | string | number, formatter: string) {
+export function fmtDateTime(date: Date | string | number, formatter?: string) {
   return generatorDate(date, formatter)
 }
 

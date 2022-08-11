@@ -41,7 +41,7 @@ export function fmtEmptyVal(val: any, target = '-') {
  * ('2048K','m') -> '2m'
  * ```
  */
-export function fmtStorageSize(val: string | number, unit: string): string {
+export function fmtStorageSize(val: string | number, unit?: string): string {
   const UNIT = 'bkmgtp'.split('')
   val = val.toString().toLowerCase()
   const size = parseFloat(val)

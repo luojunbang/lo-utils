@@ -12,7 +12,7 @@ interface tree {
 }
 
 export function deepFisrt(arr: any[], { children = 'children', name = 'name' } = {}) {
-  if (!Array.isArray(arr)) return
+  if (!Array.isArray(arr)) return []
   const parseNode = (node: any) => {
     const res = [{ [name]: node[name] }]
     if (Array.isArray(node[children])) {
