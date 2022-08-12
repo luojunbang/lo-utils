@@ -13,16 +13,21 @@ pnpm i class-style-loader -D
 
 ## options
 
-* `prefix` (default as 'L') Mark the className to be transform
+- `prefix` (default as 'L') Mark the className to be transform
 
 ```html
-<div class="Lpd-20 Lbgc-203040"></div>
+<div class="Lw-20rem Lpd-20 Lbgc-203040 Lbg-1-solid-red LborderTopLeftRaidius-10"></div>
 ```
+
 will add style block in vue
+
 ```js
 <style scoped>
+.Lw-20rem{width:20rem;}
 .Lpd-20{padding:20px;}
 .Lbgc_203040{background-color:#203040;}
+.Lbg-1-solid-red{border:1px solid red;}
+.LborderTopLeftRaidius-10{border-top-left-raduis:10px;}
 </style>
 ```
 
@@ -34,8 +39,8 @@ will add style block in vue
 - `20_20_20_90` --> `rgba(20,20,20,0.90)`
 - `v_primary__color` --> `var(--primary--color)`
 
+## default alias
 
-## default alias 
 ```js
 {
   font: 'font-size',

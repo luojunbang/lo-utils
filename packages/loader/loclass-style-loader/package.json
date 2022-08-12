@@ -26,5 +26,9 @@
     "@vue/compiler-sfc": "^3.2.37",
     "querystring": "^0.2.1",
     "webpack": "4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luojunbang/lo-utils.git"
   }
 }
