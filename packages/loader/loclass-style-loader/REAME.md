@@ -16,10 +16,10 @@ pnpm i class-style-loader -D
 - `prefix` (default as 'L') Mark the className to be transform
 
 ```html
-<div class="Lw-20rem Lpd-20 Lbgc-203040 Lbg-1-solid-red LborderTopLeftRaidius-10"></div>
+<div class="Lw-20rem Lpd-20 Lbgc-203040 Lbg-1-solid-red LborderTopLeftRaidius-10 Ltransition-all-2s"></div>
 ```
 
-will add style block in vue
+will add new style block in vue
 
 ```js
 <style scoped>
@@ -28,6 +28,7 @@ will add style block in vue
 .Lbgc_203040{background-color:#203040;}
 .Lbg-1-solid-red{border:1px solid red;}
 .LborderTopLeftRaidius-10{border-top-left-raduis:10px;}
+.Ltransition-all-2s{transition:all 2s;}
 </style>
 ```
 
