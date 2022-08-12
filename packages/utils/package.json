@@ -5,6 +5,7 @@
   "main": "dist/lo-utils.min.js",
   "module": "dist/lo-utils.esm.js",
   "types": "dist/lo-utils.d.ts",
+  "sideEffects": false,
   "scripts": {
     "doc": "node ./build/generator_doc.js",
     "build": "rollup -c rollup.config.js && npm run build:dts",

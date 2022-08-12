@@ -7,7 +7,7 @@ import { wrapStyleBlock, parseClass } from './helper'
 
 import * as qs from 'querystring'
 
-import { deepPriority } from 'lo-utils'
+import { deepPriority,getParams } from 'lo-utils'
 
 export interface parseClassOptions {
   prefix?: string
@@ -20,7 +20,7 @@ export default function loader(this: webpack.loader.LoaderContext, content: stri
     return new RegExp(`\^\\${prefix}[\\w]+\-`).test(className)
   }
   const { resourceQuery = '' } = ctx
-  const incomingQuery = qs.parse(resourceQuery.slice(1))
+  const incomingQuery = getParams(resourceQuery.slice(1))
   if (!(!resourceQuery || incomingQuery.type === 'style')) return content
   const { descriptor, errors } = parse(content, {})
   if (incomingQuery.type === 'style' && Number(incomingQuery.index) < descriptor.styles.length) return content
