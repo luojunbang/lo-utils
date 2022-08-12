@@ -3,11 +3,18 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const { DefinePlugin } = require('webpack')
 module.exports = {
-  entry: resolve('./example/index.ts'),
-  //   devServer: {
-  //     port: 7788,
-  //   },
-  output: { path: resolve('./loader-dist') },
+  mode: 'development',
+  entry: resolve('./index.ts'),
+  output: {
+    clean: true,
+    filename: 'js/[name]-[contenthash:8].js',
+    chunkFilename: 'js/[name]-[contenthash:8].js',
+    path: resolve('./dist'),
+  },
+  devServer: {
+    // port: 7788,
+    hot: true,
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.mjs', '.js', '.jsx', '.vue', '.json', '.wasm'],
     modules: ['node_modules'],
@@ -16,7 +23,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'style-loader', 'css-loader'],
+        use: ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.js$/,
@@ -24,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader', resolve(__dirname, '../src/loader/loClassLoader/index.js')],
+        use: ['vue-loader', { loader: 'class-style-loader', options: { prefix: 'L' } }],
       },
       {
         test: /\.ts$/,

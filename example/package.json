@@ -1,0 +1,28 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "babel-loader": "^8.2.5",
+    "class-style-loader:workspace": "link:@lo/class-style-loader:workspace",
+    "sass-loader": "^13.0.2",
+    "scss": "^0.2.4",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "vue-loader": "^17.0.0",
+    "vue-style-loader": "^4.1.3",
+    "webpack": "5.74",
+    "webpack-dev-server": "^4.10.0"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  }
+}
