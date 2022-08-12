@@ -142,6 +142,29 @@ importers:
       querystring: 0.2.1
       webpack: 4.46.0
 
+  packages/loader/loclass-style-loader:
+    specifiers:
+      '@types/loader-utils': ^2.0.3
+      '@types/webpack': '4'
+      '@vue/compiler-core': ^3.2.37
+      '@vue/compiler-sfc': ^3.2.37
+      chalk: ^5.0.1
+      lo-utils: workspace:^1.2.19
+      loader-utils: '2'
+      querystring: ^0.2.1
+      webpack: '4'
+    dependencies:
+      chalk: 5.0.1
+      lo-utils: link:../../utils
+      loader-utils: 2.0.2
+    devDependencies:
+      '@types/loader-utils': 2.0.3
+      '@types/webpack': 4.41.32
+      '@vue/compiler-core': 3.2.37
+      '@vue/compiler-sfc': 3.2.37
+      querystring: 0.2.1
+      webpack: 4.46.0
+
   packages/utils:
     specifiers: {}
 

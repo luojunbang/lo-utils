@@ -1,6 +1,6 @@
 {
   "name": "lo-utils",
-  "version": "1.2.18",
+  "version": "1.2.19",
   "description": "A Utils by Lo",
   "main": "dist/lo-utils.min.js",
   "module": "dist/lo-utils.esm.js",
@@ -15,12 +15,11 @@
     "vite": "vite --config ./example/vite.config.ts",
     "release": "npm run build && npm run publish:bug",
     "publish:bug": "npm version patch && npm publish",
-    "test":"jest"
+    "test": "jest"
   },
   "author": "luojunbang",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "files": [
     "dist/lo-utils.d.ts",
     "dist/lo-utils.*.js",
