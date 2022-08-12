@@ -3,7 +3,7 @@ const directionTypes = ['t', 'r', 'b', 'l', 'x', 'y']
 const directionOriginals = ['top', 'right', 'bottom', 'left', 'left,right', 'top,bottom']
 if (Object.keys(config).length === 0) generateConfig()
 
-console.log(config)
+// console.log(config)
 
 import { isInt } from 'lo-utils'
 
