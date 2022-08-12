@@ -1,6 +1,6 @@
 {
   "name": "loclass-style-loader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transform specific className to style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
