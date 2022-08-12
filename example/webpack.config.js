@@ -19,6 +19,11 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.mjs', '.js', '.jsx', '.vue', '.json', '.wasm'],
     modules: ['node_modules'],
   },
+  resolveLoader: {
+    alias: {
+      'loclass-style-loader': require.resolve('../packages/loader/loclass-style-loader'),
+    },
+  },
   module: {
     rules: [
       {
@@ -31,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader', { loader: 'class-style-loader', options: { prefix: 'L' } }],
+        use: ['vue-loader', { loader: 'loclass-style-loader', options: { prefix: 'L' } }],
       },
       {
         test: /\.ts$/,
