@@ -16,12 +16,13 @@ pnpm i class-style-loader -D
 * `prefix` (default as 'L') Mark the className to be transform
 
 ```html
-<div class="Lpd-20"></div>
+<div class="Lpd-20 Lbgc-203040"></div>
 ```
 will add style block in vue
 ```js
 <style scoped>
 .Lpd-20{padding:20px;}
+.Lbgc_203040{background-color:#203040;}
 </style>
 ```
 
