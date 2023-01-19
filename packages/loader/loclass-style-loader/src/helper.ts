@@ -64,9 +64,9 @@ function generateConfig() {
   configContact('bd', 'border')
   configContact('bd', 'border', ['c', 'rd', ...directionTypes], ['color', 'raduis', ...directionOriginals])
   configContact('mg', 'margin')
-  configContact('mg', 'margin', directionTypes, directionOriginals)
+  configContact('m', 'margin', directionTypes, directionOriginals)
   configContact('pd', 'padding')
-  configContact('pd', 'padding', directionTypes, directionOriginals)
+  configContact('p', 'padding', directionTypes, directionOriginals)
 }
 
 export function getCssProperty(key: string) {

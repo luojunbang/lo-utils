@@ -30,17 +30,17 @@ const umdConfig = {
   input: './src/index.ts',
   output: {
     file: 'dist/lo-utils.min.js',
-    name: 'lou',
+    name: 'loUtils',
     format: 'umd',
   },
   plugins: [
     tsPlugin,
-    terser({
-      compress: {
-        ecma: 2015,
-        pure_getters: true,
-      },
-    }),
+    // terser({
+    //   compress: {
+    //     ecma: 2015,
+    //     pure_getters: true,
+    //   },
+    // }),
   ],
 }
 

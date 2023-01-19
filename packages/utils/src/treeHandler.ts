@@ -56,3 +56,33 @@ export function deepPriority<T extends Record<string, any>, U>(root: T, fn: (x: 
     })
   }
 }
+
+enum TreeKey {
+  ID,
+  PARENTID,
+}
+
+interface TreeNode extends Record<string, any> {}
+interface Tree extends TreeNode {
+  children: TreeNode[]
+}
+
+export function list2Tree(list: TreeNode[], { id = 'id', pId = 'pId' } = {}): Tree[] {
+  const res: Tree[] = []
+  const obj: Record<string, Tree> = {}
+  list.forEach((i: TreeNode) => {
+    const _parentId = i[pId]
+    const _id = i[id]
+    if (obj[_id] && obj[_id][id]) throw new Error('REPEAT ID..')
+    obj[_id] = { ...i, children: obj[_id] ? obj[_id].children : [] }
+    if (!obj[_parentId]) obj[_parentId] = { children: [] as TreeNode[] }
+    obj[_parentId].children.push(obj[_id])
+  })
+  Object.keys(obj).forEach(key => {
+    const item: Tree = obj[key]
+    if (obj[item.pId] && !obj[item.pId].id) {
+      res.push(item)
+    }
+  })
+  return res
+}

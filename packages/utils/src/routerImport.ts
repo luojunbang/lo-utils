@@ -81,7 +81,7 @@ export function routeAutoLink(routePath: string[], layoutComponentLists: Compone
   }
 }
 
-export function filePathToNest(routePath: string[], config: { [x: string]: routerConfig }, prefix = ''): navRouteConfig[] {
+export function filePathToNest(routePath: string[], config: { [x: string]: routerConfig } = {}, prefix = ''): navRouteConfig[] {
   const pathList = routePath.filter(i => isIndex(i.split('/').slice(-2).join('/'))).map(i => i.replace(/^\.\//, '').split('/'))
   const ans:Record<string,any> = {}
   let idx = 0

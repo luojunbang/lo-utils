@@ -73,3 +73,16 @@ export function r(x = 10): string {
 export function t(wait: number, ...args: any[]) {
   return new Promise(rs => setTimeout(rs, wait * 1000, ...args))
 }
+
+type Option = Record<string | 'label' | 'value', any>
+
+export const opt2fmt = (options: Option[]) => {
+  const fmtConfig: Record<string, any> = {}
+  options.forEach(item => {
+    const { label, value } = item
+    fmtConfig[value] = label
+  })
+  return fmtConfig
+}
+
+export const opt2fmtFn = (options: Option[]) => (val: any) => opt2fmt(options)[val] ?? val ?? '-'
