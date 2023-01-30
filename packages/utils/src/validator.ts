@@ -94,3 +94,7 @@ export function isNotEmptyText(val: any): boolean {
 export function isUndef(val: any) {
   return val === null || val === undefined
 }
+
+export function isDef(val: any) {
+  return val === null || val === undefined
+}
