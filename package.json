@@ -6,7 +6,7 @@
   ],
   "private": true,
   "scripts": {
-    "dev":"pnpm run -C ./example serve",
+    "dev": "pnpm run -C ./example serve",
     "test:utils": "jest --roots ./packages/utils/",
     "test:loader": "jest --roots ./packages/loader/"
   },
@@ -62,5 +62,6 @@
   "bugs": {
     "url": "https://github.com/luojunbang/lo-utils/issues"
   },
-  "homepage": "https://github.com/luojunbang/lo-utils#readme"
+  "homepage": "https://github.com/luojunbang/lo-utils#readme",
+  "version": "0.0.1"
 }
