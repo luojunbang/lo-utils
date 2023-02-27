@@ -9,8 +9,9 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "noImplicitThis": false
-  },
+    "noImplicitThis": false,
+    "lib": ["ESNext", "dom", "dom.iterable", "scripthost"],
+},
   "types": [
     // "vite/client"
     "webpack-env"
