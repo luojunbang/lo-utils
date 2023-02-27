@@ -35,7 +35,7 @@ export function isPositiveFloat(text: string | number): boolean {
  * @returns {Boolean}
  */
 export function isInt(text: string | number): boolean {
-  if (isUndef(text)) return false
+  if (isNil(text)) return false
   return /^(0|[1-9][0-9]*)$/.test(text.toString())
 }
 
@@ -65,12 +65,10 @@ export function isPort(text: string | number): boolean {
  * @returns {Boolean}
  */
 export function isJSType(val: any, target: string): boolean {
-  return (
-    Object.prototype.toString
+  return Object.prototype.toString
       .call(val)
       .replace(/^\[object ([a-zA-Z]*)\]$/, '$1')
-      .toLowerCase() === target.toLowerCase()
-  )
+        .toLowerCase() === target.toLowerCase()
 }
 
 /**
@@ -78,8 +76,8 @@ export function isJSType(val: any, target: string): boolean {
  * @param {*} val
  * @returns {Boolean}
  */
-export function isEmpty(val: any): boolean {
-  return val === null || val === ''
+export function isEmpty(val: any): val is undefined|null|'' {
+  return isNil(val) || val === ''
 }
 
 /**
@@ -88,13 +86,10 @@ export function isEmpty(val: any): boolean {
  * @returns {Boolean}
  */
 export function isNotEmptyText(val: any): boolean {
-  return val !== null && val !== '' && val !== undefined
+  return !isEmpty(val)
 }
 
-export function isUndef(val: any) {
-  return val === null || val === undefined
-}
 
-export function isDef(val: any) {
+export function isNil(val: any):val is undefined|null  {
   return val === null || val === undefined
 }
