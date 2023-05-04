@@ -20,7 +20,12 @@
   },
   "author": "luojunbang",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.21.4",
+    "rollup-plugin-babel": "^4.4.0",
+    "tslib": "^2.5.0"
+  },
   "files": [
     "dist/lo-utils.d.ts",
     "dist/lo-utils.*.js",

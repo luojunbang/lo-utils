@@ -5,7 +5,7 @@
     "rootDir": ".",
     "outDir": "dist",
     "module": "es6",
-    "target": "es6",
+    "target": "ES6",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -16,7 +16,7 @@
     // "vite/client"
     "webpack-env"
   ],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "example/*.ts", "packages/utils/index.ts"],
+  "include": ["src/**/*.ts"],
   "paths": {
     "@/*": ["src/*"]
   }

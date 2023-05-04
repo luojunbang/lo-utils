@@ -7,7 +7,7 @@ describe('treeHandler', function () {
     },
   ]
   test('deepFisrt', function () {
-    const arr1 = []
+    const arr1:any[] = []
     expect(deepFisrt(arr1).join(',')).toBe('')
     const arr2 = [{ name: '1', children: [] }]
     expect(
