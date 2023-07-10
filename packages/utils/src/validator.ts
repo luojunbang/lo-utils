@@ -1,9 +1,9 @@
 // 工具
 
 /**
- * @description
- * @param {String} val
- * @returns {Boolean}
+ * Whether the text is an ip ?
+ * @public
+ * @param val - text
  */
 export function isIpv4(val: string): boolean {
   const ary = val.split('.')
@@ -11,9 +11,9 @@ export function isIpv4(val: string): boolean {
 }
 
 /**
- * @description
- * @param {String} val
- * @returns {Boolean}
+ * Whether the text is an mac address ?
+ * @public
+ * @param val - text
  */
 export function isMacAddress(val: string): boolean {
   const ary = val.split(':')
@@ -21,50 +21,49 @@ export function isMacAddress(val: string): boolean {
 }
 
 /**
- * @description 金额 等
- * @param {String|Number} val
- * @returns {Boolean}
+ * Whether the text is an Non-negative float?
+ * @public
+ * @param val - text
  */
 export function isPositiveFloat(text: string | number): boolean {
   return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) || /^[0]{1}(.[0]{1,2})?$/.test(text.toString())
 }
 
 /**
- * @description
- * @param {String|Number} val
- * @returns {Boolean}
+ * Whether the text is an Non-negative integer?
+ * @public
+ * @param val - text
  */
 export function isInt(text: string | number): boolean {
-  if (isUndef(text)) return false
   return /^(0|[1-9][0-9]*)$/.test(text.toString())
 }
 
 //
 /**
- * @description 百分率 0-100
- * @param {String|Number} val
- * @returns {Boolean}
+ * Whether the text is an 0-100 float?
+ * @public
+ * @param val - text
  */
 export function isPercent(text: string | number): boolean {
   return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) && parseFloat(text.toString()) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text.toString())
 }
 
 /**
- * @description 端口 0-65535
- * @param {String|Number} val
- * @returns {Boolean}
+ * Whether the text is an network port?
+ * @public
+ * @param val - text
  */
 export function isPort(text: string | number): boolean {
   return (/^[1-9][0-9]*$/.test(text.toString()) && Math.floor(+text) <= 65535) || /^0$/.test(text.toString())
 }
 
 /**
- * @description
- * @param {*} val
- * @param {String} target
- * @returns {Boolean}
+ * Whether the input is js type?
+ * @public
+ * @param val - value
+ * @param target - javascript type
  */
-export function isJSType(val: any, target: string): boolean {
+export function isJSType(val: any, target: string) {
   return (
     Object.prototype.toString
       .call(val)
@@ -74,27 +73,37 @@ export function isJSType(val: any, target: string): boolean {
 }
 
 /**
- * @description
- * @param {*} val
- * @returns {Boolean}
+ * Whether the text is '',null,undefined?
+ * @public
+ * @param val - value
  */
 export function isEmpty(val: any): boolean {
-  return val === null || val === ''
+  return val === null || val === ''|| val === undefined
 }
 
 /**
- * @description
- * @param {*} val
- * @returns {Boolean}
+ * Whether the text is not '',null,undefined?
+ * @public
+ * @param val - value
  */
 export function isNotEmptyText(val: any): boolean {
-  return val !== null && val !== '' && val !== undefined
+  return !isEmpty(val)
 }
 
-export function isUndef(val: any) {
+/**
+ * Whether the text is 'null,undefined?
+ * @param val - value
+ * @public
+ */
+export function isNil(val: any) {
   return val === null || val === undefined
 }
 
+/**
+ * Whether the text is not 'null,undefined?
+ * @public
+ * @param val - value
+ */
 export function isDef(val: any) {
-  return val === null || val === undefined
+  return !isNil(val)
 }

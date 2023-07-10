@@ -2,9 +2,10 @@
 import { isEmpty, isJSType, isInt } from './validator'
 
 /**
- *
- * @param {*} val
- * @returns
+ * 格式化数字
+ * @alpha
+ * @param val - formater value
+ * @example 1000 returns 1,000
  */
 export function fmtNum(val: string | number, fixed = 0): string {
   // toDo...
@@ -12,19 +13,9 @@ export function fmtNum(val: string | number, fixed = 0): string {
 }
 
 /**
- *
- * @param {*} val
- * @returns
- */
-export function fmtUndefined(val: any) {
-  if (val === undefined || val === null) return '-'
-  return val
-}
-
-/**
- *
- * @param {*} val
- * @returns
+ * 格式化空白文本 null undefind ''
+ * @public
+ * @param val - formater value
  */
 export function fmtEmptyVal(val: any, target = '-') {
   if (isEmpty(val)) return target
@@ -32,14 +23,12 @@ export function fmtEmptyVal(val: any, target = '-') {
 }
 
 /**
- * @description formatter size display
- * @param {String｜Number } val The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
- * @param {String} unit accept targetUnit ex.'k','K','Kb'
- * @returns {String} The val after transform
+ * 格式化存储大小
+ * @public
+ * @param val - The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
+ * @param unit - accept targetUnit ex.'k','K','Kb'
  * @example
- * ```js
- * ('2048K','m') -> '2m'
- * ```
+ * ('2048K','m') returns '2m'
  */
 export function fmtStorageSize(val: string | number, unit?: string): string {
   const UNIT = 'bkmgtp'.split('')
@@ -66,9 +55,9 @@ export function fmtStorageSize(val: string | number, unit?: string): string {
 }
 
 /**
- *
- * @param {*} val
- * @returns
+ * 格式化内容长度
+ * @public
+ * @param val - formater value
  */
 export function fmtContentLength(val: string | number): string {
   const UNIT = 'BKMGTP'

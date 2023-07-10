@@ -2,10 +2,10 @@
 import { isJSType } from './validator'
 
 /**
- * @description 计算label的长度 三个数组字母==两个文字
- * @param {*} label
- * @param {*} fontSize
- * @returns
+ * 计算label的长度 三个数组字母==两个文字
+ * @public
+ * @param label - text
+ * @param fontSize - font size
  */
 export function getLabelWidth(label: string, fontSize = 14) {
   const minWidth = 2 * fontSize
@@ -19,9 +19,9 @@ export function getLabelWidth(label: string, fontSize = 14) {
 }
 
 /**
- *
- * @param {*} val
- * @returns
+ * 复制文本
+ * @public
+ * @param val - text
  */
 export function copyText(val: string) {
   if (!isJSType(val, 'string') || !document) return false
@@ -36,9 +36,8 @@ export function copyText(val: string) {
 }
 
 /**
- * @description 获取滚动条宽度
- * @returns Number
- *
+ * 获取滚动条宽度
+ * @public
  */
 export function getScrollbarWidth(): number {
   if (!window || !document) throw new Error('Need window env')
@@ -60,22 +59,44 @@ export function getScrollbarWidth(): number {
   return outerboxWidth - innerboxWidth
 }
 
-export function isInContainer() {
-  console.log('heloo')
+/**
+ * 检测元素是否到达可视窗口内
+ * @alpha
+ */
+export function isInContainer(element:string|HTMLElement) {
 }
 
+/**
+ * 生成随机字符串
+ * @public
+ * @param x - 位数
+ */
 export function r(x = 10): string {
   return Math.random()
     .toString(16)
     .slice(2, 2 + x)
 }
 
+/**
+ * 等待n秒
+ * @public
+ * @param x - second
+ */
 export function t(wait: number, ...args: any[]) {
   return new Promise(rs => setTimeout(rs, wait * 1000, ...args))
 }
 
-type Option = Record<string | 'label' | 'value', any>
+interface Option extends Record<string,any>{
+  label:string
+  value:string
+}
 
+/**
+ * 数组选项转换为格式化对象 
+ * @public
+ * @param options - 选项
+ * @example [\{label:'label',value:'value'\}] returns \{value:'label'\}
+ */
 export const opt2fmt = (options: Option[]) => {
   const fmtConfig: Record<string, any> = {}
   options.forEach(item => {
@@ -85,4 +106,10 @@ export const opt2fmt = (options: Option[]) => {
   return fmtConfig
 }
 
+/**
+ * 数组选项转换为格式化函数
+ * @public
+ * @param options - 选项
+ * @returns a formatter function return the label for the value
+ */
 export const opt2fmtFn = (options: Option[]) => (val: any) => opt2fmt(options)[val] ?? val ?? '-'
