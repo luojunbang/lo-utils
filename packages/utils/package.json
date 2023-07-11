@@ -1,6 +1,6 @@
 {
   "name": "lo-utils",
-  "version": "1.2.25",
+  "version": "1.2.26",
   "description": "A Utils by Lo",
   "main": "dist/lo-utils.min.js",
   "module": "dist/lo-utils.esm.js",
@@ -24,7 +24,7 @@
   "files": [
     "dist/lo-utils.d.ts",
     "dist/lo-utils.*.js",
-    "style/**"
+    "README.md"
   ],
   "repository": {
     "type": "git",
