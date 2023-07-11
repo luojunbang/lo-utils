@@ -10,7 +10,7 @@ const markdown = api.members
         const fnTitle = `### ${i.name}(${i.parameters?.map(i=>`${i.parameterName}${i.isOptional?'?':''}`).join(', ')})`;
         const fnDesc = `\n${i.docComment
           .replace("\n * @public", "")
-          .replace(/\s\*\n/g, "")}`;
+          .replace(/(\s\*\n)|(\/\*\*\s)|(\s\*\/)/g, "")}`;
         return fnTitle + fnDesc;
       })
       .join("\n");
