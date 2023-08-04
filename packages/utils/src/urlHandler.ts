@@ -1,6 +1,5 @@
-// 工具
 /**
- * 拼接url与参数
+ * 拼接url与参数,skip undefined and null
  * @public
  * @example parseParams(\{a:1\},'github.com') == github.com?a=1
  */
@@ -9,7 +8,7 @@ export function parseParams(params: Record<string, any>, url = ''): string {
   return (
     res +
     Object.keys(params)
-      .map(key => `${key}=${encodeURIComponent(params[key] ? params[key] : '')}`)
+      .map((key) => `${key}=${encodeURIComponent(params[key] ?? '')}`)
       .join('&')
   )
 }

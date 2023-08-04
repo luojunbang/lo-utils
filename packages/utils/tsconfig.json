@@ -7,15 +7,23 @@
     "module": "es6",
     "target": "es6",
     "strict": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "noImplicitThis": false
+    "noImplicitThis": false,
+    "lib": ["esnext", "dom"]
   },
   "types": [
     // "vite/client"
     "webpack-env"
   ],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "example/*.ts", "packages/utils/index.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "example/*.ts",
+    "packages/utils/index.ts"
+  ],
   "paths": {
     "@/*": ["src/*"]
   }

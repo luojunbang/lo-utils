@@ -7,32 +7,26 @@
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  * @public
  */
-export function generatorDate(
-  date: Date | string | number,
-  formatter = "y-m-d h:i:s"
-) {
-  let res = "Invalid Date";
-  if (!date) return res;
-  if (Object.prototype.toString.call(date) === "[object Date]") {
+export function generatorDate(date: Date | string | number, formatter = 'y-m-d h:i:s') {
+  let res = 'Invalid Date'
+  if (!date) return res
+  if (Object.prototype.toString.call(date) === '[object Date]') {
   } else if (/^[0-9]{0,13}$/.test(date.toString())) {
-    date = new Date(Math.floor(+date));
-  } else if (typeof date === "string") {
-    date = date.replace(new RegExp(/-/gm), "/"); //IOS
+    date = new Date(Math.floor(+date))
+  } else if (typeof date === 'string') {
+    date = date.replace(new RegExp(/-/gm), '/') //IOS
   }
-  const d = new Date(date);
-  if (d.toString() === "Invalid Date") return res;
+  const d = new Date(date)
+  if (d.toString() === 'Invalid Date') return res
   const getWeek = (d: Date): number => {
-    const day1 = new Date(d.getFullYear(), 0, 1);
-    const day1week = day1.getDay();
-    const dis =
-      d.getTime() -
-      day1.getTime() -
-      (day1week == 0 ? 0 : 86400000 * (7 - day1week));
+    const day1 = new Date(d.getFullYear(), 0, 1)
+    const day1week = day1.getDay()
+    const dis = d.getTime() - day1.getTime() - (day1week == 0 ? 0 : 86400000 * (7 - day1week))
     if (dis < 0) {
-      return getWeek(new Date(d.getFullYear() - 1, 11, 31));
+      return getWeek(new Date(d.getFullYear() - 1, 11, 31))
     }
-    return Math.floor(dis / 86400000 / 7) + 1;
-  };
+    return Math.floor(dis / 86400000 / 7) + 1
+  }
   const formatObj: Record<string, any> = {
     y: d.getFullYear(),
     m: d.getMonth() + 1,
@@ -40,20 +34,18 @@ export function generatorDate(
     h: d.getHours(),
     i: d.getMinutes(),
     s: d.getSeconds(),
-    a: ["日", "一", "二", "三", "四", "五", "六"][d.getDay()],
+    a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()],
     w: getWeek(d),
-  };
-  res = formatter;
+  }
+  res = formatter
   Object.keys(formatObj).forEach((key) => {
-    const reg = new RegExp(`${key}{1}`, "g");
+    const reg = new RegExp(`${key}{1}`, 'g')
     res = res.replace(
       reg,
-      key === "a" || key === "w"
-        ? formatObj[key]
-        : formatObj[key].toString().padStart(2, "0") // 星期不填充0
-    );
-  });
-  return res;
+      key === 'a' || key === 'w' ? formatObj[key] : formatObj[key].toString().padStart(2, '0'), // 星期不填充0
+    )
+  })
+  return res
 }
 
 /**
@@ -66,8 +58,8 @@ export function generatorDate(
  *    fmtDate('2020-01-01','') == '20200101'
  *    fmtDate('2020-01-01','a') == '2020a01a01'
  */
-export function fmtDate(date: Date | string | number, splitter = "-") {
-  return generatorDate(date, `y${splitter}m${splitter}d`);
+export function fmtDate(date: Date | string | number, splitter = '-') {
+  return generatorDate(date, `y${splitter}m${splitter}d`)
 }
 
 /**
@@ -80,8 +72,8 @@ export function fmtDate(date: Date | string | number, splitter = "-") {
  *    fmtTime('2020-01-01','') == '000000'
  *    fmtTime('2020-01-01',' ') == '00 00 00'
  */
-export function fmtTime(date: Date | string | number, splitter = ":") {
-  return generatorDate(date, `h${splitter}i${splitter}s`);
+export function fmtTime(date: Date | string | number, splitter = ':') {
+  return generatorDate(date, `h${splitter}i${splitter}s`)
 }
 
 /**
@@ -94,7 +86,7 @@ export function fmtTime(date: Date | string | number, splitter = ":") {
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  */
 export function fmtDateTime(date: Date | string | number, formatter?: string) {
-  return generatorDate(date, formatter);
+  return generatorDate(date, formatter)
 }
 
 /**
@@ -104,9 +96,6 @@ export function fmtDateTime(date: Date | string | number, formatter?: string) {
  * @param last - 第二个参数
  * @example isSecondTimeBigger('2020-01-01','2020-01-02') == true
  */
-export function isSecondTimeBigger(
-  first: Date | string | number,
-  last: Date | string | number
-) {
-  return new Date(last).getTime() > new Date(first).getTime();
+export function isSecondTimeBigger(first: Date | string | number, last: Date | string | number) {
+  return new Date(last).getTime() > new Date(first).getTime()
 }

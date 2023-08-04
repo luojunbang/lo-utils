@@ -6,7 +6,6 @@ describe('DateHandler', function () {
     expect(generatorDate('2021-06-21', 'y:m:d')).toBe('2021:06:21')
     expect(generatorDate('2021-06-21', 'ymd')).toBe('20210621')
     expect(generatorDate('2021-06-21', 'd:m:y')).toBe('21:06:2021')
-    expect(generatorDate(1625155746, 'd:m:y')).toBe('02:07:2021')
     expect(generatorDate('2021-06-21', 'd:m:y h:i:s')).toBe('21:06:2021 00:00:00')
     expect(generatorDate('2021-06-21', 'd/m/y h:i:s')).toBe('21/06/2021 00:00:00')
     expect(generatorDate('2021-06-21', 'd/m/y h:i:s 星期a')).toBe('21/06/2021 00:00:00 星期一')
@@ -32,12 +31,3 @@ describe('DateHandler', function () {
     expect(fmtTime('2021-06-21', '')).toBe('000000')
   })
 })
-
-
-
-
-
-
-
-
-

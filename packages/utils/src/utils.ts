@@ -12,7 +12,7 @@ export function getLabelWidth(label: string, fontSize = 14) {
   let res = minWidth
   if (!label) return minWidth
   if (label.length) {
-    const az09AryLength = label.split('').filter(i => /[0-9A-Za-z()%]/.test(i)).length
+    const az09AryLength = label.split('').filter((i) => /[0-9A-Za-z()%]/.test(i)).length
     res = Math.ceil((az09AryLength * fontSize * 2) / 3) + (label.length - az09AryLength) * fontSize
   }
   return Math.max(minWidth, res)
@@ -63,8 +63,7 @@ export function getScrollbarWidth(): number {
  * 检测元素是否到达可视窗口内
  * @alpha
  */
-export function isInContainer(element:string|HTMLElement) {
-}
+export function isInContainer(element: string | HTMLElement) {}
 
 /**
  * 生成随机字符串
@@ -83,23 +82,23 @@ export function r(x = 10): string {
  * @param x - second
  */
 export function t(wait: number, ...args: any[]) {
-  return new Promise(rs => setTimeout(rs, wait * 1000, ...args))
+  return new Promise((rs) => setTimeout(rs, wait * 1000, ...args))
 }
 
-interface Option extends Record<string,any>{
-  label:string
-  value:string
+interface Option extends Record<string, any> {
+  label: string
+  value: string
 }
 
 /**
- * 数组选项转换为格式化对象 
+ * 数组选项转换为格式化对象
  * @public
  * @param options - 选项
  * @example [\{label:'label',value:'value'\}] returns \{value:'label'\}
  */
 export const opt2fmt = (options: Option[]) => {
   const fmtConfig: Record<string, any> = {}
-  options.forEach(item => {
+  options.forEach((item) => {
     const { label, value } = item
     fmtConfig[value] = label
   })

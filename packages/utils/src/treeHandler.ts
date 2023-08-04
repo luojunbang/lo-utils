@@ -1,100 +1,120 @@
 /**
+ * 深度遍历扁平化
+ * @public
+ * @param root - target tree
+ * @param fields - default as 'children' for children key,'id' for unique key
+ */
+export function FlattenTreeDeepFirst<T extends Record<string, any>>(
+  root: T[],
+  fields?: { children?: string; id?: string | number },
+) {
+  const res: T[] = []
+  deepPriority(
+    root,
+    (item) => {
+      res.push(item)
+    },
+    fields,
+  )
+  return res
+}
+/**
  * 深度遍历
  * @public
  * @param root - target tree
- * @param options - default as 'children' for children key,'id' for unique key 
+ * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function deepFisrt(root: any[], { children = 'children', id = 'id' } = {}) {
-  if (!Array.isArray(root)) return []
-  const parseNode = (node: any) => {
-    const res = [{ [id]: node[id] }]
-    if (Array.isArray(node[children])) {
-      node[children].forEach((n: any) => res.push(...parseNode(n)))
-    }
-    return res
-  }
-  const res: { [x: string]: any }[] = []
-  root.forEach(n => res.push(...parseNode(n)))
+export function FlattenTreeWildFirst<T extends Record<string, any>>(
+  root: T[],
+  fields?: { children?: string; id?: string | number },
+) {
+  const res: T[] = []
+  wildPriority(
+    root,
+    (item) => {
+      res.push(item)
+    },
+    fields,
+  )
   return res
 }
 
 /**
- * 广度遍历
+ * 广度优先遍历
  * @public
  * @param root - target tree
- * @param options - default as 'children' for children key,'id' for unique key 
+ * @param fn - callback if return truely, it break
+ * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function wildFirst(root: any[], { children = 'children', id = 'id' } = {}) {
-  let waitParseList = []
-  const res = root.map((node: any) => {
-    Array.isArray(node[children]) && waitParseList.push(...node[children])
-    return { [id]: node[id] }
-  })
-  while (waitParseList.length != 0) {
-    const cacheList: any[] = []
-    waitParseList.forEach(node => {
-      res.push({ [id]: node[id] })
-      Array.isArray(node[children]) && cacheList.push(...node[children])
-    })
-    waitParseList = cacheList
+export function wildPriority<T extends Record<string, any>>(
+  root: T[],
+  fn: (item: T) => boolean | void,
+  fields?: { children?: string; id?: string | number },
+) {
+  const { children = 'children' } = fields ?? {}
+  const waitParseList = [...root]
+  while (waitParseList.length > 0) {
+    const item = waitParseList.shift()
+    if (!item) break
+    if (fn(item)) break
+    if (item[children]?.length > 0) waitParseList.push(...item[children])
   }
-  return res
 }
 
 /**
- * 深度优先
+ * 深度优先遍历
  * @public
  * @param root - target Tree
- * @param fn - callback
- * @param options - default as 'children' for children key,'id' for unique key 
+ * @param fn - callback if return truely, it break
+ * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function deepPriority<T extends Record<string, any>, U>(root: T, fn: (x: T, y: number) => any, { children = 'children' } = {}): void {
-  if (Array.isArray(root[children]) && root[children].length > 0) {
-    ;(root[children] as T[]).forEach((node, idx) => {
-      fn(node, idx)
-      deepPriority(node, fn)
-    })
+export function deepPriority<T extends Record<string, any>>(
+  root: T[],
+  fn: (item: T) => boolean | void,
+  fields?: { children?: string; id?: string | number },
+): void {
+  const { children = 'children' } = fields ?? {}
+  for (const item of root) {
+    if (fn(item)) break
+    if (item[children]?.length > 0) {
+      deepPriority(item[children], fn, fields)
+    }
   }
-}
-
-
-interface TreeNode extends Record<string, any> {}
-interface Tree extends TreeNode {
-  children: TreeNode[]
 }
 
 /**
  * 列表转换为树结构
  * @beta
  * @param list - list
- * @param options - default as 'children' form children key
+ * @param fields - default as children = 'children' , id = 'id', parentId = 'parentId'
  */
-export function list2Tree(list: TreeNode[], { id = 'id', parentId = 'parentId' } = {}): Tree[] {
-  const res: Tree[] = []
-  const obj: Record<string, Tree> = {}
-  list.forEach((i: TreeNode) => {
-    const _parentId = i[parentId]
-    const _id = i[id]
-    if (obj[_id] && obj[_id][id]) throw new Error('REPEAT ID..')
-    obj[_id] = { ...i, children: obj[_id] ? obj[_id].children : [] }
-    if (!obj[_parentId]) obj[_parentId] = { children: [] as TreeNode[] }
-    obj[_parentId].children.push(obj[_id])
+export function list2Tree<T extends Record<string, any>>(
+  list: T[],
+  fields?: { children?: string; id?: string | number; parentId?: string },
+): T[] {
+  const { children = 'children', id = 'id', parentId = 'parentId' } = fields ?? {}
+
+  const res: T[] = []
+  const cachedMap: Record<string, T> = {}
+  list.forEach((item) => {
+    const _parentId = item[parentId]
+    const _id = item[id]
+    if (cachedMap[_id] && cachedMap[_id][id]) throw new Error('REPEAT ID..')
+
+    cachedMap[_id] = { ...item, [children]: cachedMap[_id] ? cachedMap[_id][children] : [] }
+    if (_parentId === undefined) return
+    if (!cachedMap[_parentId]) cachedMap[_parentId] = { [children]: [] as T[] } as T
+
+    cachedMap[_parentId][children].push(cachedMap[_id])
   })
-  Object.keys(obj).forEach(key => {
-    const item: Tree = obj[key]
-    if (obj[item.parentId] && !obj[item.parentId].id) {
+  Object.values(cachedMap).forEach((item) => {
+    if (item[id] === undefined) return
+    if (
+      item[parentId] === undefined ||
+      (cachedMap[item[parentId]] && !cachedMap[item[parentId]][id])
+    ) {
       res.push(item)
     }
   })
   return res
-}
-
-
-/**
- * 树结构转换为列表
- * @alpha
- * @param list - list
- */
-export function tree2List(list:any[]){
-
 }
