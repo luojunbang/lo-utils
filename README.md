@@ -15,17 +15,23 @@
  * @param immediate - is call immediate
 
 
-### deepFisrt(root, { children, id }?)
+### deepPriority(root, fn, fields?)
+ * 深度优先遍历
+ * @param root - target Tree
+ * @param fn - callback if return truely, it break
+ * @param fields - default as 'children' for children key,'id' for unique key
+
+
+### FlattenTreeDeepFirst(root, fields?)
+ * 深度遍历扁平化
+ * @param root - target tree
+ * @param fields - default as 'children' for children key,'id' for unique key
+
+
+### FlattenTreeWildFirst(root, fields?)
  * 深度遍历
  * @param root - target tree
- * @param options - default as 'children' for children key,'id' for unique key
-
-
-### deepPriority(root, fn, { children }?)
- * 深度优先
- * @param root - target Tree
- * @param fn - callback
- * @param options - default as 'children' for children key,'id' for unique key
+ * @param fields - default as 'children' for children key,'id' for unique key
 
 
 ### fmtContentLength(val)
@@ -52,6 +58,14 @@
 ### fmtEmptyVal(val, target?)
  * 格式化空白文本 null undefind ''
  * @param val - formater value
+
+
+### fmtNum(val, fixed?, currency?)
+ * 根据本地语言格式化数字
+ * @param val - formatter value
+ * @param fixed - 小数点后位数
+ * @param currency - 是否增加货币符号
+ * @returns 
 
 
 ### fmtStorageSize(val, unit?)
@@ -198,7 +212,7 @@
 
 
 ### parseParams(params, url?)
- * 拼接url与参数
+ * 拼接url与参数,skip undefined and null
  * @example
  * parseParams(\{a:1\},'github.com') == github.com?a=1
 
@@ -226,8 +240,9 @@
  * @param wait - time(ms)
 
 
-### wildFirst(root, { children, id }?)
- * 广度遍历
+### wildPriority(root, fn, fields?)
+ * 广度优先遍历
  * @param root - target tree
- * @param options - default as 'children' for children key,'id' for unique key
+ * @param fn - callback if return truely, it break
+ * @param fields - default as 'children' for children key,'id' for unique key
 

@@ -3,9 +3,10 @@ import { isEmpty, isJSType, isInt } from './validator'
 
 /**
  * 根据本地语言格式化数字
- * @param val
- * @param fixed
- * @param currency 是否接受货币符号
+ * @public
+ * @param val - formatter value
+ * @param fixed - 小数点后位数
+ * @param currency 是否增加货币符号
  * @returns
  */
 export function fmtNum(val: any, fixed = 0, currency = ''): string {
