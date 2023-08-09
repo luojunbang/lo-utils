@@ -10,7 +10,7 @@ describe('', () => {
       callFn(rs)
       callFn(rs)
       callFn(rs)
-    }).then((res) => {
+    }).then(() => {
       expect(fn).toBeCalledTimes(1)
     })
   })

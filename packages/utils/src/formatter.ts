@@ -2,14 +2,20 @@
 import { isEmpty, isJSType, isInt } from './validator'
 
 /**
- * 格式化数字
- * @alpha
- * @param val - formater value
- * @example 1000 returns 1,000
+ * 根据本地语言格式化数字
+ * @param val
+ * @param fixed
+ * @param currency 是否接受货币符号
+ * @returns
  */
-export function fmtNum(val: string | number, fixed = 0): string {
-  // toDo...
-  return val.toString()
+export function fmtNum(val: any, fixed = 0, currency = ''): string {
+  if (isJSType(val, 'string')) val = parseFloat(val)
+  if (isNaN(val)) return 'Invalid number'
+  const options: Intl.NumberFormatOptions = {
+    minimumFractionDigits: fixed,
+    maximumFractionDigits: fixed,
+  }
+  return `${currency}${val.toLocaleString(undefined, options)}`
 }
 
 /**

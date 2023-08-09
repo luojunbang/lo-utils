@@ -6,7 +6,7 @@
  */
 export function FlattenTreeDeepFirst<T extends Record<string, any>>(
   root: T[],
-  fields?: { children?: string; id?: string | number },
+  fields?: { children?: string },
 ) {
   const res: T[] = []
   deepPriority(
@@ -26,7 +26,7 @@ export function FlattenTreeDeepFirst<T extends Record<string, any>>(
  */
 export function FlattenTreeWildFirst<T extends Record<string, any>>(
   root: T[],
-  fields?: { children?: string; id?: string | number },
+  fields?: { children?: string },
 ) {
   const res: T[] = []
   wildPriority(
@@ -49,7 +49,7 @@ export function FlattenTreeWildFirst<T extends Record<string, any>>(
 export function wildPriority<T extends Record<string, any>>(
   root: T[],
   fn: (item: T) => boolean | void,
-  fields?: { children?: string; id?: string | number },
+  fields?: { children?: string },
 ) {
   const { children = 'children' } = fields ?? {}
   const waitParseList = [...root]
@@ -71,7 +71,7 @@ export function wildPriority<T extends Record<string, any>>(
 export function deepPriority<T extends Record<string, any>>(
   root: T[],
   fn: (item: T) => boolean | void,
-  fields?: { children?: string; id?: string | number },
+  fields?: { children?: string },
 ): void {
   const { children = 'children' } = fields ?? {}
   for (const item of root) {

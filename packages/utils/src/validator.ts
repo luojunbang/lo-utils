@@ -5,9 +5,11 @@
  * @public
  * @param val - text
  */
-export function isIpv4(val: string): boolean {
+export function isIpv4(val: any): boolean {
   const ary = val.split('.')
-  return ary.length === 4 && ary.every(i => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
+  return (
+    ary.length === 4 && ary.every((i) => i !== '' && /^([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/.test(i))
+  )
 }
 
 /**
@@ -15,9 +17,9 @@ export function isIpv4(val: string): boolean {
  * @public
  * @param val - text
  */
-export function isMacAddress(val: string): boolean {
+export function isMacAddress(val: any): boolean {
   const ary = val.split(':')
-  return ary.length === 6 && ary.every(i => /^[\dabcdefABCDEF]{2}$/.test(i))
+  return ary.length === 6 && ary.every((i) => /^[\dabcdefABCDEF]{2}$/.test(i))
 }
 
 /**
@@ -25,8 +27,11 @@ export function isMacAddress(val: string): boolean {
  * @public
  * @param val - text
  */
-export function isPositiveFloat(text: string | number): boolean {
-  return /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) || /^[0]{1}(.[0]{1,2})?$/.test(text.toString())
+export function isPositiveFloat(text: any): boolean {
+  return (
+    /^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) ||
+    /^[0]{1}(.[0]{1,2})?$/.test(text.toString())
+  )
 }
 
 /**
@@ -34,7 +39,8 @@ export function isPositiveFloat(text: string | number): boolean {
  * @public
  * @param val - text
  */
-export function isInt(text: string | number): boolean {
+export function isInt(text: any): boolean {
+  if (isNil(text)) return false
   return /^(0|[1-9][0-9]*)$/.test(text.toString())
 }
 
@@ -44,8 +50,11 @@ export function isInt(text: string | number): boolean {
  * @public
  * @param val - text
  */
-export function isPercent(text: string | number): boolean {
-  return (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) && parseFloat(text.toString()) <= 100) || /^[0]{1}(.[0-9]{1,2})?$/.test(text.toString())
+export function isPercent(text: any): boolean {
+  return (
+    (/^[1-9][0-9]*(.[0-9]{1,2})?$/.test(text.toString()) && parseFloat(text.toString()) <= 100) ||
+    /^[0]{1}(.[0-9]{1,2})?$/.test(text.toString())
+  )
 }
 
 /**
@@ -53,8 +62,11 @@ export function isPercent(text: string | number): boolean {
  * @public
  * @param val - text
  */
-export function isPort(text: string | number): boolean {
-  return (/^[1-9][0-9]*$/.test(text.toString()) && Math.floor(+text) <= 65535) || /^0$/.test(text.toString())
+export function isPort(text: any): boolean {
+  return (
+    (/^[1-9][0-9]*$/.test(text.toString()) && Math.floor(+text) <= 65535) ||
+    /^0$/.test(text.toString())
+  )
 }
 
 /**
@@ -78,7 +90,7 @@ export function isJSType(val: any, target: string) {
  * @param val - value
  */
 export function isEmpty(val: any): boolean {
-  return val === null || val === ''|| val === undefined
+  return val === null || val === '' || val === undefined
 }
 
 /**

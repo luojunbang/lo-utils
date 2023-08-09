@@ -23,19 +23,39 @@ describe('treeHandler', () => {
     expect(FlattenTreeDeepFirst(arr1).join(',')).toBe('')
     const arr2 = [{ name: '1', children: [] }]
     expect(
-      FlattenTreeDeepFirst(arr2, { children: 'child', id: 'name' })
+      FlattenTreeDeepFirst(arr2, { children: 'child' })
         .map((i) => i.name)
         .join(','),
     ).toBe(['1'].join(','))
 
-    expect(
-      FlattenTreeDeepFirst(arr3, { children: 'child', id: 'name' }).map((i) => i.name),
-    ).toEqual(['root', 'p0', 'p1', 'c1_1', 'c1_2', 'p2', 'c2_1', 'c2_1_1', 'c2_1_2', 'c2_2', 'p3'])
+    expect(FlattenTreeDeepFirst(arr3, { children: 'child' }).map((i) => i.name)).toEqual([
+      'root',
+      'p0',
+      'p1',
+      'c1_1',
+      'c1_2',
+      'p2',
+      'c2_1',
+      'c2_1_1',
+      'c2_1_2',
+      'c2_2',
+      'p3',
+    ])
   })
   test('FlattenTreeWildFirst', function () {
-    expect(
-      FlattenTreeWildFirst(arr3, { children: 'child', id: 'name' }).map((i) => i.name),
-    ).toEqual(['root', 'p0', 'p1', 'p2', 'p3', 'c1_1', 'c1_2', 'c2_1', 'c2_2', 'c2_1_1', 'c2_1_2'])
+    expect(FlattenTreeWildFirst(arr3, { children: 'child' }).map((i) => i.name)).toEqual([
+      'root',
+      'p0',
+      'p1',
+      'p2',
+      'p3',
+      'c1_1',
+      'c1_2',
+      'c2_1',
+      'c2_2',
+      'c2_1_1',
+      'c2_1_2',
+    ])
   })
   test('list2Tree', () => {
     const arr = [
