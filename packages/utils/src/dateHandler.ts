@@ -1,5 +1,5 @@
 /**
- * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
+ * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周 e:毫秒)
  * @param date - 日期
  * @param formatter - 格式
  * @example
@@ -36,13 +36,14 @@ export function generatorDate(date: Date | string | number, formatter = 'y-m-d h
     s: d.getSeconds(),
     a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()],
     w: getWeek(d),
+    e: d.getMilliseconds().toString().padStart(3, '0'),
   }
   res = formatter
   Object.keys(formatObj).forEach((key) => {
     const reg = new RegExp(`${key}{1}`, 'g')
     res = res.replace(
       reg,
-      key === 'a' || key === 'w' ? formatObj[key] : formatObj[key].toString().padStart(2, '0'), // 星期不填充0
+      /[awe]/.test(key) ? formatObj[key] : formatObj[key].toString().padStart(2, '0'), // 星期不填充0
     )
   })
   return res
@@ -85,8 +86,8 @@ export function fmtTime(date: Date | string | number, splitter = ':') {
  *    generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  */
-export function fmtDateTime(date: Date | string | number, formatter?: string) {
-  return generatorDate(date, formatter)
+export function fmtDateTime(date: Date | string | number) {
+  return generatorDate(date, 'y-m-d h:i:s')
 }
 
 /**
@@ -98,4 +99,31 @@ export function fmtDateTime(date: Date | string | number, formatter?: string) {
  */
 export function isSecondTimeBigger(first: Date | string | number, last: Date | string | number) {
   return new Date(last).getTime() > new Date(first).getTime()
+}
+
+/**
+ * 返回时间字符串 20001010123030
+ * @public
+ * @param date - input
+ */
+export function timeString(date: Date | string | number) {
+  return generatorDate(date, 'ymdhis')
+}
+
+/**
+ * 返回第几周
+ * @public
+ * @param date - input
+ */
+export function fmtWeek(date: Date | string | number) {
+  return generatorDate(date, 'w')
+}
+
+/**
+ * 返回中文星期几
+ * @public
+ * @param date - input
+ */
+export function fmtDay(date: Date | string | number) {
+  return generatorDate(date, 'a')
 }
