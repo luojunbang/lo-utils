@@ -2,29 +2,27 @@
 import { isEmpty, isJSType, isInt } from './validator'
 
 /**
- *
- * @param {*} val
+ * 根据本地语言格式化数字
+ * @public
+ * @param val - formatter value
+ * @param fixed - 小数点后位数
+ * @param currency 是否增加货币符号
  * @returns
  */
-export function fmtNum(val: string | number, fixed = 0): string {
-  // toDo...
-  return val.toString()
+export function fmtNum(val: any, fixed = 0, currency = ''): string {
+  if (isJSType(val, 'string')) val = parseFloat(val)
+  if (isNaN(val)) return 'Invalid number'
+  const options: Intl.NumberFormatOptions = {
+    minimumFractionDigits: fixed,
+    maximumFractionDigits: fixed,
+  }
+  return `${currency}${val.toLocaleString(undefined, options)}`
 }
 
 /**
- *
- * @param {*} val
- * @returns
- */
-export function fmtUndefined(val: any) {
-  if (val === undefined || val === null) return '-'
-  return val
-}
-
-/**
- *
- * @param {*} val
- * @returns
+ * 格式化空白文本 null undefind ''
+ * @public
+ * @param val - formater value
  */
 export function fmtEmptyVal(val: any, target = '-') {
   if (isEmpty(val)) return target
@@ -32,14 +30,12 @@ export function fmtEmptyVal(val: any, target = '-') {
 }
 
 /**
- * @description formatter size display
- * @param {String｜Number } val The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
- * @param {String} unit accept targetUnit ex.'k','K','Kb'
- * @returns {String} The val after transform
+ * 格式化存储大小
+ * @public
+ * @param val - The val to transform ,default unit is b,Only accept 2b 2k 2m 2g 2t 2p
+ * @param unit - accept targetUnit ex.'k','K','Kb'
  * @example
- * ```js
- * ('2048K','m') -> '2m'
- * ```
+ * ('2048K','m') returns '2m'
  */
 export function fmtStorageSize(val: string | number, unit?: string): string {
   const UNIT = 'bkmgtp'.split('')
@@ -66,9 +62,9 @@ export function fmtStorageSize(val: string | number, unit?: string): string {
 }
 
 /**
- *
- * @param {*} val
- * @returns
+ * 格式化内容长度
+ * @public
+ * @param val - formater value
  */
 export function fmtContentLength(val: string | number): string {
   const UNIT = 'BKMGTP'

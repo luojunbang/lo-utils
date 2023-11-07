@@ -1,25 +1,22 @@
-// 日期格式化工具
-
-import { isNil } from "./validator";
-
 /**
- * @description 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
- * @param {String} date
- * @param {String} formatter y-m-d h:i:s a
+ * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周 e:毫秒)
+ * @param date - 日期
+ * @param formatter - 格式
  * @example
- * ```js
  *    generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
- * ```
+ * @public
  */
-
-export function generatorDate(date: any, formatter = "y-m-d h:i:s"): string {
-  let res = "Invalid Date";
-  if (isNil(date)) return res;
-  if (typeof date === "string") {
-    date = date.replace(new RegExp(/-/gm), "/"); //IOS
+export function generatorDate(date: Date | string | number, formatter = 'y-m-d h:i:s') {
+  let res = 'Invalid Date'
+  if (!date) return res
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+  } else if (/^[0-9]{0,13}$/.test(date.toString())) {
+    date = new Date(Math.floor(+date))
+  } else if (typeof date === 'string') {
+    date = date.replace(new RegExp(/-/gm), '/') //IOS
   }
-  const d = new Date(date as VarDate);
+  const d = new Date(date);
   if (d.toString() === "Invalid Date") return res;
   const getWeek = (d: Date): number => {
     const day1 = new Date(d.getFullYear(), 0, 1);
@@ -42,67 +39,94 @@ export function generatorDate(date: any, formatter = "y-m-d h:i:s"): string {
     s: d.getSeconds(),
     a: ["日", "一", "二", "三", "四", "五", "六"][d.getDay()],
     w: getWeek(d),
-  };
-  res = formatter;
+    e: d.getMilliseconds().toString().padStart(3, '0'),
+  }
+  res = formatter
   Object.keys(formatObj).forEach((key) => {
-    const reg = new RegExp(`${key}{1}`, "g");
+    const reg = new RegExp(`${key}{1}`, 'g')
     res = res.replace(
       reg,
-      key === "a" || key === "w"
-        ? formatObj[key]
-        : formatObj[key].toString().padStart(2, "0") // 星期不填充0
-    );
-  });
-  return res;
+      /[awe]/.test(key) ? formatObj[key] : formatObj[key].toString().padStart(2, '0'), // 星期不填充0
+    )
+  })
+  return res
 }
 
 /**
- * @description 格式化日期
- * @param {String} Date
- * @param {String} splitter  '-'
+ * 格式化日期
+ * @public
+ * @param Date - 日期
+ * @param splitter - 默认-
  * @example
- * ```js
  *    fmtDate('2020-01-01') == '2020-01-01'
  *    fmtDate('2020-01-01','') == '20200101'
- *    fmtDate('2020-01-01',' ') == '2020 01 01'
- * ```
+ *    fmtDate('2020-01-01','a') == '2020a01a01'
  */
 export function fmtDate(date: any, splitter = "-") {
   return generatorDate(date, `y${splitter}m${splitter}d`);
 }
 
 /**
- * @description 格式化时间
- * @param {String} Date
- * @param {String} splitter  ':'
+ * 格式化时间
+ * @public
+ * @param Date - 日期
+ * @param splitter - 默认:
  * @example
- * ```js
  *    fmtTime('2020-01-01') == '00:00:00'
  *    fmtTime('2020-01-01','') == '000000'
  *    fmtTime('2020-01-01',' ') == '00 00 00'
- * ```
  */
 export function fmtTime(date: any, splitter = ":") {
   return generatorDate(date, `h${splitter}i${splitter}s`);
 }
 
 /**
- * @description 跟generatorData一样
+ * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
+ * @public
+ * @param date - 日期
+ * @param formatter - 格式
+ * @example
+ *    generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
+ *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  */
-export function fmtDateTime(date: any, formatter?: string) {
-  return generatorDate(date, formatter);
+export function fmtDateTime(date: Date | string | number) {
+  return generatorDate(date, 'y-m-d h:i:s')
 }
 
 /**
- * @description 比较时间,第二参数时间戳比第一参数时间戳大
- * @param {String} first
- * @param {String} last
- * @returns {Boolean}
- * @example
- * ```js
- *    isSecondTimeBigger('2020-01-01','2020-01-02') == true
- * ```
+ * 比较时间,第二参数时间戳比第一参数时间戳大
+ * @public
+ * @param first - 第一个参数
+ * @param last - 第二个参数
+ * @example isSecondTimeBigger('2020-01-01','2020-01-02') == true
  */
-export function isSecondTimeBigger(first: any, last: any) {
-  return generatorDate(last) > generatorDate(first);
+export function isSecondTimeBigger(first: Date | string | number, last: Date | string | number) {
+  return new Date(last).getTime() > new Date(first).getTime()
+}
+
+/**
+ * 返回时间字符串 20001010123030
+ * @public
+ * @param date - input
+ */
+export function timeString(date: Date | string | number) {
+  return generatorDate(date, 'ymdhis')
+}
+
+/**
+ * 返回第几周
+ * @public
+ * @param date - input
+ */
+export function fmtWeek(date: Date | string | number) {
+  return generatorDate(date, 'w')
+}
+
+/**
+ * 返回中文星期几
+ * @public
+ * @param date - input
+ */
+export function fmtDay(date: Date | string | number) {
+  return generatorDate(date, 'a')
 }

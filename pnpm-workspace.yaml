@@ -1,4 +1,3 @@
 packages:
-  - packages/utils
-  - packages/loader/*
+  - packages
   - example

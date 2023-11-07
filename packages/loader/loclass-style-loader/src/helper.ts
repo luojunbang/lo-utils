@@ -22,13 +22,13 @@ export const wrapStyleBlock = (block: string): string => `\n  <style scoped> ${b
 export const autoFixUnit = (str: string): string => {
   if (/[\dAaBbCcDdEeFf]{6}/.test(str)) return '#' + str //#00AA00
   else if (/^\d+_\d+_\d+(_\d+)?$/.test(str)) {
-    // 20_20_20 -> rgb(20,20,20)
-    // 20_20_20_20 -> rgba(20,20,20,0.20)
+    // 20_20_20 returns  rgb(20,20,20)
+    // 20_20_20_20 returns  rgba(20,20,20,0.20)
     const strAry = str.split('_')
     if (strAry.length === 4) strAry[3] = (+strAry[3] / 100).toFixed(2)
     return `rgb${strAry.length == 4 ? 'a' : ''}(${strAry.join(',')})`
   } else if (/^v_[\w]+$/.test(str)) {
-    // v_primary__color -> var(--primary--color)
+    // v_primary__color returns  var(--primary--color)
     return `var(${str.replace('v_', '--').replace(/_/g, '-')})` 
   } else if (isInt(str)) return str + 'px'
   else return str

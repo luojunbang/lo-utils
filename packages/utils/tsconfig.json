@@ -7,6 +7,7 @@
     "module": "es6",
     "target": "ES6",
     "strict": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noImplicitThis": false,
@@ -16,7 +17,13 @@
     // "vite/client"
     "webpack-env"
   ],
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "example/*.ts",
+    "packages/utils/index.ts"
+  ],
   "paths": {
     "@/*": ["src/*"]
   }

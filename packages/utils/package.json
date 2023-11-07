@@ -1,19 +1,15 @@
 {
   "name": "lo-utils",
-  "version": "1.2.24",
+  "version": "1.2.27",
   "description": "A Utils by Lo",
   "main": "dist/lo-utils.min.js",
   "module": "dist/lo-utils.esm.js",
   "types": "dist/lo-utils.d.ts",
   "sideEffects": false,
   "scripts": {
-    "doc": "node ./build/generator_doc.js",
+    "doc": "node ./build/generateDoc.js",
     "build": "rollup -c rollup.config.js && npm run build:dts",
     "build:dts": "api-extractor run --local --verbose",
-    "dev": "webpack --watch --config ./build/webpack.config.js",
-    "e:dev": "webpack --watch --config ./example/webpack.config.js",
-    "e:serve": "webpack-dev-server --mode=development --config ./example/webpack.config.js",
-    "vite": "vite --config ./example/vite.config.ts",
     "release": "npm run build && npm run publish:bug",
     "publish:bug": "npm version patch && npm publish",
     "test": "jest"
@@ -29,7 +25,7 @@
   "files": [
     "dist/lo-utils.d.ts",
     "dist/lo-utils.*.js",
-    "style/**"
+    "README.md"
   ],
   "repository": {
     "type": "git",

@@ -1,8 +1,8 @@
 /**
- *
- * @param {Function} func
- * @param {Number} wait
- * @returns {*}
+ * 节流
+ * @public
+ * @param func - callback
+ * @param wait - time(ms)
  */
 export function throttle(func: (...arg: any[]) => any, wait = 500) {
   let ctx: any, args: any, res: any, lastTime: number
@@ -21,10 +21,11 @@ export function throttle(func: (...arg: any[]) => any, wait = 500) {
 }
 
 /**
- * @param {Function} func
- * @param {number} wait
- * @param {boolean} immediate
- * @return {*}
+ * 防抖
+ * @public
+ * @param func - callback
+ * @param wait - time(ms)
+ * @param immediate - is call immediate
  */
 export function debounce(func: (...arg: any[]) => any, wait = 300, immediate = false) {
   let timeout: any, args: any | null, context: null, timestamp: number, result: any

@@ -1,12 +1,7 @@
-// 工具
-
 /**
- * @description
  * 检查是否首次访问
- * @example
- * ```js
- * checkIsFirstEntry(KEY?).then(val=>{}).catch(_=>{})
- * ```
+ * @public
+ * @returns - Promise<Boolean>
  */
 export function checkIsFirstEntry(flagKey = 'IS_FIRST_ENTRY') {
   if (!window || !window.localStorage) throw new Error('This method need to run in browser')
