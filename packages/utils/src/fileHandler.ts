@@ -1,5 +1,7 @@
 // 文件工具
 import { AxiosResponse } from 'axios'
+import { join } from 'path'
+import fs from 'fs'
 
 /**
  * 文件流转化为文件
@@ -53,6 +55,13 @@ export function generatorFileAxios(res: AxiosResponse, fileName?: string, type?:
   generatorFile(fileName ?? parseFileName(headers['content-disposition']), data, type)
 }
 
+/**
+ * dataURLtoFile
+ * @public
+ * @param dataurl
+ * @param filename
+ * @returns
+ */
 export function dataURLtoFile(dataurl: string, filename: string) {
   const arr = dataurl.split(','),
     bstr = atob(arr[1]),
@@ -65,8 +74,12 @@ export function dataURLtoFile(dataurl: string, filename: string) {
   return new File([u8arr], filename, { type: mime })
 }
 
-import { join } from 'path'
-import fs from 'fs'
+/**
+ * 打印文件结构
+ * @public
+ * @param rootPath 根目录
+ * @param exclude 需要排除的文件名或者目录
+ */
 export function logFileStruct(rootPath: string, exclude = ['node_modules', '.git']) {
   const [subdir, place, file] = ['├──', '|   ', '└──']
 

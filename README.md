@@ -8,6 +8,13 @@
  * @param val - text
 
 
+### dataURLtoFile(dataurl, filename)
+ * dataURLtoFile
+ * @param dataurl - 
+ * @param filename - 
+ * @returns 
+
+
 ### debounce(func, wait?, immediate?)
  * 防抖
  * @param func - callback
@@ -47,12 +54,17 @@
  * fmtDate('2020-01-01') == '2020-01-01' fmtDate('2020-01-01','') == '20200101' fmtDate('2020-01-01','a') == '2020a01a01'
 
 
-### fmtDateTime(date, formatter?)
+### fmtDateTime(date)
  * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
  * @param date - 日期
  * @param formatter - 格式
  * @example
  * generatorDate('2020-01-01') == '2020-01-01 00:00:00 五' generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
+
+
+### fmtDay(date)
+ * 返回中文星期几
+ * @param date - input
 
 
 ### fmtEmptyVal(val, target?)
@@ -84,8 +96,13 @@
  * fmtTime('2020-01-01') == '00:00:00' fmtTime('2020-01-01','') == '000000' fmtTime('2020-01-01',' ') == '00 00 00'
 
 
+### fmtWeek(date)
+ * 返回第几周
+ * @param date - input
+
+
 ### generatorDate(date, formatter?)
- * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周)
+ * 格式化日期时间星期(y:年 m:月 d:日 h:小时 i:分钟 s:秒 a:星期 w:第几周 e:毫秒)
  * @param date - 日期
  * @param formatter - 格式
  * @example
@@ -193,6 +210,12 @@
  * @returns - Promise
 
 
+### logFileStruct(rootPath, exclude?)
+ * 打印文件结构
+ * @param rootPath - 根目录
+ * @param exclude - 需要排除的文件名或者目录
+
+
 ### opt2fmt(undefined)
  * 数组选项转换为格式化对象
  * @param options - 选项
@@ -238,6 +261,11 @@
  * 节流
  * @param func - callback
  * @param wait - time(ms)
+
+
+### timeString(date)
+ * 返回时间字符串 20001010123030
+ * @param date - input
 
 
 ### wildPriority(root, fn, fields?)
