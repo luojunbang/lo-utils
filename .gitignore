@@ -4,3 +4,4 @@ test/mysql.js
 temp
 dist
 loader-dist
+packages/utils/src/tempCodeRunnerFile.ts

@@ -15,7 +15,9 @@ export function generatorFile(fileName: string, blob: BlobPart, fileType = ''): 
     pdf: 'application/pdf;charset=utf-8',
   }
 
-  const url = window.URL.createObjectURL(new Blob([blob], { type: FILE_TYPE[fileType] ?? fileType }))
+  const url = window.URL.createObjectURL(
+    new Blob([blob], { type: FILE_TYPE[fileType] ?? fileType }),
+  )
 
   const a = document.createElement('a')
   a.setAttribute('href', url)
@@ -34,7 +36,8 @@ export function generatorFile(fileName: string, blob: BlobPart, fileType = ''): 
  */
 export function parseFileName(contentDispotion: string | undefined): string {
   if (contentDispotion === undefined) return Math.random().toString(16).slice(2)
-  if (/UTF-8/.test(contentDispotion)) return contentDispotion.replace(/[\s\S]+UTF-8''([\S\s]+\.[\S]+)/, '$1')
+  if (/UTF-8/.test(contentDispotion))
+    return contentDispotion.replace(/[\s\S]+UTF-8''([\S\s]+\.[\S]+)/, '$1')
   return contentDispotion.replace(/\s*attachment;\s*filename="([\S\s]+\.[\S]+)"[\s\S]*/, '$1')
 }
 
@@ -51,13 +54,53 @@ export function generatorFileAxios(res: AxiosResponse, fileName?: string, type?:
 }
 
 export function dataURLtoFile(dataurl: string, filename: string) {
-  const arr = dataurl.split(',')
-  let mime = (arr[0].match(/:(.*?);/) ?? [])[1],
+  const arr = dataurl.split(','),
     bstr = atob(arr[1]),
-    n = bstr.length,
-    u8arr = new Uint8Array(n)
+    mime = (arr[0].match(/:(.*?);/) ?? [])[1]
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n)
   }
   return new File([u8arr], filename, { type: mime })
+}
+
+import { join } from 'path'
+import fs from 'fs'
+export function logFileStruct(rootPath: string, exclude = ['node_modules', '.git']) {
+  const [subdir, place, file] = ['├──', '|   ', '└──']
+
+  console.log(`${rootPath}\n.`)
+  const deepSearchFile = (path: string, prefix) => {
+    const list = fs.readdirSync(path)
+    const dir: [string, boolean][] = []
+    const fileList: [string, boolean][] = []
+    list.forEach((p) => {
+      if (exclude.includes(p)) return
+      const _path = join(path, p)
+      const fileStat = fs.statSync(_path)
+      if (fileStat.isDirectory()) {
+        dir.push([p, true])
+      } else {
+        fileList.push([p, false])
+      }
+    })
+    ;[...dir, ...fileList].forEach(([p, isDir], index, arr) => {
+      const _path = join(path, p)
+      const mark = index == arr.length - 1 ? file : subdir
+      if (isDir) {
+        console.log(`${prefix}${mark} ${p}`)
+        deepSearchFile(_path, prefix + place)
+      } else {
+        console.log(`${prefix}${mark} ${p}`)
+      }
+    })
+  }
+
+  const fileStat = fs.statSync(rootPath)
+  if (fileStat.isDirectory()) {
+    deepSearchFile(rootPath, '')
+  } else {
+    console.log(`${file} ${rootPath}`)
+  }
 }
