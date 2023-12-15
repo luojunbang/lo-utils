@@ -64,5 +64,8 @@
     "url": "https://github.com/luojunbang/lo-utils/issues"
   },
   "homepage": "https://github.com/luojunbang/lo-utils#readme",
-  "version": "0.0.2"
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/node": "^20.10.4"
+  }
 }

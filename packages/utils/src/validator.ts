@@ -80,7 +80,8 @@ export function isJSType(val: any, target: string) {
     Object.prototype.toString
       .call(val)
       .replace(/^\[object ([a-zA-Z]*)\]$/, '$1')
-        .toLowerCase() === target.toLowerCase()
+      .toLowerCase() === target.toLowerCase()
+  )
 }
 
 /**
