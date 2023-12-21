@@ -57,8 +57,8 @@ export function generatorFileAxios(res: AxiosResponse, fileName?: string, type?:
 /**
  * dataURLtoFile
  * @public
- * @param dataurl
- * @param filename
+ * @param dataurl - dataurl
+ * @param filename - filename
  * @returns
  */
 export function dataURLtoFile(dataurl: string, filename: string) {

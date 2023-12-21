@@ -10,8 +10,8 @@
 
 ### dataURLtoFile(dataurl, filename)
  * dataURLtoFile
- * @param dataurl - 
- * @param filename - 
+ * @param dataurl - dataurl
+ * @param filename - filename
  * @returns 
 
 
@@ -31,8 +31,8 @@
 
 ### exclude(undefined)
  * exclude some fields and return a new object
- * @param obj - 
- * @param keys - 
+ * @param obj - object
+ * @param keys - keys in obj
  * @returns 
 
 
@@ -84,7 +84,6 @@
  * @param val - formatter value
  * @param fixed - 小数点后位数
  * @param currency - 是否增加货币符号
- * @returns 
 
 
 ### fmtStorageSize(val, unit?)
@@ -250,8 +249,8 @@
 
 ### pick(undefined)
  * pick some fields and return a new object
- * @param obj - 
- * @param keys - 
+ * @param obj - object
+ * @param keys - keys in obj
  * @returns 
 
 

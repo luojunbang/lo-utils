@@ -6,8 +6,7 @@ import { isEmpty, isJSType, isInt } from './validator'
  * @public
  * @param val - formatter value
  * @param fixed - 小数点后位数
- * @param currency 是否增加货币符号
- * @returns
+ * @param currency - 是否增加货币符号
  */
 export function fmtNum(val: any, fixed = 0, currency = ''): string {
   if (isJSType(val, 'string')) val = parseFloat(val)

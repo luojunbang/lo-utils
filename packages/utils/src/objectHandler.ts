@@ -1,7 +1,8 @@
 /**
+ * @public
  * pick some fields and return a new object
- * @param obj 
- * @param keys 
+ * @param obj - object
+ * @param keys - keys in obj
  * @returns 
  */
 export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
@@ -9,9 +10,10 @@ export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
 }
 
 /**
+ * @public
  * exclude some fields and return a new object
- * @param obj 
- * @param keys 
+ * @param obj - object
+ * @param keys - keys in obj
  * @returns 
  */
 export const exclude = <T extends Record<string, any>, K extends keyof T>(

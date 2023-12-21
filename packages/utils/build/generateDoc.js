@@ -22,3 +22,4 @@ const markdown = api.members
 const fs = require('fs')
 
 fs.writeFileSync(path.resolve(__dirname, '../../../README.md'), markdown)
+fs.writeFileSync(path.resolve(__dirname, '../README.md'), markdown)
