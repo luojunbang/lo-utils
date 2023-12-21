@@ -29,6 +29,13 @@
  * @param fields - default as 'children' for children key,'id' for unique key
 
 
+### exclude(undefined)
+ * exclude some fields and return a new object
+ * @param obj - 
+ * @param keys - 
+ * @returns 
+
+
 ### FlattenTreeDeepFirst(root, fields?)
  * 深度遍历扁平化
  * @param root - target tree
@@ -210,12 +217,6 @@
  * @returns - Promise
 
 
-### logFileStruct(rootPath, exclude?)
- * 打印文件结构
- * @param rootPath - 根目录
- * @param exclude - 需要排除的文件名或者目录
-
-
 ### opt2fmt(undefined)
  * 数组选项转换为格式化对象
  * @param options - 选项
@@ -245,6 +246,13 @@
  * @param val - target
  * @example
  * 100 returns 100px,100vw returns 100vw,100% returns 100%
+
+
+### pick(undefined)
+ * pick some fields and return a new object
+ * @param obj - 
+ * @param keys - 
+ * @returns 
 
 
 ### r(x?)
