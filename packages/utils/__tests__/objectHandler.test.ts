@@ -1,4 +1,6 @@
-import { pick, exclude } from '../src/objectHandler'
+import { pick, exclude }
+
+ from '../src/objectHandler'
 
 const foo = 'foo'
 const bar = 'bar'

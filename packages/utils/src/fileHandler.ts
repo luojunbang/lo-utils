@@ -1,6 +1,4 @@
 // 文件工具
-import { AxiosResponse } from 'axios'
-
 
 /**
  * 文件流转化为文件
@@ -16,9 +14,7 @@ export function generatorFile(fileName: string, blob: BlobPart, fileType = ''): 
     pdf: 'application/pdf;charset=utf-8',
   }
 
-  const url = window.URL.createObjectURL(
-    new Blob([blob], { type: FILE_TYPE[fileType] ?? fileType }),
-  )
+  const url = window.URL.createObjectURL(new Blob([blob], { type: FILE_TYPE[fileType] ?? fileType }))
 
   const a = document.createElement('a')
   a.setAttribute('href', url)
@@ -37,8 +33,7 @@ export function generatorFile(fileName: string, blob: BlobPart, fileType = ''): 
  */
 export function parseFileName(contentDispotion: string | undefined): string {
   if (contentDispotion === undefined) return Math.random().toString(16).slice(2)
-  if (/UTF-8/.test(contentDispotion))
-    return contentDispotion.replace(/[\s\S]+UTF-8''([\S\s]+\.[\S]+)/, '$1')
+  if (/UTF-8/.test(contentDispotion)) return contentDispotion.replace(/[\s\S]+UTF-8''([\S\s]+\.[\S]+)/, '$1')
   return contentDispotion.replace(/\s*attachment;\s*filename="([\S\s]+\.[\S]+)"[\s\S]*/, '$1')
 }
 
@@ -49,7 +44,7 @@ export function parseFileName(contentDispotion: string | undefined): string {
  * @param fileName - custom filename or request header filename
  * @param type - file type such as (xls,zip,pdf) or the original fileType in mdn
  */
-export function generatorFileAxios(res: AxiosResponse, fileName?: string, type?: string): void {
+export function generatorFileAxios(res: { headers: Record<string, any>; data: BlobPart }, fileName?: string, type?: string): void {
   const { headers, data } = res
   generatorFile(fileName ?? parseFileName(headers['content-disposition']), data, type)
 }
@@ -73,4 +68,15 @@ export function dataURLtoFile(dataurl: string, filename: string) {
   return new File([u8arr], filename, { type: mime })
 }
 
-
+/**
+ * @public
+ * Get imageType from filename
+ * @param str
+ * @returns
+ */
+export function getImageType(str: string) {
+  const idx = str.lastIndexOf('.')
+  if (idx == -1) throw new Error(`Can't get the extension from string ${str}. `)
+  const ret = str.slice(idx + 1)
+  return ret
+}

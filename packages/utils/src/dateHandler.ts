@@ -7,8 +7,8 @@
  *    generatorDate('2020-01-01','ymdhis 星期a 第w周') == '20200101000000 星期五 第w周'
  * @public
  */
-export function generatorDate(date: Date | string | number, formatter = 'y-m-d h:i:s') {
-  let res = 'Invalid Date'
+export function generatorDate(date: Date | string | number, formatter = "y-m-d h:i:s") {
+  let res = "Invalid Date"
   if (!date) return res
   if (Object.prototype.toString.call(date) === '[object Date]') {
   } else if (/^[0-9]{0,13}$/.test(date.toString())) {
@@ -16,20 +16,17 @@ export function generatorDate(date: Date | string | number, formatter = 'y-m-d h
   } else if (typeof date === 'string') {
     date = date.replace(new RegExp(/-/gm), '/') //IOS
   }
-  const d = new Date(date);
-  if (d.toString() === "Invalid Date") return res;
+  const d = new Date(date)
+  if (d.toString() === 'Invalid Date') return res
   const getWeek = (d: Date): number => {
-    const day1 = new Date(d.getFullYear(), 0, 1);
-    const day1week = day1.getDay();
-    const dis =
-      d.getTime() -
-      day1.getTime() -
-      (day1week == 0 ? 0 : 86400000 * (7 - day1week));
+    const day1 = new Date(d.getFullYear(), 0, 1)
+    const day1week = day1.getDay()
+    const dis = d.getTime() - day1.getTime() - (day1week == 0 ? 0 : 86400000 * (7 - day1week))
     if (dis < 0) {
-      return getWeek(new Date(d.getFullYear() - 1, 11, 31));
+      return getWeek(new Date(d.getFullYear() - 1, 11, 31))
     }
-    return Math.floor(dis / 86400000 / 7) + 1;
-  };
+    return Math.floor(dis / 86400000 / 7) + 1
+  }
   const formatObj: Record<string, any> = {
     y: d.getFullYear(),
     m: d.getMonth() + 1,
@@ -37,7 +34,7 @@ export function generatorDate(date: Date | string | number, formatter = 'y-m-d h
     h: d.getHours(),
     i: d.getMinutes(),
     s: d.getSeconds(),
-    a: ["日", "一", "二", "三", "四", "五", "六"][d.getDay()],
+    a: ['日', '一', '二', '三', '四', '五', '六'][d.getDay()],
     w: getWeek(d),
     e: d.getMilliseconds().toString().padStart(3, '0'),
   }
@@ -62,8 +59,8 @@ export function generatorDate(date: Date | string | number, formatter = 'y-m-d h
  *    fmtDate('2020-01-01','') == '20200101'
  *    fmtDate('2020-01-01','a') == '2020a01a01'
  */
-export function fmtDate(date: any, splitter = "-") {
-  return generatorDate(date, `y${splitter}m${splitter}d`);
+export function fmtDate(date: any, splitter = '-') {
+  return generatorDate(date, `y${splitter}m${splitter}d`)
 }
 
 /**
@@ -76,8 +73,8 @@ export function fmtDate(date: any, splitter = "-") {
  *    fmtTime('2020-01-01','') == '000000'
  *    fmtTime('2020-01-01',' ') == '00 00 00'
  */
-export function fmtTime(date: any, splitter = ":") {
-  return generatorDate(date, `h${splitter}i${splitter}s`);
+export function fmtTime(date: any, splitter = ':') {
+  return generatorDate(date, `h${splitter}i${splitter}s`)
 }
 
 /**

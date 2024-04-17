@@ -20,9 +20,12 @@ export function parseParams(params: Record<string, any>, url = ''): string {
  */
 export function getParams(url: string) {
   const url_ary = url.slice(url.indexOf('?') + 1).split('&')
-  return url_ary.reduce((rs, item) => {
-    const [key, value] = item.split('=')
-    rs[key] = decodeURIComponent(value)
-    return rs
-  }, {} as Record<string, string>)
+  return url_ary.reduce(
+    (rs, item) => {
+      const [key, value] = item.split('=')
+      rs[key] = decodeURIComponent(value)
+      return rs
+    },
+    {} as Record<string, string>,
+  )
 }

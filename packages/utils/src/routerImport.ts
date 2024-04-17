@@ -1,6 +1,13 @@
 import type { Component } from 'vue'
 
-import type { _RouteRecordBase, RouteMeta, RouteRecordName, RouteComponent, RouteRecordRedirectOption, RouteRecordRaw } from 'vue-router'
+import type {
+  _RouteRecordBase,
+  RouteMeta,
+  RouteRecordName,
+  RouteComponent,
+  RouteRecordRedirectOption,
+  RouteRecordRaw,
+} from 'vue-router'
 
 type RouteInfoCallback = (routeInfo: AIRouteRecordBase) => any
 
@@ -18,7 +25,8 @@ export declare interface AIRouteRecordBase {
  * @param path
  * @returns
  */
-const purePathToArray = (path: string | string[]): string[] => (Array.isArray(path) ? path : path.replace(/^\.\//, '').split('/'))
+const purePathToArray = (path: string | string[]): string[] =>
+  Array.isArray(path) ? path : path.replace(/^\.\//, '').split('/')
 
 /**
  * @description 判断是否是 DIR\DIR.vue 或者 DIR\index.vue 不区分大小写
@@ -59,7 +67,11 @@ export const isVueFile = (name: string) => /\.vue$/.test(name)
  * @param hrefPrefix
  * @returns
  */
-export function generateMenuFromFilePath(routePath: string[], hrefPrefix = '', routeConfigCallback: RouteInfoCallback = _ => void 0) {
+export function generateMenuFromFilePath(
+  routePath: string[],
+  hrefPrefix = '',
+  routeConfigCallback: RouteInfoCallback = (_) => void 0,
+) {
   return parseRouteConfigToNest(pathToRouteInfo(routePath, hrefPrefix, routeConfigCallback))
 }
 
@@ -72,10 +84,18 @@ export function generateMenuFromFilePath(routePath: string[], hrefPrefix = '', r
  * @param prefix
  * @returns
  */
-export function generateRouterFromFilePath(routePath: string[], layoutComponentLists: Component[], routeConfigCallback: RouteInfoCallback = _ => void 0) {
+export function generateRouterFromFilePath(
+  routePath: string[],
+  layoutComponentLists: Component[],
+  routeConfigCallback: RouteInfoCallback = (_) => void 0,
+) {
   if (!Array.isArray(layoutComponentLists)) throw Error('Should be Array fo LayoutComponents.')
 
-  const routeObject: Record<string, AIRouteRecordBase> = pathToRouteInfo(routePath, '', routeConfigCallback)
+  const routeObject: Record<string, AIRouteRecordBase> = pathToRouteInfo(
+    routePath,
+    '',
+    routeConfigCallback,
+  )
 
   Object.entries(routeObject).forEach(([key, routeRaw]) => {
     if (key.includes('/')) {
@@ -93,20 +113,31 @@ export function generateRouterFromFilePath(routePath: string[], layoutComponentL
   return routes
 }
 
-export function toCompoennt(importFn: (path: string) => RouteComponent | (() => Promise<RouteComponent>), routeLists: AIRouteRecordBase[]): RouteRecordRaw[] {
-  return routeLists.map(i => {
+export function toCompoennt(
+  importFn: (path: string) => RouteComponent | (() => Promise<RouteComponent>),
+  routeLists: AIRouteRecordBase[],
+): RouteRecordRaw[] {
+  return routeLists.map((i) => {
     let children: RouteRecordRaw[] = []
     if (i.children && i.children.length > 0) children = toCompoennt(importFn, i.children)
-    return { ...i, children, component: typeof i.component === 'string' ? importFn(i.component) : i.component }
+    return {
+      ...i,
+      children,
+      component: typeof i.component === 'string' ? importFn(i.component) : i.component,
+    }
   })
 }
 
-export function pathToRouteInfo(routePath: string[], hrefPrefix: string, routeConfigCallback: RouteInfoCallback) {
+export function pathToRouteInfo(
+  routePath: string[],
+  hrefPrefix: string,
+  routeConfigCallback: RouteInfoCallback,
+) {
   const pathList = routePath.filter(isIndexPath).map(purePathToArray)
   const ans: Record<string, AIRouteRecordBase> = {}
   let idx = 0
-  while (pathList.some(i => i[idx] !== void 0)) {
-    pathList.forEach(path => {
+  while (pathList.some((i) => i[idx] !== void 0)) {
+    pathList.forEach((path) => {
       if (!path[idx] || isVueFile(path[idx])) return // 筛选重复导入 xx/index.vue
       const key = path.slice(0, idx + 1).join('/')
 
@@ -134,7 +165,7 @@ export function pathToRouteInfo(routePath: string[], hrefPrefix: string, routeCo
  * @returns
  */
 export const parseRouteConfigToNest = (routeConfig: Record<string, any>): any[] => {
-  Object.keys(routeConfig).forEach(item => {
+  Object.keys(routeConfig).forEach((item) => {
     const pathKeyArray = item.split('/')
     const parent = routeConfig[pathKeyArray.slice(0, pathKeyArray.length - 1).join('/')]
     if (parent) {
@@ -147,5 +178,5 @@ export const parseRouteConfigToNest = (routeConfig: Record<string, any>): any[] 
   })
   return Object.entries(routeConfig)
     .filter(([key, val]) => !key.includes('/'))
-    .map(i => i[1])
+    .map((i) => i[1])
 }

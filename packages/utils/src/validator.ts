@@ -90,7 +90,7 @@ export function isJSType(val: any, target: string) {
  * @param val - value
  */
 export function isEmpty(val: any): boolean {
-  return val === null || val === '' || val === undefined
+  return isNil(val) || val === ''
 }
 
 /**
