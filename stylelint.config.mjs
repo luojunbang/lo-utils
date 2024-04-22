@@ -11,6 +11,6 @@ const config = {
     'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,
   },
-  ignoreFiles: ['**/*.js'],
+  ignoreFiles: ['**/*.js', 'node_modules'],
 }
 export default config

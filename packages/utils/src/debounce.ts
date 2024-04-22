@@ -10,9 +10,10 @@ export function throttle(func: (...arg: any[]) => any, wait = 500) {
     lastTime = Date.now()
     res = func.apply(ctx, args)
   }
-  return function (...argument: any) {
+  return (...argument: any) => {
     !lastTime && handle()
     args = argument
+    // @ts-expect-error just ignore it
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     ctx = this
     if (Date.now() - lastTime > wait) handle()
@@ -46,7 +47,8 @@ export function debounce(func: (...arg: any[]) => any, wait = 300, immediate = f
       }
     }
   }
-  return function (...argument: any) {
+  return (...argument: any) => {
+    // @ts-expect-error just ignore it
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     context = this
     args = argument

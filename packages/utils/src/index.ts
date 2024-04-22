@@ -1,3 +1,5 @@
+import 'core-js/stable'
+
 export * from './dateHandler'
 export * from './fileHandler'
 export * from './formatter'
