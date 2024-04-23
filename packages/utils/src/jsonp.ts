@@ -1,5 +1,5 @@
-import { parseParams, r } from './index'
-
+import { r } from './utils'
+import { parseParams } from './urlHandler'
 /**
  * @public
  * jsonp

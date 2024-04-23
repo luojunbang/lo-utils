@@ -27,7 +27,7 @@
     "typescript-eslint": "^7.7.0"
   },
   "lint-staged": {
-    "*.{vue,js,ts,jsx,tsx,md,json}": [
+    "*.{vue,js,ts,jsx,tsx,md,json,mjs,cjs}": [
       "eslint --fix",
       "prettier -w"
     ],

@@ -1,7 +1,7 @@
 'use strict'
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./lo-utils.min.cjs')
+  module.exports = require('./dist/lo-utils.cjs.min.js')
 } else {
-  module.exports = require('./lo-utils.cjs')
+  module.exports = require('./dist/lo-utils.cjs.js')
 }
