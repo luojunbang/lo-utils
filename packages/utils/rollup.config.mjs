@@ -9,7 +9,7 @@ import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
 const { name } = fs.readJsonSync(path.resolve(import.meta.dirname, '../lo-utils/package.json'))
 console.log('name:', name)
 
-const browserInput = 'src/index.brower.ts'
+const broswerInput = 'src/index.brower.ts'
 const input = 'src/index.ts'
 
 const terserPlugin = () =>
@@ -53,7 +53,7 @@ const outpuFile = (name) => path.resolve(import.meta.dirname, `./dist/${name}`)
 
 export default [
   {
-    input: browserInput,
+    input: broswerInput,
     output: {
       file: outpuFile(`${name}.min.js`),
       name: 'loUtils',
@@ -62,7 +62,7 @@ export default [
     plugins: [tsPlugin(), , nodeResolve(), commonjs(), terserPlugin()],
   },
   {
-    input: browserInput,
+    input: broswerInput,
     output: {
       file: outpuFile(`${name}.es5.min.js`),
       name: 'loUtils',
@@ -72,9 +72,9 @@ export default [
   },
   ...['', 'min'].reduce((rs, min) => {
     rs.push({
-      input: browserInput,
+      input: broswerInput,
       output: {
-        file: outpuFile([name, 'brower', 'esm', min, 'js'].filter((i) => i).join('.')),
+        file: outpuFile([name, 'broswer', 'esm', min, 'js'].filter((i) => i).join('.')),
         format: 'esm',
       },
       plugins: [tsPlugin(), ...(min ? [terserPlugin()] : [])],
