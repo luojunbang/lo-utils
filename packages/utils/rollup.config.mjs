@@ -1,13 +1,13 @@
-import path, { resolve } from 'path'
+import path from 'path'
 import terser from '@rollup/plugin-terser'
 import ts from '@rollup/plugin-typescript'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import fs from 'fs-extra'
 import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
-
-const { name } = fs.readJsonSync(path.resolve(import.meta.dirname, '../lo-utils/package.json'))
-console.log('name:', name)
+import { loUtilsPkg, loUtilsOutput } from '@lo/build-helper'
+console.log('loUtilsOutput:', loUtilsOutput)
+const { name: PKG_NAME } = fs.readJsonSync(loUtilsPkg)
 
 const broswerInput = 'src/index.brower.ts'
 const input = 'src/index.ts'
@@ -15,7 +15,7 @@ const input = 'src/index.ts'
 const terserPlugin = () =>
   terser({
     compress: {
-      ecma: 'es5',
+      ecma: 5,
       pure_getters: true,
     },
   })
@@ -42,59 +42,68 @@ const tsPlugin = (target = 'es6') =>
   ts({
     compilerOptions: {
       target,
-      outDir: './dist',
       declaration: false,
       declarationMap: false,
     },
-    exclude: ['__tests__/*'],
+    exclude: ['__tests__'],
   })
 
-const outpuFile = (name) => path.resolve(import.meta.dirname, `./dist/${name}`)
+const outpuFile = (name) => path.resolve(loUtilsOutput, 'dist', `./${name}`)
 
-export default [
+const browserConfig = [
   {
     input: broswerInput,
     output: {
-      file: outpuFile(`${name}.min.js`),
+      file: outpuFile(`${PKG_NAME}.min.js`),
       name: 'loUtils',
       format: 'umd',
     },
-    plugins: [tsPlugin(), , nodeResolve(), commonjs(), terserPlugin()],
+    plugins: [tsPlugin(), nodeResolve(), commonjs(), terserPlugin()],
   },
   {
     input: broswerInput,
     output: {
-      file: outpuFile(`${name}.es5.min.js`),
+      file: outpuFile(`${PKG_NAME}.es5.min.js`),
       name: 'loUtils',
       format: 'umd',
     },
-    plugins: [tsPlugin('es5'), , nodeResolve(), commonjs(), terserPlugin()],
+    plugins: [tsPlugin('es5'), babelPlugin(), nodeResolve(), commonjs(), terserPlugin()],
   },
-  ...['', 'min'].reduce((rs, min) => {
-    rs.push({
-      input: broswerInput,
-      output: {
-        file: outpuFile([name, 'broswer', 'esm', min, 'js'].filter((i) => i).join('.')),
+  {
+    input: broswerInput,
+    output: [
+      {
+        file: outpuFile(`${PKG_NAME}.broswer.esm.js`),
         format: 'esm',
       },
-      plugins: [tsPlugin(), ...(min ? [terserPlugin()] : [])],
-    })
-    rs.push({
-      input,
-      output: {
-        file: outpuFile([name, 'cjs', min, 'js'].filter((i) => i).join('.')),
-        format: 'cjs',
-      },
-      plugins: [tsPlugin(), nodeResolve(), ...(min ? [terserPlugin()] : [])],
-    })
-    rs.push({
-      input,
-      output: {
-        file: outpuFile([name, 'esm', min, 'js'].filter((i) => i).join('.')),
+      {
+        file: outpuFile(`${PKG_NAME}.broswer.esm.min.js`),
         format: 'esm',
+        plugins: [terserPlugin()],
       },
-      plugins: [tsPlugin(), nodeResolve(), ...(min ? [terserPlugin()] : [])],
-    })
-    return rs
-  }, []),
+    ],
+    plugins: [tsPlugin()],
+  },
 ]
+
+const nodeConfig = {
+  input,
+  output: [
+    {
+      file: outpuFile(`${PKG_NAME}.esm.js`),
+      format: 'esm',
+    },
+    {
+      file: outpuFile(`${PKG_NAME}.cjs.js`),
+      format: 'cjs',
+    },
+    {
+      file: outpuFile(`${PKG_NAME}.cjs.min.js`),
+      format: 'cjs',
+      plugins: [terserPlugin()],
+    },
+  ],
+  plugins: [tsPlugin(), nodeResolve()],
+}
+
+export default [nodeConfig, ...browserConfig]

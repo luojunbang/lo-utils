@@ -6,5 +6,8 @@
   "module": "dist/lo-utils.esm.js",
   "browser": "dist/lo-utils.browser.esm.js",
   "author": "lo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@lo/utils": "workspace:^"
+  }
 }

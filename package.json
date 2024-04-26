@@ -4,7 +4,10 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "stub": "pnpm run -r -parallel stub",
+    "postinstall": "pnpm stub",
+    "clean": "rimraf ./dist"
   },
   "author": "",
   "license": "ISC",
@@ -35,5 +38,9 @@
       "stylelint \"**/*.{css,scss,less,sass}\" --fix",
       "prettier -w"
     ]
+  },
+  "dependencies": {
+    "@lo/build-helper": "workspace:^",
+    "rimraf": "^5.0.5"
   }
 }
