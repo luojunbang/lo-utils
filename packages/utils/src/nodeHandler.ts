@@ -1,5 +1,5 @@
 import { join } from 'path'
-import fs from 'fs'
+import * as fs from 'fs'
 
 /**
  * 打印文件结构

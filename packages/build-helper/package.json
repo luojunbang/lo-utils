@@ -8,12 +8,6 @@
   "scripts": {
     "stub": "unbuild --stub"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {

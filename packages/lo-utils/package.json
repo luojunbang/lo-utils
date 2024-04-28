@@ -5,6 +5,7 @@
   "main": "index.js",
   "module": "dist/lo-utils.esm.js",
   "browser": "dist/lo-utils.browser.esm.js",
+  "types": "index.d.ts",
   "author": "lo",
   "license": "ISC",
   "dependencies": {
