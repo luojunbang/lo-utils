@@ -2,13 +2,18 @@
   "mainEntryPointFilePath": "./dist/src/index.d.ts",
   "apiReport": {
     "enabled": true,
-    "reportFolder": "<projectFolder>/temp/"
+    "reportTempFolder": "<projectFolder>/dist/",
+    "reportFolder": "<projectFolder>/dist/"
   },
   "docModel": {
-    "enabled": true
+    "enabled": true,
+    "apiJsonFilePath": "<projectFolder>/dist/lo-utils.api.json"
   },
   "dtsRollup": {
-    "enabled": true,
-    "untrimmedFilePath": "./dist/<unscopedPackageName>.d.ts"
+    "enabled": false,
+    "untrimmedFilePath": "./dist/lo-utils.d.ts"
+  },
+  "tsdocMetadata": {
+    "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
   }
 }

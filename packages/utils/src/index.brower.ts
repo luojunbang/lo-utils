@@ -1,3 +1,9 @@
+/**
+ * A library for Utils in browser.
+ *
+ * @packageDocumentation
+ */
+
 export * from './browser'
 export * from './dateHandler'
 export * from './fileHandler'

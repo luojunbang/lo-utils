@@ -4,8 +4,8 @@ import * as fs from 'fs'
 /**
  * 打印文件结构
  * @public
- * @param rootPath 根目录
- * @param exclude 需要排除的文件名或者目录
+ * @param rootPath - 根目录
+ * @param exclude - 需要排除的文件名或者目录
  */
 export function logFileStruct(rootPath: string, exclude = ['node_modules', '.git']) {
   const [subdir, place, file] = ['├──', '|   ', '└──']

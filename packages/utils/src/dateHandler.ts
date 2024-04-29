@@ -1,12 +1,15 @@
 /**
  * Format a date/time with customizable formatting options.
  * (y:year m:month d:day h:hour i:minutes s:second a:weekday w:week e:millisecond)
+ *
+ * @public
  * @param date - Date object, string, or timestamp
  * @param formatter - Format string (default: 'y-m-d h:i:s')
- * @returns Formatted date/time string
  * @example
- *    generatorDate('2020-01-01') == '2020-01-01 00:00:00 五'
- *    generatorDate('2020-01-01','ymdhis.e 星期a 第w周') == '20200101000000.000 星期五 第w周'
+ * ```
+ * generatorDate('2020-01-01') // '2020-01-01 00:00:00 五'
+ * generatorDate('2020-01-01','ymdhis.e 星期a 第w周') // '20200101000000.000 星期五 第w周'
+ * ```
  */
 export function generatorDate(date: any, formatter = 'y-m-d h:i:s') {
   let res = 'Invalid Date'
@@ -53,13 +56,16 @@ export function generatorDate(date: any, formatter = 'y-m-d h:i:s') {
 
 /**
  * Format a date.
+ * @public
  * @param date - Date object, string, or timestamp
  * @param separator - Separator character (default: '-')
  * @returns Formatted date string
  * @example
- *    formatDateOnly('2020-01-01') => '2020-01-01'
- *    formatDateOnly('2020-01-01', '') => '20200101'
- *    formatDateOnly('2020-01-01', 'a') => '2020a01a01'
+ * ```
+ * fmtDate('2020-01-01') // '2020-01-01'
+ * fmtDate('2020-01-01', '') // '20200101'
+ * fmtDate('2020-01-01', 'a') // '2020a01a01'
+ * ```
  */
 export function fmtDate(date: any, splitter = '-') {
   return generatorDate(date, `y${splitter}m${splitter}d`)
@@ -71,9 +77,11 @@ export function fmtDate(date: any, splitter = '-') {
  * @param Date - Date object, string, or timestamp
  * @param separator - Separator character (default: ':')
  * @example
- *    fmtTime('2020-01-01') == '00:00:00'
- *    fmtTime('2020-01-01','') == '000000'
- *    fmtTime('2020-01-01',' ') == '00 00 00'
+ * ```
+ *    fmtTime('2020-01-01') // '00:00:00'
+ *    fmtTime('2020-01-01','') // '000000'
+ *    fmtTime('2020-01-01',' ') // '00 00 00'
+ * ```
  */
 export function fmtTime(date: any, splitter = ':') {
   return generatorDate(date, `h${splitter}i${splitter}s`)
@@ -84,7 +92,9 @@ export function fmtTime(date: any, splitter = ':') {
  * @public
  * @param date - Date object, string, or timestamp
  * @example
- *    generatorDate('2020-01-01') == '2020-01-01 00:00:00'
+ * ```
+ *    fmtDateTime('2020-01-01') // '2020-01-01 00:00:00'
+ * ```
  */
 export function fmtDateTime(date: any) {
   return generatorDate(date, 'y-m-d h:i:s')

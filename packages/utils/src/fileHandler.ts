@@ -69,12 +69,12 @@ export function dataURLtoFile(dataurl: string, filename: string) {
 }
 
 /**
- * @public
  * Get imageType from filename
- * @param str
+ * @public
+ * @param str - filename
  * @returns
  */
-export function getImageType(str: string) {
+export function getExt(str: string) {
   const idx = str.lastIndexOf('.')
   if (idx == -1) throw new Error(`Can't get the extension from string ${str}. `)
   const ret = str.slice(idx + 1)

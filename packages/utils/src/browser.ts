@@ -1,18 +1,21 @@
 import { isJSType } from './validator'
+
 /**
  * 检查是否首次访问
  * @public
- * @returns - Promise<Boolean>
+ * @param flagKey - key in localStorage
+ * @returns The timestamp of first entry.
  */
-export function checkIsFirstEntry(flagKey = 'IS_FIRST_ENTRY') {
+export function checkIsFirstEntry(flagKey = 'IS_FIRST_ENTRY'): Promise<string> {
   if (!window || !window.localStorage) throw new Error('This method need to run in browser')
   return new Promise((rs, rj) => {
     const ret = window.localStorage.getItem(flagKey)
     if (ret) {
       rj(ret)
     } else {
-      window.localStorage.setItem(flagKey, '1')
-      rs('1')
+      const d = Date.now().toString()
+      window.localStorage.setItem(flagKey, d)
+      rs(d)
     }
   })
 }
