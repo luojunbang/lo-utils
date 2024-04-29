@@ -1,3 +1,3 @@
 # lo-utils
 
-[utils](./packages/utils/doc/utils.md) : An Uitls.
+[utils](https://github.com/luojunbang/lo-utils/blob/master/packages/utils/doc/utils.md) : An Uitls.

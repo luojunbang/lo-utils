@@ -17,6 +17,7 @@ async function buildTypeDefination() {
 async function init() {
   await buildModule()
   await buildTypeDefination()
+  await fs.copyFile(resolve(loUtilsRoot, 'index.js'), resolve(loUtilsOutput, 'index.js'))
   await fs.copyFile(loUtilsPkg, resolve(loUtilsOutput, 'package.json'))
   await fs.copyFile(resolve(loUtilsRoot, 'README.md'), resolve(loUtilsOutput, 'README.md'))
 }
