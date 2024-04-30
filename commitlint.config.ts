@@ -1,5 +1,7 @@
 import type { UserConfig } from '@commitlint/types'
 
+const scopes = ['', 'utils', 'vue-components']
+
 const config: UserConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
@@ -25,6 +27,11 @@ const config: UserConfig = {
      * ^^^^
      */
     'type-enum': [2, 'always', ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'release', 'style', 'test', 'improvement']],
+    /**
+     * type[scope]: [function] description
+     *      ^^^^^
+     */
+    'scope-enum': [2, 'always', scopes],
   },
 }
 

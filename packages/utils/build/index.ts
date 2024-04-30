@@ -1,25 +1,36 @@
-import { loUtilsOutput, loUtilsPkg, loUtilsRoot } from '@lo/build-helper'
 import { execa, $ } from 'execa'
-import fs from 'fs-extra'
+import { utilsRoot, utilsOutput, utilsPkg } from '@lo/build-helper'
+import { copyFile, readJSON, writeJSON } from 'fs-extra'
 import { resolve } from 'path'
-console.log('loUtilsOutput:', loUtilsOutput)
+import { write } from 'fs'
+import { exclude } from '../src'
+import { version } from 'os'
 
 async function buildModule() {
-  const { stdout } = await $({ stdio: 'inherit' })`pnpm build:module`
-  console.log('buildModule.stdout:', stdout)
+  await $({ stdio: 'inherit' })`pnpm build:module`
 }
 
 async function buildTypeDefination() {
-  const { stdout } = await $({ stdio: 'inherit' })`pnpm build:dts`
-  console.log('buildTypeDefination.stdout:', stdout)
+  await $({ stdio: 'inherit' })`pnpm build:dts`
+}
+
+async function modifyPkg() {
+  const pkg = await readJSON(utilsPkg)
+  await writeJSON(
+    resolve(utilsOutput, 'package.json'),
+    {
+      ...exclude(pkg, ['devDependencies']),
+      version: '2.3.4',
+    },
+    {
+      spaces: '\t',
+    },
+  )
 }
 
 async function init() {
-  await buildModule()
-  await buildTypeDefination()
-  await fs.copyFile(resolve(loUtilsRoot, 'index.js'), resolve(loUtilsOutput, 'index.js'))
-  await fs.copyFile(loUtilsPkg, resolve(loUtilsOutput, 'package.json'))
-  await fs.copyFile(resolve(loUtilsRoot, 'README.md'), resolve(loUtilsOutput, 'README.md'))
+  await Promise.all([buildModule(), buildTypeDefination()])
+  await Promise.all([modifyPkg(), copyFile(resolve(utilsRoot, 'index.js'), resolve(utilsOutput, 'index.js')), copyFile(resolve(utilsRoot, 'README.md'), resolve(utilsOutput, 'README.md'))])
 }
 
 init()

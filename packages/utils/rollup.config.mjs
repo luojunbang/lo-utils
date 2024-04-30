@@ -1,4 +1,4 @@
-import path from 'path'
+import { resolve } from 'path'
 import terser from '@rollup/plugin-terser'
 import ts from '@rollup/plugin-typescript'
 import nodeResolve from '@rollup/plugin-node-resolve'
@@ -6,7 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import fs from 'fs-extra'
 import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
 import { loUtilsPkg, loUtilsOutput } from '@lo/build-helper'
-console.log('loUtilsOutput:', loUtilsOutput)
+
 const { name: PKG_NAME } = fs.readJsonSync(loUtilsPkg)
 
 const broswerInput = 'src/index.brower.ts'
@@ -48,9 +48,10 @@ const tsPlugin = (target = 'es6') =>
     exclude: ['__tests__'],
   })
 
-const outpuFile = (name) => path.resolve(loUtilsOutput, 'dist', `./${name}`)
+const outpuFile = (name) => resolve(loUtilsOutput, 'dist', `./${name}`)
 
 const browserConfig = [
+  /** es6 browser */
   {
     input: broswerInput,
     output: {
@@ -61,6 +62,7 @@ const browserConfig = [
     plugins: [tsPlugin(), nodeResolve(), commonjs(), terserPlugin()],
   },
   {
+    /** es5 browser */
     input: broswerInput,
     output: {
       file: outpuFile(`${PKG_NAME}.es5.min.js`),
@@ -69,6 +71,7 @@ const browserConfig = [
     },
     plugins: [tsPlugin('es5'), babelPlugin(), nodeResolve(), commonjs(), terserPlugin()],
   },
+  /** es5 browser esm */
   {
     input: broswerInput,
     output: [

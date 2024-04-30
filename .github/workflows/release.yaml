@@ -1,0 +1,32 @@
+name: Create a release
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  release:
+    name: Create a release tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # - name: Setup pnpm
+      #   uses: pnpm/action-setup@v2
+
+      # - name: Setup node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
+
+      - name: Check commit message for "release"
+        id: check_release
+        run: echo "PACKAGE_NAME=$(git log --format=%B -n 1 | grep -o '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
+
+      - name: Compile all package -n 1
+        run: sh ./scripts/publish.sh
+        env:
+          PACKAGE_NAME: ${{ steps.check_release.outputs.PACKAGE_NAME }}

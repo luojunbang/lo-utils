@@ -1,0 +1,29 @@
+# name: Publish to NPM registry
+
+# on:
+#   push:
+#     branches:
+#       - master
+#       - main
+
+# jobs:
+#   build:
+#     name: Build Project
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+
+#       - name: Setup pnpm
+#         uses: pnpm/action-setup@v2
+
+#       - name: Setup node
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+
+#       - name: Install dependencies
+#         run: pnpm i --frozen-lockfile
+
+#       - name: Compile all package
+#         run: sh ./scripts/publish.sh

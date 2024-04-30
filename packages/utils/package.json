@@ -1,8 +1,11 @@
 {
-  "name": "@lo/utils",
-  "version": "1.0.0",
+  "name": "lo-utils",
+  "version": "1.0.0-dev",
   "description": "An utils",
-  "main": "jest.config.js",
+  "main": "index.js",
+  "module": "dist/lo-utils.esm.js",
+  "browser": "dist/lo-utils.browser.esm.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsx ./build",
@@ -14,12 +17,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.4",
     "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.4",
     "@babel/runtime": "^7.24.4",
     "@microsoft/api-documenter": "^7.24.2",
     "@microsoft/api-extractor": "^7.43.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/fs-extra": "^11.0.4",
@@ -30,13 +37,5 @@
     "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.6.2",
     "unbuild": "^2.0.0"
-  },
-  "dependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "@lo/build-helper": "workspace:^",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.12.7"
   }
 }
