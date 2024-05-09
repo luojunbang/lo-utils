@@ -23,10 +23,18 @@ jobs:
       #     node-version: 20
 
       - name: Check commit message for "release"
-        id: check_release
-        run: echo "PACKAGE_NAME=$(git log --format=%B -n 1 | grep -o '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
+        id: check_commit_message
+        run: echo "contains_release=$(if git log --format=%B -n 1 ${{ github.sha }} | grep -q 'release'; then echo true; else echo false; fi)" >> $GITHUB_OUTPUT
 
-      - name: Compile all package -n 1
-        run: sh ./scripts/publish.sh
+      - name: Get package name from commit message
+        id: package_name
+        if: steps.check_commit_message.outputs.contains_release == 'true'
+        run: echo "package_name=$(git log --format=%B -n 1 | grep -o '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
+
+      - name: Add release tag
+        if: steps.check_commit_message.outputs.contains_release == 'true'
+        id: tag_name
+        run: sh ./scripts/release.sh
         env:
-          PACKAGE_NAME: ${{ steps.check_release.outputs.PACKAGE_NAME }}
+          PACKAGE_NAME: ${{ steps.package_name.outputs.package_name }}
+          TOKEN: ${{ secrets.ACTION_SECRET }}
