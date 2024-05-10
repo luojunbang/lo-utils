@@ -1,0 +1,11 @@
+name: Build Project
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  test:
+    name: Create a release tag
+    runs-on: ubuntu-latest
