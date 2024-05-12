@@ -1,10 +1,11 @@
 import { execa, $ } from 'execa'
 import { utilsRoot, utilsOutput, utilsPkg } from '@lo/build-helper'
-import { copyFile, readJSON, writeJSON } from 'fs-extra'
+import { copyFile, outputJSON, readJSON } from 'fs-extra'
 import { resolve } from 'path'
-import { write } from 'fs'
-import { exclude } from '../src'
-import { version } from 'os'
+import { omit } from '../src'
+
+const { TAG_VERSION, GIT_HEAD } = process.env
+console.log('TAG_VERSION:', TAG_VERSION)
 
 async function buildModule() {
   await $({ stdio: 'inherit' })`pnpm build:module`
@@ -16,11 +17,13 @@ async function buildTypeDefination() {
 
 async function modifyPkg() {
   const pkg = await readJSON(utilsPkg)
-  await writeJSON(
+  const [_, version] = TAG_VERSION?.split('/') ?? []
+  await outputJSON(
     resolve(utilsOutput, 'package.json'),
     {
-      ...exclude(pkg, ['devDependencies']),
-      version: '2.3.4',
+      ...omit(pkg, ['devDependencies']),
+      version: version ?? pkg.version,
+      gitHead: GIT_HEAD,
     },
     {
       spaces: '\t',

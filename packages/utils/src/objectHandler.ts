@@ -16,10 +16,7 @@ export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
  * @param keys - keys in obj
  * @returns
  */
-export const exclude = <T extends Record<string, any>, K extends keyof T>(
-  obj: T,
-  keys: K[],
-): Omit<T, K> => {
+export const omit = <T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
   return Object.fromEntries(
     Object.keys(obj)
       .filter((k) => !keys.includes(k as K))

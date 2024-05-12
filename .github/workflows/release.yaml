@@ -11,17 +11,18 @@ jobs:
     name: Create a release tag
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Check commit message for "release"
         id: check_commit_message
-        run: echo "contains_release=$(if git log --format=%B -n 1 ${{ github.sha }} | grep -q 'release'; then echo true; else echo false; fi)" >> $GITHUB_OUTPUT
+        run: echo "contains_release=$(if git log --format=%B -n 1 ${{ github.sha }} | grep -E '^release'; then echo true; else echo false; fi)" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        if: steps.check_commit_message.outputs.contains_release == 'true'
+        uses: actions/checkout@v3
 
       - name: Get package name from commit message
         id: package_name
         if: steps.check_commit_message.outputs.contains_release == 'true'
-        run: echo "package_name=$(git log --format=%B -n 1 | grep -o '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
+        run: echo "package_name=$(git log --format=%B -n 1 ${{ github.sha }} | grep -E '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
 
       - name: Add release tag
         if: steps.check_commit_message.outputs.contains_release == 'true'

@@ -1,4 +1,4 @@
-name: Build Project
+name: Publish to NPM registry
 
 on:
   push:
@@ -6,6 +6,71 @@ on:
       - '*'
 
 jobs:
-  test:
-    name: Create a release tag
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Add dev branch
+  #       run: git branch dev origin/master
+
+  #     - name: Setup pnpm
+  #       uses: pnpm/action-setup@v2
+
+  #     - name: Setup node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
+  #         registry-url: https://registry.npmjs.com/
+
+  #     - name: Get pnpm store directory
+  #       id: pnpm-cache
+  #       run: |
+  #         echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+  #     - uses: actions/cache@v3
+  #       name: Setup pnpm cache
+  #       with:
+  #         path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+  #         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-pnpm-store-
+
+  #     - name: Install dependencies
+  #       run: pnpm i --frozen-lockfile
+
+  publish:
+    # needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.com/
+
+      # - name: Install dependencies
+      #   run: pnpm i --frozen-lockfile
+
+      - name: Get version
+        run: echo "TAG_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Get git head
+        run: echo "GIT_HEAD=${GITHUB_SHA}" >> $GITHUB_ENV
+      
+      - name: Build&publish
+        run: sh ./scripts/publish.sh
+        env:
+          TAG_VERSION: ${{env.TAG_VERSION}}
+          GIT_HEAD: ${{env.GIT_HEAD}}
+          REGISTRY: https://registry.npmjs.com/
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

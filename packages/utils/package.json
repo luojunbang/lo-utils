@@ -2,6 +2,7 @@
   "name": "lo-utils",
   "version": "1.0.0-dev",
   "description": "An utils",
+  "sideEffects": false,
   "main": "index.js",
   "module": "dist/lo-utils.esm.js",
   "browser": "dist/lo-utils.browser.esm.js",
@@ -14,8 +15,12 @@
     "build:doc": "tsc && api-extractor run --local --verbose && api-documenter markdown -i ./dist -o ./doc",
     "clean": "rimraf ./dist"
   },
-  "author": "",
+  "author": "luojunbang",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luojunbang/lo-utils.git"
+  },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.4",

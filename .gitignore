@@ -9,4 +9,4 @@ cache.md
 # api-extrator output
 temp
 tsdoc-metadata.json
-act_secret
+.secrets

@@ -5,9 +5,9 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import fs from 'fs-extra'
 import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
-import { loUtilsPkg, loUtilsOutput } from '@lo/build-helper'
+import { utilsPkg, utilsOutput } from '@lo/build-helper'
 
-const { name: PKG_NAME } = fs.readJsonSync(loUtilsPkg)
+const { name: PKG_NAME } = fs.readJsonSync(utilsPkg)
 
 const broswerInput = 'src/index.brower.ts'
 const input = 'src/index.ts'
@@ -48,7 +48,7 @@ const tsPlugin = (target = 'es6') =>
     exclude: ['__tests__'],
   })
 
-const outpuFile = (name) => resolve(loUtilsOutput, 'dist', `./${name}`)
+const outpuFile = (name) => resolve(utilsOutput, 'dist', `./${name}`)
 
 const browserConfig = [
   /** es6 browser */

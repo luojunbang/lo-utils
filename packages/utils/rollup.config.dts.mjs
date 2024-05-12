@@ -4,7 +4,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import dts from 'rollup-plugin-dts'
 import { resolve } from 'node:path'
 
-import { loUtilsOutput } from '@lo/build-helper'
+import { utilsOutput } from '@lo/build-helper'
 
 const dtsOuputPath = resolve(import.meta.dirname, 'dist')
 
@@ -16,7 +16,7 @@ if (!existsSync(dtsOuputPath)) {
 export default {
   input: resolve(dtsOuputPath, 'src/index.d.ts'),
   output: {
-    file: resolve(loUtilsOutput, 'index.d.ts'),
+    file: resolve(utilsOutput, 'index.d.ts'),
     format: 'es',
   },
   plugins: [dts()],
