@@ -11,7 +11,7 @@
     "stub": "pnpm run -r -parallel stub",
     "postinstall": "pnpm stub",
     "clean": "rimraf ./dist && pnpm run -r clean",
-    "build": "tsx ./scripts/build"
+    "build": "pnpm run -r -parallel build"
   },
   "license": "ISC",
   "devDependencies": {

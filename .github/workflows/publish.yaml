@@ -16,30 +16,33 @@ jobs:
   #     - name: Add dev branch
   #       run: git branch dev origin/master
 
-  #     - name: Setup pnpm
-  #       uses: pnpm/action-setup@v2
+  # - name: Setup pnpm
+  #   uses: pnpm/action-setup@v2
 
-  #     - name: Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 20
-  #         registry-url: https://registry.npmjs.com/
+  # - name: Setup node
+  #   uses: actions/setup-node@v3
+  #   with:
+  #     node-version: 20
+  #     registry-url: https://registry.npmjs.com/
 
-  #     - name: Get pnpm store directory
-  #       id: pnpm-cache
-  #       run: |
-  #         echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+  # - name: Get pnpm store directory
+  #   id: pnpm-cache
+  #   run: |
+  #     echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-  #     - uses: actions/cache@v3
-  #       name: Setup pnpm cache
-  #       with:
-  #         path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-  #         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-pnpm-store-
+  # - uses: actions/cache@v3
+  #   name: Setup pnpm cache
+  #   with:
+  #     path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+  #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+  #     restore-keys: |
+  #       ${{ runner.os }}-pnpm-store-
 
-  #     - name: Install dependencies
-  #       run: pnpm i --frozen-lockfile
+  # - name: Install dependencies
+  #   run: pnpm i --frozen-lockfile
+
+  # - name: Run test
+  #   run: pnpm test
 
   publish:
     # needs: test
@@ -66,7 +69,7 @@ jobs:
 
       - name: Get git head
         run: echo "GIT_HEAD=${GITHUB_SHA}" >> $GITHUB_ENV
-      
+
       - name: Build&publish
         run: npx tsx ./scripts/publish.ts
         env:

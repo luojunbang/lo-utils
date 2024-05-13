@@ -1,8 +1,6 @@
-import { execa, $ } from 'execa'
-import { copyFile } from 'fs-extra'
-import { resolve } from 'path'
+import { $ } from 'execa'
 
-import { utilsRoot, utilsOutput, utilsPkg } from '@lo/build-helper'
+import { utilsOutput } from '@lo/build-helper'
 
 async function init() {
   const { TAG_VERSION, GIT_HEAD } = process.env
