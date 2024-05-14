@@ -9,7 +9,7 @@ import { utilsPkg, utilsOutput } from '@lo/build-helper'
 
 const { name: PKG_NAME } = fs.readJsonSync(utilsPkg)
 
-const broswerInput = 'src/index.brower.ts'
+const browserInput = 'src/index.browser.ts'
 const input = 'src/index.ts'
 
 const terserPlugin = () =>
@@ -53,7 +53,7 @@ const outpuFile = (name) => resolve(utilsOutput, 'dist', `./${name}`)
 const browserConfig = [
   /** es6 browser */
   {
-    input: broswerInput,
+    input: browserInput,
     output: {
       file: outpuFile(`${PKG_NAME}.min.js`),
       name: 'loUtils',
@@ -63,7 +63,7 @@ const browserConfig = [
   },
   {
     /** es5 browser */
-    input: broswerInput,
+    input: browserInput,
     output: {
       file: outpuFile(`${PKG_NAME}.es5.min.js`),
       name: 'loUtils',
@@ -73,14 +73,14 @@ const browserConfig = [
   },
   /** es5 browser esm */
   {
-    input: broswerInput,
+    input: browserInput,
     output: [
       {
-        file: outpuFile(`${PKG_NAME}.broswer.esm.js`),
+        file: outpuFile(`${PKG_NAME}.browser.esm.js`),
         format: 'esm',
       },
       {
-        file: outpuFile(`${PKG_NAME}.broswer.esm.min.js`),
+        file: outpuFile(`${PKG_NAME}.browser.esm.min.js`),
         format: 'esm',
         plugins: [terserPlugin()],
       },

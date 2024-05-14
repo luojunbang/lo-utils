@@ -4,5 +4,5 @@
  * @packageDocumentation
  */
 
-export * from './index.brower'
+export * from './index.browser'
 export * from './nodeHandler'
