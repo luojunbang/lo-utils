@@ -24,4 +24,4 @@ echo "\n Generate next version $next_version \n"
 
 git tag "$next_version"
 
-git push "https://$GITHUB_TOKEN@github.com/luojunbang/lo-utils.git" "$next_version"
+git push origin "$next_version"
