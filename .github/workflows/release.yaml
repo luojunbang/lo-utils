@@ -31,4 +31,11 @@ jobs:
         run: sh ./scripts/release.sh
         env:
           PACKAGE_NAME: ${{ steps.package_name.outputs.package_name }}
-          GH_TOKEN: ${{ secrets.ACTION_SECRET }}
+
+      - uses: mathieudutour/github-tag-action@v6.2
+        with:
+          tag_prefix: ''
+          custom_tag: ${{ steps.tag_name.outputs.next_version }}
+          github_token: ${{ secrets.ACTION_SECRET }}
+
+      

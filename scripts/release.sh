@@ -5,8 +5,6 @@ if [ -z "$PACKAGE_NAME" ]; then
     PACKAGE_NAME="utils"
 fi
 
-echo "Token: $GITHUB_REPOSITORY"
-
 echo "\n Current release package is $PACKAGE_NAME \n"
 
 git fetch --tags
@@ -22,6 +20,9 @@ next_version="${major_minor_version}.${new_revision_number}"
 
 echo "\n Generate next version $next_version \n"
 
-git tag "$next_version"
 
-git push origin "$next_version"
+echo "next_version=$next_version" >> $GITHUB_OUTPUT
+
+# git tag "$next_version"
+
+# git push origin "$next_version"
