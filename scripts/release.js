@@ -67,17 +67,18 @@ const createRef = async (tag, sha) => {
 
   await exec('git fetch --tags')
 
-  const { stdout: lastVersion } = await exec(`git tag -l "${PACKAGE_NAME}/*" | sort -rV | head -n 1`)
+  let { stdout: lastVersion } = await exec(`git tag -l "${PACKAGE_NAME}/*" | sort -rV | head -n 1`)
+  lastVersion = lastVersion.trim()
   const _idx = lastVersion.lastIndexOf('.')
 
   const nextVersion = `${lastVersion.slice(0, _idx)}.${+lastVersion.slice(_idx + 1) + 1}`
   console.log(`\n Generate next version ${nextVersion} \n`)
 
-  const { stdout: changlog } = await exec(`git log "$last_version..HEAD" --format='%s' --invert-grep --grep='^release'`)
+  const { stdout: changlog } = await exec(`git log "${lastVersion}..HEAD" --format='%s' --invert-grep --grep='^release'`)
   console.log('changlog:\n', changlog, '\n')
 
   const { data: tagData } = await createTag(nextVersion, GITHUB_SHA, changlog)
-  console.log('SHA:', tagData.SHA)
+  console.log('SHA:', tagData.sha)
 
   const { data } = await createRef(nextVersion, tagData.sha)
   console.log('data:', data)
