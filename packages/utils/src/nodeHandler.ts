@@ -1,5 +1,6 @@
 import { join } from 'path'
 import * as fs from 'fs'
+import { t } from './utils'
 
 /**
  * 打印文件结构
@@ -43,4 +44,21 @@ export function logFileStruct(rootPath: string, exclude = ['node_modules', '.git
   } else {
     console.log(`${file} ${rootPath}`)
   }
+}
+
+/**
+ * 等待对应的秒数
+ * @public
+ * @param sec - 秒数
+ */
+export async function tl(sec?: number) {
+  let _sec = sec ?? Math.random() * 30
+  console.log(`Wait in ${_sec}s...`)
+  while (_sec > 0) {
+    _sec--
+    await t(Math.min(_sec, 1))
+    process.stdout.write('\u001b[1F\u001b[2K')
+    console.log(`Wait in ${_sec}s...`)
+  }
+  process.stdout.write('\u001b[1F\u001b[2K')
 }
