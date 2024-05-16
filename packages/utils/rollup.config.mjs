@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import fs from 'fs-extra'
 import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
 import { utilsPkg, utilsOutput } from '@lo/build-helper'
+import json from '@rollup/plugin-json'
 
 const { name: PKG_NAME } = fs.readJsonSync(utilsPkg)
 
@@ -40,6 +41,7 @@ const babelPlugin = () =>
 
 const tsPlugin = (target = 'es6') =>
   ts({
+    tsconfig: './tsconfig.json',
     compilerOptions: {
       target,
       declaration: false,
@@ -90,6 +92,7 @@ const browserConfig = [
 ]
 
 const nodeConfig = {
+  external: ['dotenv', 'fast-glob', 'fs-extra'],
   input,
   output: [
     {

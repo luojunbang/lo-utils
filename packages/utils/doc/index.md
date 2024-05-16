@@ -17,7 +17,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[@lo/utils](./utils.md)
+[lo-utils](./lo-utils.md)
 
 </td><td>
 
