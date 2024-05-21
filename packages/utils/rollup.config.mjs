@@ -8,7 +8,7 @@ import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
 import { utilsPkg, utilsOutput } from '@lo/build-helper'
 import json from '@rollup/plugin-json'
 
-const { name: PKG_NAME } = fs.readJsonSync(utilsPkg)
+const { name: PKG_NAME, peerDependencies } = fs.readJsonSync(utilsPkg)
 
 const browserInput = 'src/index.browser.ts'
 const input = 'src/index.ts'
@@ -91,8 +91,10 @@ const browserConfig = [
   },
 ]
 
+console.log('peerDependencies:', peerDependencies)
+
 const nodeConfig = {
-  external: ['dotenv', 'fast-glob', 'fs-extra'],
+  external: Object.keys(peerDependencies),
   input,
   output: [
     {

@@ -57,12 +57,19 @@ export function isInContainer(element: string | HTMLElement) {}
  */
 export function copyText(val: string) {
   if (!isJSType(val, 'string') || !document) return false
-  const oInput = document.createElement('input')
-  oInput.value = val
-  document.body.appendChild(oInput)
-  oInput.select() // 选择对象
-  document.execCommand('Copy') // 执行浏览器复制命令
-  oInput.style.display = 'none'
-  document.body.removeChild(oInput)
-  return true
+
+  // 创建一个临时的 textarea 元素
+  const textarea = document.createElement('textarea')
+  textarea.value = val // 设置文本内容
+  document.body.appendChild(textarea) // 将 textarea 添加到文档中
+
+  // 选中 textarea 的内容
+  textarea.select()
+  textarea.setSelectionRange(0, textarea.value.length) // 对于移动设备
+
+  // 执行复制命令
+  document.execCommand('copy')
+
+  // 删除临时的 textarea 元素
+  document.body.removeChild(textarea)
 }

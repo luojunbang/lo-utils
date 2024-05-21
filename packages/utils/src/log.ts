@@ -34,7 +34,7 @@ export class Log {
       return ret
     },
   }
-  constructor(module: string, options: { outputPath?: string; timeout?: number; parseLog?: (any) => string }) {
+  constructor(module: string, options: { outputPath?: string; timeout?: number; parseLog?: (any) => string } = {}) {
     this.options = { ...this.options, ...options }
     this.logFile = join(this.options.dir, `${module}.log`)
     ensureFileSync(this.logFile)
