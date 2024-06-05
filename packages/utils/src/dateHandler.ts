@@ -18,7 +18,8 @@ export function generatorDate(date: any, formatter = 'y-m-d h:i:s') {
     /* empty */
   } else if (/^[0-9]{0,13}$/.test(date.toString())) {
     date = new Date(Math.floor(+date))
-  } else if (typeof date === 'string') {
+  } else if (!/Z$/.test(date) && typeof date === 'string') {
+    // UTC string 2000-01-01T12:00:00.000Z
     date = date.replace(new RegExp(/-/gm), '/') //IOS
   }
   const d = new Date(date)
@@ -140,4 +141,17 @@ export function fmtWeek(date: Date | string | number) {
  */
 export function fmtDay(date: Date | string | number) {
   return generatorDate(date, 'a')
+}
+
+/**
+ * Format a date to datetime as ISO 8601.
+ * @public
+ * @param date - Date object, string, or timestamp
+ * @example
+ * ```
+ *    fmtUTC('2020-01-01') // '2020-01-01T00:00:00.000Z'
+ * ```
+ */
+export function fmtUTC(date: any) {
+  return generatorDate(date, 'y-m-dTh:i:s.eZ')
 }
