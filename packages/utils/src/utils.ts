@@ -65,3 +65,32 @@ export const opt2fmt = (options: Option[]) => {
  * @returns a formatter function return the label for the value
  */
 export const opt2fmtFn = (options: Option[]) => (val: any) => opt2fmt(options)[val] ?? val ?? '-'
+
+/**
+ * 多线程执行异步任务
+ * @public
+ * @param list
+ * @param fn
+ * @param thread
+ * @returns
+ */
+export async function quene<T = any>(list: T[], fn: (item: T, idx: number) => Promise<any>, thread = 2) {
+  let idx = 0 // Start index at 0
+  const results: any[] = [] // Array to store results
+
+  const executeNext = async () => {
+    const currentIdx = idx++
+    if (currentIdx < list.length) {
+      const result = await fn(list[currentIdx], currentIdx).catch((err) => {
+        return err
+      })
+      results[currentIdx] = result // Store result at the correct index
+      await executeNext() // Recursively execute next task
+    }
+  }
+
+  // Limit concurrency using Promise.all with chunking
+  await Promise.all(Array.from({ length: Math.min(thread, list.length) }, () => executeNext()))
+
+  return results // Return all results
+}
