@@ -24,12 +24,16 @@ export class Log {
       } else if (typeof content === 'object') {
         try {
           ret = JSON.stringify(content)
-        } catch (e) {}
+        } catch (e) {
+          /* empty */
+        }
       }
       if (!ret) {
         try {
           ret = content.toString()
-        } catch (e) {}
+        } catch (e) {
+          /* empty */
+        }
       }
       return ret
     },
@@ -41,7 +45,6 @@ export class Log {
   }
 
   private common(type: LogType, ...content) {
-    let ret: string = ''
     appendFileSync(this.logFile, `${generatorDate(Date.now(), 'y-m-d h:i:s.e')}: [${type}] ${content.map(this.options.parseLog).join('\n\t\t')}\n`)
   }
   clear() {

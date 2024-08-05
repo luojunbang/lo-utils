@@ -4,10 +4,7 @@
  * @param root - target tree
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function FlattenTreeDeepFirst<T extends Record<string, any>>(
-  root: T[],
-  fields?: { children?: string },
-) {
+export function FlattenTreeDeepFirst<T extends Record<string, any>>(root: T[], fields?: { children?: string }) {
   const res: T[] = []
   deepPriority(
     root,
@@ -24,10 +21,7 @@ export function FlattenTreeDeepFirst<T extends Record<string, any>>(
  * @param root - target tree
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function FlattenTreeWildFirst<T extends Record<string, any>>(
-  root: T[],
-  fields?: { children?: string },
-) {
+export function FlattenTreeWildFirst<T extends Record<string, any>>(root: T[], fields?: { children?: string }) {
   const res: T[] = []
   wildPriority(
     root,
@@ -46,11 +40,7 @@ export function FlattenTreeWildFirst<T extends Record<string, any>>(
  * @param fn - callback if return truely, it break
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function wildPriority<T extends Record<string, any>>(
-  root: T[],
-  fn: (item: T) => boolean | void,
-  fields?: { children?: string },
-) {
+export function wildPriority<T extends Record<string, any>>(root: T[], fn: (item: T) => any, fields?: { children?: string }) {
   const { children = 'children' } = fields ?? {}
   const waitParseList = [...root]
   while (waitParseList.length > 0) {
@@ -68,11 +58,7 @@ export function wildPriority<T extends Record<string, any>>(
  * @param fn - callback if return truely, it break
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-export function deepPriority<T extends Record<string, any>>(
-  root: T[],
-  fn: (item: T) => boolean | void,
-  fields?: { children?: string },
-): void {
+export function deepPriority<T extends Record<string, any>>(root: T[], fn: (item: T) => any, fields?: { children?: string }): void {
   const { children = 'children' } = fields ?? {}
   for (const item of root) {
     if (fn(item)) break
@@ -88,10 +74,7 @@ export function deepPriority<T extends Record<string, any>>(
  * @param list - list
  * @param fields - default as children = 'children' , id = 'id', parentId = 'parentId'
  */
-export function list2Tree<T extends Record<string, any>>(
-  list: T[],
-  fields?: { children?: string; id?: string | number; parentId?: string },
-): T[] {
+export function list2Tree<T extends Record<string, any>>(list: T[], fields?: { children?: string; id?: string | number; parentId?: string }): T[] {
   const { children = 'children', id = 'id', parentId = 'parentId' } = fields ?? {}
 
   const res: T[] = []
@@ -109,10 +92,7 @@ export function list2Tree<T extends Record<string, any>>(
   })
   Object.values(cachedMap).forEach((item) => {
     if (item[id] === undefined) return
-    if (
-      item[parentId] === undefined ||
-      (cachedMap[item[parentId]] && !cachedMap[item[parentId]][id])
-    ) {
+    if (item[parentId] === undefined || (cachedMap[item[parentId]] && !cachedMap[item[parentId]][id])) {
       res.push(item)
     }
   })

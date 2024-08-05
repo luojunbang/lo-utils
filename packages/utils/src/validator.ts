@@ -114,6 +114,7 @@ export function isDef(val: any) {
  * @public
  * @param val - value
  */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function isFunc(val: any): val is Function {
   return typeof val === 'function'
 }

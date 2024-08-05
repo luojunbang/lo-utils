@@ -1,4 +1,4 @@
-import { quene } from '../src' // 假设 quene 函数的实现在 quene.ts 文件中
+import { quene, r } from '../src' // 假设 quene 函数的实现在 quene.ts 文件中
 
 describe('quene function', () => {
   test('should process items in the list with concurrency', async () => {
@@ -104,5 +104,13 @@ describe('quene function', () => {
     expect(mockProcessItem).toHaveBeenCalledWith(2, 1)
     expect(mockProcessItem).toHaveBeenCalledWith(3, 2)
     expect(ret[1]).toEqual(new Error('Test error'))
+  })
+})
+
+describe('Generate x random string', () => {
+  test('Generate x random string', async () => {
+    ;[0, 1, 1e1, 1e2, 1e3].forEach((n) => {
+      expect(r(n).length).toBe(n)
+    })
   })
 })
