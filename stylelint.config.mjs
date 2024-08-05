@@ -6,7 +6,7 @@ const config = {
   rules: {
     // at-rule-no-unknown: 屏蔽一些scss等语法检查
     'at-rule-no-unknown': null,
-    'scss/at-rule-no-unknown': true,
+    'scss/at-rule-no-unknown': [false, { ignoreAtRules: ['tailwind', 'apply'] }],
     'scss/selector-no-redundant-nesting-selector': true,
     'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,
