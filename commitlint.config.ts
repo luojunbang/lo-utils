@@ -1,6 +1,6 @@
 import type { UserConfig } from '@commitlint/types'
 
-const scopes = ['', 'utils', 'vue-components']
+const scopes = ['', 'utils', 'vue-components', 'react-components']
 
 const config: UserConfig = {
   extends: ['@commitlint/config-conventional'],

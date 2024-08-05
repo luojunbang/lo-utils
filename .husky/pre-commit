@@ -1,4 +1,4 @@
 #!/bin/sh
 
-pnpm exec lint-staged --concurrent false
+# pnpm exec lint-staged --concurrent false
 

@@ -2,7 +2,6 @@ const config = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
       jsx: true,
     },
     sourceType: 'module',
@@ -26,7 +25,7 @@ const config = {
       },
     },
   ],
-  ignorePatterns: ['**/node_modules/', 'dist', 'lo-utils', '*.json'],
+  ignorePatterns: ['**/node_modules/', 'dist/*', 'lo-utils', '**/*.json', '*.md'],
   env: {
     browser: true,
     node: true,

@@ -42,7 +42,6 @@
       "prettier -w"
     ],
     "*.{md,json}": [
-      "eslint --fix",
       "prettier -w"
     ],
     "*.{css,scss,sass,less}": [
