@@ -118,3 +118,48 @@ export function isDef(val: any) {
 export function isFunc(val: any): val is Function {
   return typeof val === 'function'
 }
+
+export const emailRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+/**
+ * Whether the val is email /^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+ * @public
+ * @param val - value
+ */
+export const isEmail = (val: any): boolean => {
+  if (isNil(val)) return false
+  return emailRegex.test(val.toString())
+}
+
+export const phoneRegex = /^1\d{10}$/
+/**
+ * Whether the val is phone /^1[2-9]\d{9}$/
+ * @public
+ * @param val - value
+ */
+export const isPhone = (val: any): boolean => {
+  if (isNil(val)) return false
+  return phoneRegex.test(val.toString())
+}
+
+export const accountRegex = /^[a-zA-Z]\w{2,39}$/
+/**
+ * Whether the val is account /^[a-zA-Z]\w{2,39}$/
+ * @public
+ * @param val - value
+ */
+export const isAccount = (val: any): boolean => {
+  if (isNil(val)) return false
+  return accountRegex.test(val.toString())
+}
+
+export const codeRegex = /^[a-zA-Z0-9][-\w]{2,39}$/
+
+/**
+ * Whether the val is code /^[a-zA-Z0-9][-\w]{2,39}$/
+ * @public
+ * @param val - value
+ */
+export const isCode = (val: any): boolean => {
+  if (isNil(val)) return false
+  return codeRegex.test(val.toString())
+}

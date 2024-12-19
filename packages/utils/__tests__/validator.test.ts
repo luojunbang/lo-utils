@@ -1,4 +1,4 @@
-import { isDef, isEmpty, isInt, isJSType, isNil, isNotEmptyText, isPercent, isPort } from '../src'
+import { isAccount, isCode, isDef, isEmail, isEmpty, isInt, isJSType, isNil, isNotEmptyText, isPercent, isPhone, isPort } from '../src'
 
 describe('isPort function', () => {
   test('valid numeric port', () => {
@@ -148,5 +148,108 @@ describe('isDef', () => {
   test('undefined value', () => {
     expect(isDef(null)).toBe(false)
     expect(isDef(undefined)).toBe(false)
+  })
+})
+
+describe('isEmail', () => {
+  const test_cases = [
+    // 正向用例
+    ['test@example.com', true], // 合法邮箱
+    ['user.name@example.co', true], // 合法邮箱
+    ['user_name123@example.com', true], // 合法邮箱
+    ['test.email+filter@example.com', true], // 合法邮箱
+    // 负向用例
+    ['invalid-email', false], // 不合法，缺少 @
+    ['@example.com', false], // 不合法，缺少用户名
+    ['user@.com', false], // 不合法，域名部分缺少主机
+    ['user@domain', false], // 不合法，缺少顶级域名
+    ['user@domain.c', false], // 不合法，顶级域名过短
+    ['', false], // 不合法，空字符串
+  ]
+  test('defined value', () => {
+    test_cases.forEach((item) => {
+      const [i, ret] = item
+      expect(isEmail(i)).toBe(ret)
+    })
+  })
+  test('undefined value', () => {
+    expect(isEmail(null)).toBe(false)
+    expect(isEmail(undefined)).toBe(false)
+  })
+})
+describe('isPhone', () => {
+  const test_cases = [
+    // 正向用例
+    ['12345678901', true], // 合法手机号
+    ['19876543210', true], // 合法手机号
+    ['14567890123', true], // 合法手机号
+    // 负向用例
+    ['01234567890', false], // 不合法，第一位不是 1
+    ['1987654321', false], // 不合法，位数不足
+    ['198765432101', false], // 不合法，位数过多
+    ['198765432a', false], // 不合法，包含非数字字符
+    ['', false], // 不合法，空字符串
+  ]
+  test('defined value', () => {
+    test_cases.forEach((item) => {
+      const [i, ret] = item
+      expect(isPhone(i)).toBe(ret)
+    })
+  })
+  test('undefined value', () => {
+    expect(isPhone(null)).toBe(false)
+    expect(isPhone(undefined)).toBe(false)
+  })
+})
+describe('isAccount', () => {
+  const test_cases = [
+    // 正向用例
+    ['user123', true], // 合法用户名
+    ['User_Name_123', true], // 合法用户名
+    ['abc', true], // 合法用户名，最短长度
+    ['user_name_very_long', true], // 合法用户名，最长长度
+    // 负向用例2
+    ['_username', false], // 不合法，特殊字符开头
+    ['1username', false], // 不合法，数字开头
+    ['us', false], // 不合法，长度不足
+    ['user name', false], // 不合法，包含空格
+    ['user@name', false], // 不合法，包含特殊字符
+    ['username#123', false], // 不合法，包含特殊字符
+    ['', false], // 不合法，空字符串
+    ['thisusernameiswaytoolongthisusernameiswaytoolong', false], // 不合法，长度超出限制
+  ]
+  test('defined value', () => {
+    test_cases.forEach((item) => {
+      console.log('item:', item)
+      const [i, ret] = item
+      expect(isAccount(i)).toBe(ret)
+    })
+  })
+
+  test('undefined value', () => {
+    expect(isPhone(null)).toBe(false)
+    expect(isPhone(undefined)).toBe(false)
+  })
+})
+describe('isCode', () => {
+  const test_cases = [
+    // 正向用例
+    ['a12345678901', true],
+    ['01234567890', true], // 合法
+    // 负向用例
+    ['-01234567890', false], // 不合法，第一位不是字母
+    ['_01234567890', false], // 不合法，第一位不是字母
+    ['s!sdfsa', false], // 不合法，只能是-_
+  ]
+  test('defined value', () => {
+    test_cases.forEach((item) => {
+      const [i, ret] = item
+      expect(isCode(i)).toBe(ret)
+    })
+  })
+
+  test('undefined value', () => {
+    expect(isCode(null)).toBe(false)
+    expect(isCode(undefined)).toBe(false)
   })
 })
