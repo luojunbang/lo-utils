@@ -1,4 +1,4 @@
-import { pick, exclude } from '../src/objectHandler'
+import { pick, omit } from '../src/objectHandler'
 
 const foo = 'foo'
 const bar = 'bar'
@@ -24,15 +24,15 @@ describe('pick', () => {
   })
 })
 
-describe('exclude', () => {
-  test('exclude zero field', () => {
-    expect(exclude(obj, [])).toEqual(obj)
+describe('omit', () => {
+  test('omit zero field', () => {
+    expect(omit(obj, [])).toEqual(obj)
   })
-  test('exclude some fields', () => {
-    expect(exclude(obj, ['foo'])).toEqual({ hel, bar })
-    expect(exclude(obj, ['foo', 'bar'])).toEqual({ hel })
+  test('omit some fields', () => {
+    expect(omit(obj, ['foo'])).toEqual({ hel, bar })
+    expect(omit(obj, ['foo', 'bar'])).toEqual({ hel })
   })
-  test('exclude all fields', () => {
-    expect(exclude(obj, Object.keys(obj) as KeysOfTypeMyObj[])).toEqual({})
+  test('omit all fields', () => {
+    expect(omit(obj, Object.keys(obj) as KeysOfTypeMyObj[])).toEqual({})
   })
 })

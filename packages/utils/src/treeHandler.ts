@@ -74,7 +74,7 @@ export function deepPriority<T extends Record<string, any>>(root: T[], fn: (item
  * @param list - list
  * @param fields - default as children = 'children' , id = 'id', parentId = 'parentId'
  */
-export function list2Tree<T extends Record<string, any>>(list: T[], fields?: { children?: string; id?: string | number; parentId?: string }): T[] {
+export function list2Tree<T extends Record<string, any>>(list: T[], fields?: { children?: string; id?: string; parentId?: string }): T[] {
   const { children = 'children', id = 'id', parentId = 'parentId' } = fields ?? {}
 
   const res: T[] = []

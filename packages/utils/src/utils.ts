@@ -24,11 +24,18 @@ export function getLabelWidth(label: string, fontSize = 14) {
  * @param x - 位数
  */
 export function r(x = 10): string {
-  const str = Math.random().toString(16).slice(2)
-  return Array.from({ length: 1 + Math.ceil(x / str.length) })
-    .map((i) => Math.random().toString(16).slice(2))
-    .join('')
-    .slice(2, 2 + x)
+  let ret = Math.random().toString(16).slice(2)
+  let total = x - ret.length
+  while (total > 0) {
+    const str = Math.random().toString(16).slice(2)
+    if (total < str.length) {
+      ret += str.slice(0, total)
+    } else {
+      ret += str
+    }
+    total -= str.length
+  }
+  return ret
 }
 
 /**
