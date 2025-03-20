@@ -10,6 +10,7 @@ export function FlattenTreeDeepFirst<T>(root: T[], fields?: { children?: keyof T
     root,
     (item) => {
       res.push(item)
+      return false
     },
     fields,
   )
@@ -58,9 +59,9 @@ export function wildPriority<T extends Record<string, any>>(root: T[], fn: (item
  * @param fn - callback if return truely, it break
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-function deepPriority<T>(root: T[], fn: (item: T, level?: number) => boolean | void, fields?: { children?: keyof T }) {
+function deepPriority<T>(root: T[], fn: (item: T, level?: number) => boolean, fields?: { children?: keyof T }) {
   const { children = 'children' } = fields ?? {}
-  let _level = 0
+  const _level = 0
   function deep(nodes, fn, level: number) {
     for (const item of nodes) {
       if (fn(item, level)) break
