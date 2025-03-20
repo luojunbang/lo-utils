@@ -33,7 +33,7 @@ jobs:
 
       - name: Get package name from commit message
         id: package_name
-        run: echo "package_name=$(git log --format=%B -n 1 ${{ github.sha }} | grep -E '^release(\(.*)\)' | sed 's/^release(\(.*\))/\1/')" >> $GITHUB_OUTPUT
+        run: echo "package_name=$(git log --format=%B -n 1 ${{ github.sha }} | grep -E '^release\([^)]*\)' | sed -E 's/^release\(([^)]*)\).*/\1/'" >> $GITHUB_OUTPUT
 
       - name: Setup node
         uses: actions/setup-node@v3
