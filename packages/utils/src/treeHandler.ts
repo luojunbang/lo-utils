@@ -59,12 +59,13 @@ export function wildPriority<T extends Record<string, any>>(root: T[], fn: (item
  * @param fn - callback if return truely, it break
  * @param fields - default as 'children' for children key,'id' for unique key
  */
-function deepPriority<T>(root: T[], fn: (item: T, level?: number) => boolean, fields?: { children?: keyof T }) {
+function deepPriority<T>(root: T[], fn: (item: T, index: number, level: number) => boolean | undefined, fields?: { children?: keyof T }) {
   const { children = 'children' } = fields ?? {}
   const _level = 0
   function deep(nodes, fn, level: number) {
-    for (const item of nodes) {
-      if (fn(item, level)) break
+    for (let i = 0; i < nodes.length; i++) {
+      const item = nodes[i]
+      if (fn(item, i, level)) break
       if (item[children]?.length > 0) {
         deep(item[children], fn, level + 1)
       }
@@ -78,14 +79,18 @@ function deepPriority<T>(root: T[], fn: (item: T, level?: number) => boolean, fi
  * 列表转换为树结构
  * @beta
  * @param list - list
- * @param fields - default as children = 'children' , id = 'id', parentId = 'parentId'
+ * @param fields - default as children = 'children' , id = 'id', parentId = 'parentId', orderCallback, callback: (item,index)=>
  */
-export function list2Tree<T extends Record<string, any>>(list: T[], fields?: { children?: string; id?: string; parentId?: string }): T[] {
-  const { children = 'children', id = 'id', parentId = 'parentId' } = fields ?? {}
+export function list2Tree<T extends Record<string, any>>(
+  list: T[],
+  fields?: { children?: string; id?: string; parentId?: string; orderCallback: (a: T, b: T) => number; callback: (T, number) => T },
+): T[] {
+  const { children = 'children', id = 'id', parentId = 'parentId', orderCallback, callback } = fields ?? {}
 
   const res: T[] = []
   const cachedMap: Record<string, T> = {}
-  list.forEach((item) => {
+  list.forEach((_item, index) => {
+    const item = callback ? callback(_item, index) : _item
     const _parentId = item[parentId]
     const _id = item[id]
     if (cachedMap[_id] && cachedMap[_id][id]) throw new Error('REPEAT ID..')
@@ -102,5 +107,13 @@ export function list2Tree<T extends Record<string, any>>(list: T[], fields?: { c
       res.push(item)
     }
   })
+
+  if (orderCallback) {
+    const loop = (list: T[]) => {
+      list.sort(orderCallback)
+      list.forEach((i) => i.children && loop(i.children))
+    }
+    loop(res)
+  }
   return res
 }
