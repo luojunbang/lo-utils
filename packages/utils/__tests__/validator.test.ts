@@ -220,7 +220,6 @@ describe('isAccount', () => {
   ]
   test('defined value', () => {
     test_cases.forEach((item) => {
-      console.log('item:', item)
       const [i, ret] = item
       expect(isAccount(i)).toBe(ret)
     })

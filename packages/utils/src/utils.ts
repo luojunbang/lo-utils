@@ -1,5 +1,4 @@
 // 工具
-import { isJSType } from './validator'
 
 /**
  * 计算label的长度 三个数组字母==两个文字
@@ -26,6 +25,7 @@ export function getLabelWidth(label: string, fontSize = 14) {
 export function r(x = 10): string {
   let ret = Math.random().toString(16).slice(2)
   let total = x - ret.length
+  if (total < 0) return ret.slice(0, x)
   while (total > 0) {
     const str = Math.random().toString(16).slice(2)
     if (total < str.length) {

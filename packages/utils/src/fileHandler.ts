@@ -76,7 +76,7 @@ export function dataURLtoFile(dataurl: string, filename: string) {
  */
 export function getExt(str: string) {
   const idx = str.lastIndexOf('.')
-  if (idx == -1) throw new Error(`Can't get the extension from string ${str}. `)
+  if (idx == -1) return null
   const ret = str.slice(idx + 1)
   return ret
 }
