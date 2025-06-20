@@ -1,6 +1,6 @@
 import { execa, $ } from 'execa'
 import { utilsRoot, utilsOutput, utilsPkg } from '@lo/build-helper'
-import { copyFile, outputJSON, readJSON } from 'fs-extra'
+import { copyFile, copySync, outputJSON, readJSON } from 'fs-extra'
 import { resolve } from 'path'
 import { omit } from '../src'
 
@@ -32,6 +32,8 @@ async function modifyPkg() {
 }
 
 async function init() {
+  await copySync(resolve(utilsRoot, './src'), resolve(utilsOutput, './src'))
+  await copySync(resolve(utilsRoot, './bin'), resolve(utilsOutput, './bin'))
   await Promise.all([buildModule(), buildTypeDefination()])
   await Promise.all([modifyPkg(), copyFile(resolve(utilsRoot, 'index.js'), resolve(utilsOutput, 'index.js')), copyFile(resolve(utilsRoot, 'README.md'), resolve(utilsOutput, 'README.md'))])
 }

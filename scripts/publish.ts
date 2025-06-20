@@ -13,6 +13,8 @@ async function init() {
   await $({ stdio: 'inherit' })`echo "✅ Build Done. ${utilsOutput}"`
 
   // await $({ stdio: 'inherit' })`cp ./.npmrc ${utilsOutput}/.npmrc`
+  await $({ stdio: 'inherit', cwd: utilsOutput })`chmod +x bin/cli.js`
+
   await $({ stdio: 'inherit', cwd: utilsOutput })`npm publish`
 
   $`echo "✅ Publish Done. "`
