@@ -24,10 +24,6 @@
     "type": "git",
     "url": "git+https://github.com/luojunbang/lo-utils.git"
   },
-  "files": [
-    "bin",
-    "src"
-  ],
   "devDependencies": {
     "@babel/cli": "^7.24.5",
     "@babel/core": "^7.24.5",
