@@ -18,6 +18,56 @@ export function fmtNum(val: any, fixed = 0, currency = ''): string {
   return `${currency}${val.toLocaleString(undefined, options)}`
 }
 
+export function abbreviateNumber(num: number, decimals: number = 1, round: boolean = false): string {
+  const units = ['', 'K', 'M', 'B', 'T']
+  let unitIndex = 0
+  let n = num
+
+  while (n >= 1000 && unitIndex < units.length - 1) {
+    n /= 1000
+    unitIndex++
+  }
+
+  // 保留指定位数小数
+  const value = toFixedNumber(n, decimals, round)
+  let formatted = value.toFixed(decimals)
+
+  // 去掉尾部无意义的 .0 / 0
+  if (decimals > 0) {
+    formatted = formatted.replace(/\.0+$|(\.\d*[1-9])0+$/, '$1')
+  }
+
+  return formatted + units[unitIndex]
+}
+
+export function abbreviateNumberDefaultK(num: number, round: boolean = false): string {
+  let n = num
+
+  // 100 <= num < 1000 时也要以 k 为单位（0.xk）
+  if (num >= 100 && num < 1000) {
+    n = num / 1000
+  } else return abbreviateNumber(num, 1, round)
+
+  const value = toFixedNumber(n, 1, round)
+
+  // 格式化并去掉无意义的尾0
+  const formatted = value.toFixed(1).replace(/\.0+$|(\.\d*[1-9])0+$/, '$1')
+
+  return formatted + 'k'
+}
+/**
+ * 保留指定小数位，可以选择四舍五入或截断
+ * @param n 数字
+ * @param decimals 保留的小数位数
+ * @param round 是否四舍五入（false 表示截断）
+ */
+export function toFixedNumber(n: number, decimals: number = 1, round: boolean = false): number {
+  const factor = Math.pow(10, decimals)
+  return round
+    ? Math.round(n * factor) / factor // 四舍五入
+    : Math.floor(n * factor) / factor // 截断
+}
+
 /**
  * 格式化空白文本 null undefind ''
  * @public
