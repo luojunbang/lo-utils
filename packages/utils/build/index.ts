@@ -34,7 +34,7 @@ async function init() {
   await copySync(resolve(utilsRoot, './bin'), resolve(utilsOutput, './bin'))
   await Promise.all([buildModule(), buildTypeDefination()])
   await Promise.all([modifyPkg(), copyFile(resolve(utilsRoot, 'index.js'), resolve(utilsOutput, 'index.js')), copyFile(resolve(utilsRoot, 'README.md'), resolve(utilsOutput, 'README.md'))])
-  copySync(resolve(utilsRoot, 'dist'), resolve(utilsOutput, 'dist'), {
+  copySync(resolve(utilsRoot, 'dist'), resolve(utilsOutput), {
     filter(src, dest) {
       return /(min|cjs|esm).js$/.test(src)
     },

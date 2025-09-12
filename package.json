@@ -29,6 +29,7 @@
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,mjs,cjs}": [
+      "eslint --fix",
       "prettier -w"
     ],
     "*.{md,json}": [
