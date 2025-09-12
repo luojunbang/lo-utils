@@ -11,7 +11,7 @@ describe('', () => {
       callFn(rs)
       callFn(rs)
     }).then(() => {
-      expect(fn).toBeCalledTimes(1)
+      expect(fn).toHaveBeenCalledTimes(1)
     })
   })
   test('debounce: call outof wait', async () => {
@@ -33,7 +33,7 @@ describe('', () => {
           }),
       )
       .then((_) => {
-        expect(fn).toBeCalledTimes(2)
+        expect(fn).toHaveBeenCalledTimes(2)
       })
   })
 })

@@ -19,5 +19,8 @@
   "license": "ISC",
   "devDependencies": {
     "unbuild": "^2.0.0"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.1"
   }
 }

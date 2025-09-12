@@ -4,9 +4,8 @@ import ts from '@rollup/plugin-typescript'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import fs from 'fs-extra'
-import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel'
+import { babel } from '@rollup/plugin-babel'
 import { utilsPkg, utilsOutput } from '@lo/build-helper'
-import json from '@rollup/plugin-json'
 
 const { name: PKG_NAME, peerDependencies } = fs.readJsonSync(utilsPkg)
 
@@ -50,7 +49,7 @@ const tsPlugin = (target = 'es6') =>
     exclude: ['__tests__'],
   })
 
-const outpuFile = (name) => resolve(utilsOutput, 'dist', `./${name}`)
+const outpuFile = (name) => `dist/${name}`
 
 const browserConfig = [
   /** es6 browser */
