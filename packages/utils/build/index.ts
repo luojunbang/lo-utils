@@ -1,6 +1,6 @@
 import { $ } from 'execa'
 import { utilsRoot, utilsOutput, utilsPkg } from '@lo/build-helper'
-import { copyFile, copySync, outputJSON, readJSON } from 'fs-extra'
+import { copyFile, copySync, lstatSync, outputJSON, readJSON } from 'fs-extra'
 import { resolve } from 'path'
 import { omit } from '../src'
 
@@ -34,8 +34,9 @@ async function init() {
   await copySync(resolve(utilsRoot, './bin'), resolve(utilsOutput, './bin'))
   await Promise.all([buildModule(), buildTypeDefination()])
   await Promise.all([modifyPkg(), copyFile(resolve(utilsRoot, 'index.js'), resolve(utilsOutput, 'index.js')), copyFile(resolve(utilsRoot, 'README.md'), resolve(utilsOutput, 'README.md'))])
-  copySync(resolve(utilsRoot, 'dist'), resolve(utilsOutput), {
-    filter(src, dest) {
+  copySync(resolve(utilsRoot, 'dist'), resolve(utilsOutput, 'dist'), {
+    filter(src) {
+      if (src === resolve(utilsRoot, 'dist')) return true
       return /(min|cjs|esm).js$/.test(src)
     },
   })
